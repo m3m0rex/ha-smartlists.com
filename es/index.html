@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HA SmartLists – listas de la compra para Home Assistant</title>
+<meta name="description" content="SmartLists: listas de la compra de verdad para Home Assistant – como integración HACS con categorías, modo compra y compartir por enlace, o como app Android con listas locales y widget.">
+<link rel="icon" href="../assets/icon.png">
+<link rel="alternate" hreflang="de" href="https://ha-smartlists.com/">
+<link rel="alternate" hreflang="en" href="https://ha-smartlists.com/en/">
+<link rel="alternate" hreflang="fr" href="https://ha-smartlists.com/fr/">
+<link rel="alternate" hreflang="es" href="https://ha-smartlists.com/es/">
+<link rel="alternate" hreflang="it" href="https://ha-smartlists.com/it/">
+<link rel="alternate" hreflang="pl" href="https://ha-smartlists.com/pl/">
+<link rel="alternate" hreflang="x-default" href="https://ha-smartlists.com/en/">
+<style>
+  :root {
+    --blue: #1565C0;
+    --blue-dark: #0D47A1;
+    --blue-light: #E3F2FD;
+    --ink: #1A1C1E;
+    --muted: #5B6570;
+    --bg: #F5F8FC;
+    --card-bg: #FFFFFF;
+    --border: #DCE6F2;
+    --yellow: #F5B700;
+    --green: #2E7D32;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+  }
+  a { color: var(--blue); }
+
+  /* ---------- Navigation mit Umschalter ---------- */
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(13, 71, 161, 0.96);
+    backdrop-filter: blur(6px);
+    color: #fff;
+    padding: 10px 24px;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  }
+  nav .brand { font-weight: 800; font-size: 17px; display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+  nav .brand img { width: 26px; height: 26px; border-radius: 7px; background: #fff; padding: 2px; }
+  .switch {
+    display: inline-flex; background: rgba(255,255,255,0.14); border-radius: 999px; padding: 4px;
+    border: 1px solid rgba(255,255,255,0.22);
+  }
+  .switch button {
+    border: 0; background: none; color: #DCEBFF; font: inherit; font-size: 14px; font-weight: 700;
+    padding: 7px 16px; border-radius: 999px; cursor: pointer; white-space: nowrap;
+    transition: background .15s ease, color .15s ease;
+  }
+  .switch button[aria-selected="true"] { background: #fff; color: var(--blue-dark); box-shadow: 0 2px 8px rgba(0,0,0,.18); }
+  .lang {
+    background: rgba(255,255,255,0.14); color: #fff; border: 1px solid rgba(255,255,255,0.22); border-radius: 999px;
+    font: inherit; font-size: 13.5px; font-weight: 700; padding: 6px 10px; cursor: pointer;
+  }
+  .lang option { color: #1A1C1E; }
+  nav .right { display: flex; gap: 8px; align-items: center; }
+  nav a.cta {
+    background: #fff; color: var(--blue-dark); padding: 8px 16px; border-radius: 999px;
+    font-weight: 700; font-size: 14px; text-decoration: none; white-space: nowrap;
+  }
+
+  /* ---------- Bereiche ---------- */
+  .panel { display: none; }
+  body[data-product="hacs"] .panel.hacs, body[data-product="app"] .panel.app { display: block; }
+  body[data-product="hacs"] .only-app, body[data-product="app"] .only-hacs { display: none; }
+
+  header {
+    background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
+    color: #fff;
+    padding: 64px 24px 88px;
+    text-align: center;
+  }
+  header .logo {
+    width: 72px; height: 72px; margin: 0 auto 20px;
+    background: rgba(255,255,255,0.15); border-radius: 20px;
+    display: flex; align-items: center; justify-content: center; font-size: 36px;
+  }
+  header .logo img { width: 52px; height: 52px; }
+  header .kicker {
+    display: inline-block; font-size: 12.5px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+    background: rgba(255,255,255,0.14); border-radius: 999px; padding: 4px 12px; margin-bottom: 14px; color: #DCEBFF;
+  }
+  header h1 { margin: 0 0 12px; font-size: clamp(30px, 5.5vw, 46px); font-weight: 800; letter-spacing: -0.5px; }
+  header p.tagline { margin: 0 auto 32px; max-width: 640px; font-size: 18px; color: #DCEBFF; padding: 0 8px; }
+  header code { background: rgba(255,255,255,0.16); border-radius: 6px; padding: 1px 6px; font-size: .92em; }
+  .btn-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .download-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #fff; color: var(--blue-dark);
+    padding: 16px 32px; border-radius: 14px;
+    font-weight: 800; font-size: 17px; text-decoration: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+    transition: transform 0.15s ease;
+  }
+  .download-btn.ghost { background: rgba(255,255,255,0.12); color: #fff; box-shadow: none; border: 1px solid rgba(255,255,255,0.35); }
+  .download-btn:hover { transform: translateY(-2px); }
+  /* noch nicht veröffentlicht */
+  .download-btn.disabled, nav .cta.disabled { opacity: .45; filter: grayscale(1); cursor: not-allowed; transform: none; box-shadow: none; }
+  .soon { margin: 12px auto 0; display: table; font-size: 13.5px; font-weight: 700; color: #fff;
+    background: rgba(255,255,255,0.16); border-radius: 999px; padding: 4px 12px; }
+  .download-sub { margin-top: 14px; font-size: 13px; color: #BFD7F5; }
+
+  main { max-width: 980px; margin: -48px auto 0; padding: 0 20px 64px; }
+  .intro-card {
+    background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px;
+    padding: 28px 32px; box-shadow: 0 8px 24px rgba(21, 101, 192, 0.08);
+    margin-bottom: 40px; font-size: 16px; color: var(--muted); text-align: center;
+  }
+
+  /* Demo im Geräte-Rahmen (Mockup) */
+  .showcase {
+    background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(21, 101, 192, 0.08);
+    padding: 28px; margin-bottom: 40px;
+    display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 28px; align-items: center;
+  }
+  .showcase .screen {
+    background: #0e1014; border-radius: 22px; padding: 12px; box-shadow: 0 18px 40px rgba(13, 71, 161, 0.25);
+  }
+  .showcase .screen img { display: block; width: 100%; border-radius: 12px; }
+  .showcase h3 { margin: 0 0 10px; font-size: 22px; line-height: 1.3; }
+  .showcase p { margin: 0 0 12px; color: var(--muted); font-size: 15px; }
+  .showcase code { background: var(--blue-light); color: var(--blue-dark); border-radius: 6px; padding: 2px 7px; font-size: 14px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .chip { font-size: 12.5px; font-weight: 700; border-radius: 999px; padding: 3px 10px; background: var(--blue-light); color: var(--blue-dark); }
+  .chip.store { background: #C62828; color: #fff; border-radius: 5px; }
+  .chip.person { background: #EDE7FF; color: #5E46D8; }
+  .chip.tag { background: #E3F4E6; color: var(--green); }
+
+  h2.section-title {
+    font-size: 14px; text-transform: uppercase; letter-spacing: 1.2px;
+    color: var(--blue); font-weight: 700; margin: 48px 0 20px; padding-left: 2px;
+  }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .feature {
+    background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px;
+    padding: 22px 22px 20px; transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .feature:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(21, 101, 192, 0.10); }
+  .feature .icon {
+    width: 44px; height: 44px; border-radius: 12px; background: var(--blue-light);
+    display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 14px;
+  }
+  .feature h3 { margin: 0 0 8px; font-size: 17px; font-weight: 700; color: var(--ink); }
+  .feature p { margin: 0; font-size: 14.5px; color: var(--muted); }
+  .feature .new { font-size: 11px; font-weight: 800; color: #fff; background: var(--green); border-radius: 5px; padding: 1px 6px; margin-left: 6px; vertical-align: 2px; }
+  .feature.star .icon { background: #FFF4D6; color: var(--yellow); }
+
+  .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+  .shot { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 12px; margin: 0; }
+  .shot img { display: block; width: 100%; border-radius: 10px; background: #111318; }
+  .shot figcaption { font-size: 13.5px; color: var(--muted); padding: 10px 4px 2px; }
+
+  .callout {
+    margin-top: 24px; background: var(--blue-light); border-radius: 16px; padding: 28px 32px;
+    display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap;
+  }
+  .callout:first-of-type { margin-top: 56px; }
+  .callout .icon-big { font-size: 34px; line-height: 1; }
+  .callout h3 { margin: 0 0 6px; color: var(--blue-dark); font-size: 18px; }
+  .callout p { margin: 0; color: var(--ink); font-size: 15px; max-width: 620px; }
+  .callout code { background: #fff; border-radius: 6px; padding: 1px 6px; font-size: 13.5px; }
+
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+  .step { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
+  .step .num {
+    width: 30px; height: 30px; border-radius: 50%; background: var(--blue); color: #fff;
+    display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; margin-bottom: 10px;
+  }
+  .step h4 { margin: 0 0 6px; font-size: 15.5px; }
+  .step p { margin: 0; font-size: 14px; color: var(--muted); }
+  .step code { background: var(--blue-light); border-radius: 5px; padding: 1px 5px; font-size: 12.5px; word-break: break-all; }
+
+  .compare { width: 100%; border-collapse: separate; border-spacing: 0; background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; font-size: 14.5px; }
+  .compare th, .compare td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .compare tr:last-child td { border-bottom: 0; }
+  .compare th { background: var(--blue-light); color: var(--blue-dark); font-size: 13px; text-transform: uppercase; letter-spacing: .6px; }
+  .compare td:first-child { color: var(--muted); width: 34%; }
+
+  .final-cta {
+    margin-top: 56px; text-align: center;
+    background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
+    border-radius: 20px; padding: 44px 24px; color: #fff;
+  }
+  .final-cta h2 { margin: 0 0 10px; font-size: 24px; }
+  .final-cta p { margin: 0 0 24px; color: #DCEBFF; }
+  .cross { margin-top: 18px; font-size: 14.5px; color: var(--muted); text-align: center; }
+  .cross a { font-weight: 700; cursor: pointer; }
+
+  /* Bild vergrößern */
+  .shot img, .showcase .screen img { cursor: zoom-in; }
+  .lightbox { position: fixed; inset: 0; z-index: 50; background: rgba(10, 14, 22, .88); display: none;
+    align-items: center; justify-content: center; padding: 24px; cursor: zoom-out; }
+  .lightbox.open { display: flex; animation: lbfade .15s ease-out; }
+  .lightbox img { max-width: min(1200px, 100%); max-height: 86vh; border-radius: 12px; background: #111318;
+    box-shadow: 0 20px 60px rgba(0,0,0,.5); }
+  .lightbox p { position: absolute; bottom: 18px; left: 0; right: 0; margin: 0; text-align: center; color: #DCEBFF; font-size: 14px; padding: 0 20px; }
+  .lightbox button { position: absolute; top: 14px; right: 16px; width: 42px; height: 42px; border-radius: 50%; border: 0;
+    background: rgba(255,255,255,.16); color: #fff; font-size: 22px; cursor: pointer; }
+  @keyframes lbfade { from { opacity: 0; } to { opacity: 1; } }
+  footer { text-align: center; padding: 32px 20px 48px; color: var(--muted); font-size: 13.5px; }
+  footer a { color: var(--blue); text-decoration: none; }
+
+  @media (max-width: 760px) {
+    .showcase { grid-template-columns: 1fr; padding: 18px; }
+  }
+  @media (max-width: 560px) {
+    nav { flex-wrap: wrap; justify-content: center; padding: 10px 12px; }
+    nav .brand { display: none; }
+    nav a.cta { display: none; }
+    .lang { padding: 5px 8px; font-size: 12.5px; }
+    .switch button { padding: 7px 12px; font-size: 13.5px; }
+    header { padding: 48px 16px 72px; }
+    main { padding: 0 12px 48px; }
+    .intro-card, .callout { padding: 20px; }
+  }
+</style>
+</head>
+<body data-product="hacs">
+
+<nav>
+  <div class="brand"><img src="../assets/icon.png" alt="">HA SmartLists</div>
+  <div class="switch" role="tablist" aria-label="Elegir producto">
+    <button type="button" role="tab" data-product="hacs" aria-selected="true">🏠 Integración HACS</button>
+    <button type="button" role="tab" data-product="app" aria-selected="false">🤖 App Android</button>
+  </div>
+  <div class="right">
+    <select class="lang" aria-label="Idioma">
+      <option value="../" data-lang="de">🇩🇪 DE</option>
+      <option value="../en/" data-lang="en">🇬🇧 EN</option>
+      <option value="../fr/" data-lang="fr">🇫🇷 FR</option>
+      <option value="../es/" data-lang="es" selected>🇪🇸 ES</option>
+      <option value="../it/" data-lang="it">🇮🇹 IT</option>
+      <option value="../pl/" data-lang="pl">🇵🇱 PL</option>
+    </select>
+    <a class="cta only-hacs" href="https://github.com/m3m0rex/ha_smartlists">GitHub</a>
+    <span class="cta only-app disabled" aria-disabled="true" title="Aún no publicada">Download</span>
+  </div>
+</nav>
+
+<!-- =====================================================================
+     HACS-Integration
+     ===================================================================== -->
+<section class="panel hacs" aria-label="Integración HACS">
+  <header>
+    <div class="logo"><img src="../assets/icon.png" alt=""></div>
+    <div class="kicker">Integración para Home Assistant</div>
+    <h1>SmartLists para Home Assistant</h1>
+    <p class="tagline"><code>Leche 2 l 1,19€ @REWE *Anna #bio</code> – escríbelo y SmartLists reconoce cantidad, precio, tienda, persona y categoría y ordena el artículo como en la tienda. Directamente en Home Assistant, sin nube.</p>
+    <div class="btn-row">
+      <a class="download-btn" href="https://my.home-assistant.io/redirect/hacs_repository/?owner=m3m0rex&amp;repository=ha_smartlists&amp;category=integration">⬇️ Abrir en HACS</a>
+      <a class="download-btn ghost" href="https://github.com/m3m0rex/ha_smartlists">GitHub y documentación</a>
+    </div>
+    <div class="download-sub">Gratis · código abierto (MIT) · Home Assistant 2025.3 o posterior · 6 idiomas</div>
+  </header>
+
+  <main>
+    <div class="showcase">
+      <div class="screen"><img src="../assets/demo.gif" alt="Escribiendo «Milk 2 l 1,19€ @REWE *Anna #organic»: vista previa con cantidad, precio, insignias y categoría; luego el artículo pasa a Refrigerados" loading="lazy"></div>
+      <div>
+        <h3>Un solo campo. Todo reconocido.</h3>
+        <p>Mientras escribes ya ves el resultado – un toque más y el artículo está en su sitio en la lista.</p>
+        <div class="chips">
+          <span class="chip">2 l</span><span class="chip">1,19 €</span><span class="chip store">REWE</span>
+          <span class="chip person">👤 Anna</span><span class="chip tag">#bio</span><span class="chip">🧀 Refrigerados</span>
+        </div>
+        <p style="margin-top:14px;font-size:13.5px"><code>@</code>, <code>*</code> y <code>#</code> son solo el valor por defecto – tú eliges los caracteres.</p>
+      </div>
+    </div>
+
+    <div class="intro-card">
+      SmartLists convierte las listas de tareas de Home Assistant en listas de la compra de verdad: juntar varias listas en una, ordenar por categoría, cantidades, tiendas y personas como insignias, un modo compra y compartir por código QR. Cada lista sigue siendo una entidad <code>todo.*</code>normal – funciona en paneles, con Assist, en automatizaciones y en los widgets de la app de Home Assistant.
+    </div>
+
+    <h2 class="section-title">Listas y entrada</h2>
+    <div class="grid">
+      <div class="feature">
+        <div class="icon">🧺</div>
+        <h3>Juntar listas</h3>
+        <p>Las listas de Anna y Max (lista de la compra, Local To-do, Google Tasks, Bring!, CalDAV …) se convierten en una lista común. Marcar actúa en la lista original.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🗂️</div>
+        <h3>Ordenado como en la tienda</h3>
+        <p>Listas de palabras en seis idiomas, correcciones recordadas y orden de pasillos por tienda. Desactivable por lista.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">💡</div>
+        <h3>Sugerencias por lista</h3>
+        <p>«Comprado a menudo», artículos pendientes según vuestro ritmo y sugerencias al escribir – de esta lista, no de todas.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🧰</div>
+        <h3>Listas simples <span class="new">NUEVO</span></h3>
+        <p>Para la ferretería o la lista de equipaje: sin categorías, sin sugerencias, nada recordado – lo que hay ahí no aparece en ningún otro sitio.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">👥</div>
+        <h3>Listas propias con permisos</h3>
+        <p>Listas con propietario, compartidas por persona para ver, marcar o editar. Las listas existentes se pueden traspasar con todos sus artículos.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🧩</div>
+        <h3>Extras según necesidad</h3>
+        <p>Plan semanal con calendario e importación de Mealie, notas, estadísticas y gastos – desactivados al empezar, activables en cualquier momento.</p>
+      </div>
+    </div>
+
+    <h2 class="section-title">Compra</h2>
+    <div class="grid">
+      <div class="feature">
+        <div class="icon">🛒</div>
+        <h3>Modo compra</h3>
+        <p>Filas grandes, tocar toda la fila para marcar (con 3 segundos para deshacer), barra de tiendas, pantalla encendida. La tienda se elige sola por zona.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">📴</div>
+        <h3>Sin conexión en el súper <span class="new">NUEVO</span></h3>
+        <p>¿Sin cobertura? Marcar y añadir siguen funcionando y se envían en cuanto Home Assistant vuelve a estar accesible.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">💶</div>
+        <h3>Precios y gastos</h3>
+        <p>Los precios del texto se reconocen y recuerdan por unidad, la lista muestra un total y al marcar se registra un gasto – por mes y tienda.</p>
+      </div>
+    </div>
+
+    <h2 class="section-title">Compartir</h2>
+    <div class="grid">
+      <div class="feature">
+        <div class="icon">🔗</div>
+        <h3>Por enlace y código QR</h3>
+        <p>Para vecinos, invitados o amigos sin cuenta: solo esta lista, con fecha límite, revocable en cualquier momento – solo ver, marcar «soft» o también añadir.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🛡️</div>
+        <h3>Sin revelar tu dirección</h3>
+        <p>Los enlaces pueden ir por un túnel de Cloudflare (también con dirección fija en tu dominio) o por tu propio proxy. Home Assistant nunca es accesible por ahí.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🙋</div>
+        <h3>Se ve quién fue</h3>
+        <p>Quien marca o añade por el enlace indica su nombre una vez – tu lista muestra entonces «marcado por Max (enlace)».</p>
+      </div>
+    </div>
+
+    <h2 class="section-title">Siempre a mano</h2>
+    <div class="grid">
+      <div class="feature">
+        <div class="icon">🧭</div>
+        <h3>Página propia en la barra lateral</h3>
+        <p>Todas las listas sin panel – una o varias en paralelo, arrastrar artículos entre ellas, ajustes en un solo lugar.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🃏</div>
+        <h3>Tarjeta Lovelace</h3>
+        <p>Con plantillas para familia, tablet de cocina, tarjeta de tienda, solo ver y mosaico. Funciona con cualquier lista de tareas.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">📱</div>
+        <h3>Widgets e icono de app</h3>
+        <p>Funciona con los widgets de pantalla de inicio de la app de Home Assistant (Android e iOS). Además, un icono que abre una lista directamente en modo compra.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🗣️</div>
+        <h3>Assist y automatizaciones</h3>
+        <p>«Añade leche a la lista de la compra», evento «estoy en la tienda», recordatorio de tienda, artículos pendientes y blueprints listos.</p>
+      </div>
+    </div>
+
+    <h2 class="section-title">Así se ve</h2>
+    <div class="gallery">
+      <figure class="shot"><img src="../assets/hero.svg" alt="Página de SmartLists con lista combinada, categorías, insignias y precios" loading="lazy"><figcaption>Página «SmartLists» – lista combinada con categorías, insignias y precios.</figcaption></figure>
+      <figure class="shot"><img src="../assets/shopping-mode.svg" alt="Modo compra en el dispositivo" loading="lazy"><figcaption>Modo compra: filas grandes, barra de tiendas.</figcaption></figure>
+      <figure class="shot"><img src="../assets/share.svg" alt="Ventana de compartir con código QR" loading="lazy"><figcaption>Compartir por enlace y código QR – solo esta lista, con fecha límite.</figcaption></figure>
+      <figure class="shot"><img src="../assets/settings.svg" alt="Ajustes por secciones" loading="lazy"><figcaption>Ajustes en un solo lugar – para mí, para todos, por lista.</figcaption></figure>
+    </div>
+
+    <div class="callout">
+      <div class="icon-big">🔒</div>
+      <div>
+        <h3>Todo se queda contigo</h3>
+        <p>SmartLists funciona por completo en tu Home Assistant. Sin nube, sin cuenta, sin rastreo. Los enlaces compartidos llevan una clave aleatoria de 256 bits y solo muestran los artículos de esa lista – sin notas, precios ni personas.</p>
+      </div>
+    </div>
+    <div class="callout">
+      <div class="icon-big">👨‍👩‍👧‍👦</div>
+      <div>
+        <h3>Para toda la familia</h3>
+        <p>Cada uno mantiene su lista, la común lo muestra todo. Añadir algo puede enviar una notificación – a la app companion, Telegram o cualquier otro servicio notify.</p>
+      </div>
+    </div>
+
+    <h2 class="section-title">Instalación</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <h4>Añadir en HACS</h4>
+        <p>HACS → ⋮ → Repositorios personalizados → <code>https://github.com/m3m0rex/ha_smartlists</code>, tipo «Integración».</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h4>Descargar y reiniciar</h4>
+        <p>Descargar «SmartLists» y reiniciar Home Assistant.</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h4>Añadir la integración</h4>
+        <p>Ajustes → Dispositivos y servicios → Añadir integración → SmartLists.</p>
+      </div>
+      <div class="step">
+        <div class="num">4</div>
+        <h4>Seguir el asistente</h4>
+        <p>Abrir «SmartLists» en la barra lateral – un breve asistente pregunta por listas, tiendas e idioma. Unos dos minutos.</p>
+      </div>
+    </div>
+
+    <div class="final-cta">
+      <h2>¿Listo para mejores listas de la compra?</h2>
+      <p>Gratis y de código abierto. Funciona por completo en tu Home Assistant.</p>
+      <div class="btn-row">
+        <a class="download-btn" href="https://my.home-assistant.io/redirect/hacs_repository/?owner=m3m0rex&amp;repository=ha_smartlists&amp;category=integration">⬇️ Abrir en HACS</a>
+        <a class="download-btn ghost" href="https://github.com/m3m0rex/ha_smartlists/wiki">📖 Documentación</a>
+      </div>
+    </div>
+    <p class="cross">¿Prefieres una app propia con listas locales y widget? <a data-goto="app">A la app Android →</a></p>
+  </main>
+</section>
+
+<!-- =====================================================================
+     Android-App (Inhalt wie bisher)
+     ===================================================================== -->
+<section class="panel app" aria-label="App Android">
+  <header>
+    <div class="logo">📋</div>
+    <div class="kicker">App para Android</div>
+    <h1>HA SmartLists</h1>
+    <p class="tagline">Listas de la compra, tareas y notas – en local en el dispositivo, conectadas a Home Assistant si quieres. Sin backend propio.</p>
+    <!-- noch nicht veröffentlicht: Knopf ausgegraut. Zum Freischalten wieder als Link auf download/ha-smartlists.apk -->
+    <span class="download-btn disabled" id="download" aria-disabled="true">⬇️ Descargar APK</span>
+    <div class="soon">🚧 Aún no publicada – disponible pronto</div>
+    <div class="download-sub">Android 13 o posterior · instalación directa, sin Play Store</div>
+  </header>
+
+  <main>
+    <div class="intro-card">
+      HA SmartLists es una app Android nativa para listas de la compra, tareas y notas. Las listas pueden quedarse en el dispositivo o conectarse a Home Assistant, importar varias listas de Home Assistant y fusionarlas a tu gusto. Todo va directamente entre la app y Home Assistant – sin servicio en la nube ni servidor intermedio.
+    </div>
+
+    <h2 class="section-title">Listas y organización</h2>
+    <div class="grid">
+      <div class="feature">
+        <div class="icon">📝</div>
+        <h3>Listas locales</h3>
+        <p>Crear, renombrar, borrar y llenar listas de la compra o de tareas totalmente sin conexión – sin Home Assistant.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🏠</div>
+        <h3>Conectar Home Assistant</h3>
+        <p>Importar listas existentes de Home Assistant y gestionarlas en la app – los cambios se sincronizan en ambos sentidos.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🔀</div>
+        <h3>Listas fusionadas con modo de conflicto</h3>
+        <p>Unir varias listas locales y de Home Assistant en una vista. Por lista fusionada: sincronización en ambos sentidos, Home Assistant manda o solo local.</p>
+      </div>
+      <div class="feature star">
+        <div class="icon">⭐</div>
+        <h3>Favorito, renombrar, borrar</h3>
+        <p>Una pulsación larga en un artículo abre un menú para marcar como favorito, renombrar, copiar o borrar – los favoritos suben solos.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🙈</div>
+        <h3>Ocultar listas</h3>
+        <p>Las listas que no necesitas ahora se pueden marcar como «invisibles». Se conservan pero desaparecen de vistas y selectores.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">📥</div>
+        <h3>Importar texto</h3>
+        <p>Pasar listas de otras apps (p. ej. checklists de ColorNote o CSV sencillo) como artículos copiando y pegando.</p>
+      </div>
+    </div>
+
+    <h2 class="section-title">Notas</h2>
+    <div class="grid">
+      <div class="feature">
+        <div class="icon">🗒️</div>
+        <h3>Zona de notas propia</h3>
+        <p>Notas con título y texto, separadas de las listas de la compra. Guardadas en local o sincronizadas con Home Assistant.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">☁️</div>
+        <h3>Migración a Home Assistant</h3>
+        <p>Las listas de notas locales se pueden migrar a Home Assistant en cualquier momento, con todo su contenido.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🔍</div>
+        <h3>Lectura clara, edición sencilla</h3>
+        <p>Una nota se abre primero en solo lectura a pantalla completa con enlaces pulsables – al tocar el lápiz se pasa a editar.</p>
+      </div>
+    </div>
+
+    <h2 class="section-title">Widget y día a día</h2>
+    <div class="grid">
+      <div class="feature">
+        <div class="icon">📱</div>
+        <h3>Widget de pantalla de inicio</h3>
+        <p>Mostrar una lista, lista fusionada o lista de notas en la pantalla de inicio, marcar en el widget, colores y letra ajustables.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">💾</div>
+        <h3>Copia y restauración</h3>
+        <p>Listas locales, fusionadas y ajustes se pueden guardar en Home Assistant a mano o automáticamente, gestionar y restaurar por fecha.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🔄</div>
+        <h3>Estado de sincronización y registro</h3>
+        <p>El estado de conexión siempre está visible. Una página de detalle muestra la cola de cambios pendientes y un registro de las últimas sincronizaciones.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="icon-big">🧩</div>
+      <div>
+        <h3>Junto con la integración HACS</h3>
+        <p>Con la integración SmartLists en Home Assistant la app se vincula sola: mismas insignias, categorías y sugerencias, listas combinadas de Home Assistant y categorías recordadas en común. <a data-goto="hacs">Más sobre la integración →</a></p>
+      </div>
+    </div>
+    <div class="callout">
+      <div class="icon-big">👨‍👩‍👧‍👦</div>
+      <div>
+        <h3>Perfecto para familias</h3>
+        <p>Varias personas usan las mismas listas de Home Assistant desde sus dispositivos. Todos ven lo que falta – sin mensajes de ida y vuelta.</p>
+      </div>
+    </div>
+    <div class="callout">
+      <div class="icon-big">🔒</div>
+      <div>
+        <h3>Privacidad</h3>
+        <p>Las credenciales de Home Assistant se guardan solo cifradas en el dispositivo. Sin servidor externo, sin anuncios, sin rastreo – la comunicación va directamente entre la app y tu Home Assistant.</p>
+      </div>
+    </div>
+
+    <h2 class="section-title">Cómo funciona</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <h4>Descargar el APK</h4>
+        <p>Con el botón de descarga de arriba. Hay que permitir una vez la instalación desde fuentes desconocidas.</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h4>Abrir la app</h4>
+        <p>Crear listas locales directamente – o conectar Home Assistant en Ajustes → Conexión.</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h4>Introducir un token de larga duración</h4>
+        <p>Créalo en Home Assistant en tu perfil y pégalo en la app en «Token de integración».</p>
+      </div>
+      <div class="step">
+        <div class="num">4</div>
+        <h4>A empezar</h4>
+        <p>Cargar listas, crear listas fusionadas, configurar el widget – listo.</p>
+      </div>
+    </div>
+
+    <div class="final-cta">
+      <h2>¿Listo para empezar?</h2>
+      <p>Gratis, sin login, sin nube obligatoria.</p>
+      <span class="download-btn disabled" aria-disabled="true">⬇️ Descargar APK</span>
+      <div class="soon">🚧 Aún no publicada – disponible pronto</div>
+    </div>
+    <p class="cross">¿Todo directamente en Home Assistant, sin app? <a data-goto="hacs">A la integración HACS →</a></p>
+  </main>
+</section>
+
+<h2 class="section-title" style="max-width:980px;margin:8px auto 16px;padding:0 22px">¿Integración o app?</h2>
+<div style="max-width:980px;margin:0 auto;padding:0 20px">
+  <table class="compare">
+    <tr><th></th><th>🏠 Integración HACS</th><th>🤖 App Android</th></tr>
+    <tr><td>Funciona en</td><td>Home Assistant (navegador, app de HA, paneles)</td><td>App propia en el dispositivo Android</td></tr>
+    <tr><td>Utilizable sin Home Assistant</td><td>–</td><td>✓ listas locales</td></tr>
+    <tr><td>Categorías e insignias</td><td>✓</td><td>✓ si está vinculada con la integración</td></tr>
+    <tr><td>Modo compra, compra sin conexión</td><td>✓</td><td>Listas guardadas en el dispositivo</td></tr>
+    <tr><td>Compartir por enlace con personas sin cuenta</td><td>✓</td><td>–</td></tr>
+    <tr><td>Widget para marcar</td><td>con los widgets de la app de HA</td><td>✓ widget propio</td></tr>
+    <tr><td>Coste y licencia</td><td>gratis, código abierto (MIT)</td><td>gratis, propietaria</td></tr>
+  </table>
+</div>
+
+<footer>
+  HA SmartLists — listas de la compra, tareas y notas con Home Assistant.<br>
+  <span class="only-hacs">Integración: <a href="https://github.com/m3m0rex/ha_smartlists">GitHub</a> · <a href="https://github.com/m3m0rex/ha_smartlists/wiki">Wiki</a> · <a href="https://github.com/m3m0rex/ha_smartlists/blob/main/LICENSE">Licencia MIT</a></span>
+  <span class="only-app">App: propietaria, uso del APK oficial para fines personales – ver <a href="../LICENSE.md">licencia</a>.</span>
+</footer>
+
+<div class="lightbox" role="dialog" aria-modal="true" aria-label="Imagen ampliada">
+  <button type="button" aria-label="Cerrar">✕</button>
+  <img alt="">
+  <p></p>
+</div>
+
+<script>
+  // Bilder antippen = groß anzeigen; Klick daneben, ✕ oder Esc schließt
+  (function () {
+    var lb = document.querySelector(".lightbox"), big = lb.querySelector("img"), cap = lb.querySelector("p");
+    function close() { lb.classList.remove("open"); big.removeAttribute("src"); }
+    document.querySelectorAll(".shot img, .showcase .screen img").forEach(function (img) {
+      img.addEventListener("click", function () {
+        big.src = img.currentSrc || img.src; big.alt = img.alt;
+        var fig = img.closest("figure"), c = fig && fig.querySelector("figcaption");
+        cap.textContent = c ? c.textContent : "";
+        lb.classList.add("open");
+      });
+    });
+    lb.addEventListener("click", close);
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
+  })();
+
+  // Umschalter HACS-Integration | Android-App – merkt sich die Wahl in der Adresse (#hacs / #app)
+  (function () {
+    var buttons = document.querySelectorAll(".switch button");
+    function show(product, scroll) {
+      if (product !== "app") product = "hacs";
+      document.body.setAttribute("data-product", product);
+      buttons.forEach(function (b) { b.setAttribute("aria-selected", String(b.getAttribute("data-product") === product)); });
+      if (location.hash !== "#" + product && location.hash !== "#download") history.replaceState(null, "", "#" + product);
+      if (scroll) window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+    buttons.forEach(function (b) { b.addEventListener("click", function () { show(b.getAttribute("data-product"), true); }); });
+    document.querySelectorAll("[data-goto]").forEach(function (a) {
+      a.addEventListener("click", function (e) { e.preventDefault(); show(a.getAttribute("data-goto"), true); });
+    });
+    // Sprache: Auswahl merken; auf der deutschen Startseite einmalig in die Browsersprache wechseln
+    var sel = document.querySelector(".lang");
+    sel.addEventListener("change", function () {
+      try { localStorage.setItem("smartlists-site-lang", sel.selectedOptions[0].getAttribute("data-lang")); } catch (e) {}
+      location.href = sel.value + location.hash;
+    });
+    if (document.documentElement.lang === "de") {
+      var chosen = null;
+      try { chosen = localStorage.getItem("smartlists-site-lang"); } catch (e) {}
+      var want = (navigator.languages || [navigator.language || "de"]).map(function (l) { return String(l).slice(0, 2).toLowerCase(); })
+        .filter(function (l) { return ["de", "en", "fr", "es", "it", "pl"].indexOf(l) >= 0; })[0] || "en";
+      if (!chosen && want !== "de") { location.replace(want + "/" + location.hash); return; }
+    }
+    var h = location.hash.replace("#", "");
+    show(h === "app" || h === "download" ? "app" : "hacs", false);
+  })();
+</script>
+</body>
+</html>
