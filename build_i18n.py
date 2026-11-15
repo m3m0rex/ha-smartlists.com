@@ -120,20 +120,20 @@ T: dict[str, tuple[str, str, str, str, str]] = {
         "Liste con proprietario, condivise per persona per vedere, spuntare o modificare. Le liste esistenti si possono trasferire con tutti gli articoli.",
         "Listy z właścicielem, udostępniane osobom do podglądu, odhaczania lub edycji. Istniejące listy można przejąć ze wszystkimi produktami."),
     "Extras nach Bedarf": ("Extras when you need them", "Extras à la demande", "Extras según necesidad", "Extra quando servono", "Dodatki według potrzeb"),
-    "Wochenplan mit Kalender und Mealie-Import, Notizen, Statistik und Ausgaben – für Einsteiger aus, jederzeit zuschaltbar.": (
-        "Meal plan with calendar and Mealie import, notes, statistics and expenses – off for beginners, switch on any time.",
-        "Menu de la semaine avec calendrier et import Mealie, notes, statistiques et dépenses – désactivés au départ, activables à tout moment.",
-        "Plan semanal con calendario e importación de Mealie, notas, estadísticas y gastos – desactivados al empezar, activables en cualquier momento.",
-        "Piano settimanale con calendario e import da Mealie, note, statistiche e spese – spenti all'inizio, attivabili in qualsiasi momento.",
-        "Plan tygodnia z kalendarzem i importem z Mealie, notatki, statystyki i wydatki – na start wyłączone, można je włączyć w każdej chwili."),
+    "Wochenplan mit Kalender und Mealie-Import, Notizen, Statistik und Ausgaben, ein Einkaufs-Dashboard mit Unterseite je Liste – für Einsteiger aus, jederzeit zuschaltbar.": (
+        "Meal plan with calendar and Mealie import, notes, statistics and expenses, a shopping dashboard with one sub-page per list – off for beginners, switch on any time.",
+        "Menu de la semaine avec calendrier et import Mealie, notes, statistiques et dépenses, un tableau de bord courses avec une sous-page par liste – désactivés au départ, activables à tout moment.",
+        "Plan semanal con calendario e importación de Mealie, notas, estadísticas y gastos, un panel de compras con una subpágina por lista – desactivados al empezar, activables en cualquier momento.",
+        "Piano settimanale con calendario e import da Mealie, note, statistiche e spese, una dashboard della spesa con una sottopagina per lista – spenti all'inizio, attivabili in qualsiasi momento.",
+        "Plan tygodnia z kalendarzem i importem z Mealie, notatki, statystyki i wydatki, pulpit zakupów z podstroną dla każdej listy – na start wyłączone, można je włączyć w każdej chwili."),
     "Einkaufen": ("Shopping", "Courses", "Compra", "Spesa", "Zakupy"),
     "Einkaufsmodus": ("Shopping mode", "Mode courses", "Modo compra", "Modalità spesa", "Tryb zakupów"),
-    "Große Zeilen, ganze Zeile antippen zum Abhaken (mit 3 Sekunden Rückgängig), Markt-Leiste, Bildschirm bleibt an. Der Markt wird per Zone automatisch gewählt.": (
-        "Large rows, tap the whole row to check off (with 3-second undo), store bar, screen stays on. The store is picked automatically by zone.",
-        "Grandes lignes, toucher toute la ligne pour cocher (annulation pendant 3 secondes), barre des magasins, écran allumé. Le magasin est choisi automatiquement par zone.",
-        "Filas grandes, tocar toda la fila para marcar (con 3 segundos para deshacer), barra de tiendas, pantalla encendida. La tienda se elige sola por zona.",
-        "Righe grandi, tocca tutta la riga per spuntare (con 3 secondi per annullare), barra dei negozi, schermo acceso. Il negozio viene scelto in automatico per zona.",
-        "Duże wiersze, dotknięcie całego wiersza odhacza (z 3 sekundami na cofnięcie), pasek sklepów, ekran nie gaśnie. Sklep wybierany automatycznie wg strefy."),
+    "Große Zeilen, ganze Zeile antippen zum Abhaken (mit 3 Sekunden Rückgängig), auf Wunsch lange drücken zum Löschen, Markt-Leiste, Bildschirm bleibt an. Der Markt wird per Zone automatisch gewählt.": (
+        "Large rows, tap the whole row to check off (with 3-second undo), optionally long press to delete, store bar, screen stays on. The store is picked automatically by zone.",
+        "Grandes lignes, toucher toute la ligne pour cocher (annulation pendant 3 secondes), appui long pour supprimer si tu veux, barre des magasins, écran allumé. Le magasin est choisi automatiquement par zone.",
+        "Filas grandes, tocar toda la fila para marcar (con 3 segundos para deshacer), opcionalmente pulsación larga para borrar, barra de tiendas, pantalla encendida. La tienda se elige sola por zona.",
+        "Righe grandi, tocca tutta la riga per spuntare (con 3 secondi per annullare), se vuoi pressione lunga per eliminare, barra dei negozi, schermo acceso. Il negozio viene scelto in automatico per zona.",
+        "Duże wiersze, dotknięcie całego wiersza odhacza (z 3 sekundami na cofnięcie), opcjonalnie długie przytrzymanie usuwa, pasek sklepów, ekran nie gaśnie. Sklep wybierany automatycznie wg strefy."),
     "Offline im Supermarkt": ("Offline in the supermarket", "Hors ligne au supermarché", "Sin conexión en el súper", "Offline al supermercato", "Offline w supermarkecie"),
     "Kein Empfang? Abhaken und Hinzufügen gehen weiter und werden übertragen, sobald Home Assistant wieder erreichbar ist.": (
         "No signal? Checking off and adding keep working and are sent as soon as Home Assistant is reachable again.",
@@ -186,12 +186,12 @@ T: dict[str, tuple[str, str, str, str, str]] = {
         "Con modelli per famiglia, tablet in cucina, scheda negozio, sola lettura e riquadro. Funziona con qualsiasi lista di cose da fare.",
         "Z szablonami: rodzina, tablet w kuchni, karta sklepu, tylko podgląd i kafelek. Działa z każdą listą zadań."),
     "Widgets &amp; App-Symbol": ("Widgets &amp; app icon", "Widgets &amp; icône d'app", "Widgets e icono de app", "Widget e icona app", "Widżety i ikona aplikacji"),
-    "Läuft mit den Startbildschirm-Widgets der Home-Assistant-App (Android und iOS). Dazu ein App-Symbol, das eine Liste direkt im Einkaufsmodus öffnet.": (
-        "Works with the home-screen widgets of the Home Assistant app (Android and iOS). Plus an app icon that opens a list straight in shopping mode.",
-        "Fonctionne avec les widgets d'écran d'accueil de l'app Home Assistant (Android et iOS). Plus une icône qui ouvre une liste directement en mode courses.",
-        "Funciona con los widgets de pantalla de inicio de la app de Home Assistant (Android e iOS). Además, un icono que abre una lista directamente en modo compra.",
-        "Funziona con i widget della schermata Home dell'app Home Assistant (Android e iOS). In più un'icona che apre una lista direttamente in modalità spesa.",
-        "Działa z widżetami ekranu głównego aplikacji Home Assistant (Android i iOS). Do tego ikona otwierająca listę od razu w trybie zakupów."),
+    "Läuft mit den Startbildschirm-Widgets der Home-Assistant-App (Android und iOS), unter Android auch hübsch gestaltet im Template-Widget. Dazu ein App-Symbol, das eine Liste direkt im Einkaufsmodus öffnet.": (
+        "Works with the home-screen widgets of the Home Assistant app (Android and iOS), on Android also nicely formatted in the Template widget. Plus an app icon that opens a list straight in shopping mode.",
+        "Fonctionne avec les widgets d'écran d'accueil de l'app Home Assistant (Android et iOS), sous Android aussi joliment mis en forme dans le widget Template. Plus une icône qui ouvre une liste directement en mode courses.",
+        "Funciona con los widgets de pantalla de inicio de la app de Home Assistant (Android e iOS), en Android también con buen formato en el widget Template. Además, un icono que abre una lista directamente en modo compra.",
+        "Funziona con i widget della schermata Home dell'app Home Assistant (Android e iOS), su Android anche ben formattata nel widget Template. In più un'icona che apre una lista direttamente in modalità spesa.",
+        "Działa z widżetami ekranu głównego aplikacji Home Assistant (Android i iOS), na Androidzie także ładnie sformatowana w widżecie Template. Do tego ikona otwierająca listę od razu w trybie zakupów."),
     "Assist &amp; Automationen": ("Assist &amp; automations", "Assist &amp; automatisations", "Assist y automatizaciones", "Assist e automazioni", "Assist i automatyzacje"),
     "„Setz Milch auf die Einkaufsliste“, „Bin im Laden“-Ereignis, Markt-Erinnerung, fällige Artikel und fertige Blueprints.": (
         "“Put milk on the shopping list”, “I'm at the store” event, store reminder, due items and ready-made blueprints.",
@@ -244,6 +244,20 @@ T: dict[str, tuple[str, str, str, str, str]] = {
     "📖 Dokumentation": ("📖 Documentation", "📖 Documentation", "📖 Documentación", "📖 Documentazione", "📖 Dokumentacja"),
     "Lieber eine eigene App mit lokalen Listen und Widget?": ("Prefer an app of its own with local lists and a widget?", "Plutôt une app dédiée avec listes locales et widget ?", "¿Prefieres una app propia con listas locales y widget?", "Preferisci un'app dedicata con liste locali e widget?", "Wolisz osobną aplikację z lokalnymi listami i widżetem?"),
     "Zur Android-App →": ("To the Android app →", "Vers l'app Android →", "A la app Android →", "All'app Android →", "Do aplikacji Android →"),
+    "Passwort &amp; Notizen": ("Password &amp; notes", "Mot de passe &amp; notes", "Contraseña y notas", "Password e note", "Hasło i notatki"),
+    "Jeder Link optional mit Passwort; Notizen der Artikel nur, wenn du sie freigibst. Die geteilte Seite hat Suche, Sortierung, Angebote und zeigt, wie lange sie noch geteilt ist.": (
+        "Every link optionally with a password; item notes only if you allow them. The shared page has search, sorting, offers and shows how long it is still shared.",
+        "Chaque lien avec mot de passe en option ; les notes des articles seulement si tu les autorises. La page partagée a recherche, tri, promos et indique combien de temps elle reste partagée.",
+        "Cada enlace con contraseña opcional; las notas de los artículos solo si las permites. La página compartida tiene búsqueda, orden, ofertas y muestra cuánto tiempo sigue compartida.",
+        "Ogni link con password facoltativa; le note degli articoli solo se le consenti. La pagina condivisa ha ricerca, ordinamento, offerte e mostra per quanto è ancora condivisa.",
+        "Każdy link opcjonalnie z hasłem; notatki produktów tylko, jeśli na to pozwolisz. Udostępniona strona ma wyszukiwanie, sortowanie, promocje i pokazuje, jak długo jeszcze jest udostępniona."),
+    "Wer darf was?": ("Who may do what?", "Qui peut faire quoi ?", "¿Quién puede hacer qué?", "Chi può fare cosa?", "Kto może co?"),
+    "Für Personen in Home Assistant: nur wer hinzugefügt ist, hat Zugriff – je Person sehen, abhaken oder bearbeiten.": (
+        "For people in Home Assistant: only people you add have access – view, check off or edit per person.",
+        "Pour les personnes dans Home Assistant : seules celles que tu ajoutes ont accès – voir, cocher ou modifier par personne.",
+        "Para personas en Home Assistant: solo quien añadas tiene acceso – ver, marcar o editar por persona.",
+        "Per le persone in Home Assistant: ha accesso solo chi aggiungi – vedere, spuntare o modificare per persona.",
+        "Dla osób w Home Assistant: dostęp mają tylko dodane osoby – podgląd, odhaczanie lub edycja dla każdej."),
     # ---------- App ----------
     "App für Android": ("App for Android", "App pour Android", "App para Android", "App per Android", "Aplikacja na Androida"),
     "Einkaufslisten, To-dos und Notizen – lokal auf dem Gerät, optional verbunden mit Home Assistant. Ganz ohne eigenes Backend.": (
