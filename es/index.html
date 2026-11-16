@@ -292,6 +292,16 @@
   .compare .yes { color: var(--green); } .compare .soon-col { color: var(--muted); opacity: .75; }
   .compare.three { min-width: 620px; }
   @media (prefers-color-scheme: dark) { .compare .yes { color: #6FCF73; } }
+  /* Empfohlene Integrationen (Dank an FaserF) */
+  .thanks { background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%); color: #fff; border-radius: 20px; padding: 26px 30px; display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+  .thanks .tbig { font-size: 42px; line-height: 1; } .thanks .ttxt { flex: 1 1 340px; } .thanks h3 { margin: 0 0 6px; font-size: 22px; } .thanks p { margin: 0; color: #DCEBFF; font-size: 15.5px; }
+  .thanks .tbtn { display: flex; gap: 8px; flex-wrap: wrap; } .thanks .download-btn { font-size: 15px; padding: 10px 20px; }
+  .rec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 14px; margin-top: 16px; }
+  .rec { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 16px 18px; display: flex; gap: 14px; align-items: flex-start; text-decoration: none; color: inherit; transition: transform .15s ease, border-color .15s ease; }
+  .rec:hover { transform: translateY(-2px); border-color: var(--link); } .rec.wide { grid-column: 1 / -1; }
+  .rec .rdot { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; font-size: 20px; flex: none; background: var(--soft); }
+  .rec b { display: block; font-size: 16px; } .rec code { font-size: 12.5px; background: var(--soft); color: var(--soft-ink); border-radius: 5px; padding: 0 5px; font-weight: 400; }
+  .rec .rp { display: block; margin-top: 4px; color: var(--muted); font-size: 14px; line-height: 1.45; }
   .gallery.phones { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); align-items: start; }
   .lead { margin: -10px 0 18px; color: var(--muted); font-size: 15px; }
   .yaml { margin: 0 0 24px; background: #0e1014; color: #D7E3F4; border-radius: 14px; padding: 18px 20px; font-size: 13.5px; line-height: 1.55;
@@ -326,7 +336,7 @@
     .intro-card, .callout { padding: 20px; }
   }
   @media (prefers-color-scheme: dark) {
-    header, .final-cta { background: linear-gradient(135deg, #12508F 0%, #0A2E63 100%); }
+    header, .final-cta, .thanks { background: linear-gradient(135deg, #12508F 0%, #0A2E63 100%); }
     nav { background: rgba(10, 37, 82, 0.96); }
   }
 </style>
@@ -687,7 +697,7 @@
       <div class="feature">
         <div class="icon">🔌</div>
         <h3>Tus sensores</h3>
-        <p>Reconoce por sí sola los sensores de ofertas, p. ej. la integración de REWE ha-rewe de FaserF. Tus propios sensores REST o de plantilla se asignan campo a campo.</p>
+        <p>Reconoce por sí sola los sensores de ofertas, p. ej. los de las integraciones recomendadas de FaserF. Tus propios sensores REST o de plantilla se asignan campo a campo.</p>
       </div>
     </div>
 
@@ -725,12 +735,32 @@ all_view: list</pre>
       </div>
     </div>
 
+    <h2 class="section-title">Integraciones recomendadas</h2>
+    <div class="thanks">
+      <div class="tbig">🙏</div>
+      <div class="ttxt">
+        <h3>¡Gracias, FaserF!</h3>
+        <p>La tarjeta no trae datos de ofertas por sí misma: muestra lo que entregan los sensores de tu Home Assistant. Para eso recomendamos las integraciones de FaserF.</p>
+      </div>
+      <div class="tbtn"><a class="download-btn" href="https://hassio-addons.fabiseitz.de/">Todos los proyectos de FaserF</a><a class="download-btn ghost" href="https://github.com/FaserF">GitHub</a></div>
+    </div>
+    <div class="rec-grid">
+      <a class="rec wide" href="https://github.com/FaserF/ha-grocery-deals"><span class="rdot">🏷️</span><span><b>Grocery Deals <code>ha-grocery-deals</code></b><span class="rp">Comparación de precios entre varias tiendas: agrupa las integraciones de las tiendas y muestra el mejor precio por término de búsqueda.</span></span></a>
+      <a class="rec" href="https://github.com/FaserF/ha-rewe"><span class="rdot">🔴</span><span><b>REWE <code>ha-rewe</code></b><span class="rp">Ofertas semanales, puntos y descuentos.</span></span></a>
+      <a class="rec" href="https://github.com/FaserF/ha-edeka"><span class="rdot">🟡</span><span><b>EDEKA <code>ha-edeka</code></b><span class="rp">Ofertas semanales, descuentos y tarjeta PAYBACK.</span></span></a>
+      <a class="rec" href="https://github.com/FaserF/ha-lidl"><span class="rdot">🔵</span><span><b>Lidl <code>ha-lidl</code></b><span class="rp">Lidl Plus: ofertas semanales, cupones y tickets digitales.</span></span></a>
+      <a class="rec" href="https://github.com/FaserF/ha-aldi"><span class="rdot">⚪</span><span><b>ALDI <code>ha-aldi</code></b><span class="rp">ALDI Süd y ALDI Nord: folletos semanales.</span></span></a>
+      <a class="rec" href="https://github.com/FaserF/ha-norma"><span class="rdot">🔴</span><span><b>Norma <code>ha-norma</code></b><span class="rp">Ofertas semanales y folleto.</span></span></a>
+      <a class="rec" href="https://github.com/FaserF/ha-penny"><span class="rdot">🔴</span><span><b>PENNY <code>ha-penny</code></b><span class="rp">Tickets digitales (eBons) y puntos de fidelidad.</span></span></a>
+    </div>
+    <p class="lead" style="margin-top:14px">HA SmartLists y la Discounts Card son proyectos independientes, sin relación con FaserF ni con las tiendas mencionadas.</p>
+
     <h2 class="section-title">Instalación</h2>
     <div class="steps">
       <div class="step">
         <div class="num">1</div>
         <h4>Configurar sensores de ofertas</h4>
-        <p>Por ejemplo la integración de REWE ha-rewe de FaserF – o un sensor propio.</p>
+        <p>Por ejemplo una de las integraciones recomendadas de FaserF – o un sensor propio.</p>
       </div>
       <div class="step">
         <div class="num">2</div>
