@@ -242,6 +242,53 @@
   .cross a { font-weight: 700; cursor: pointer; }
 
   /* Bild vergrößern */
+  /* ---------- Probier es aus: Eingabe live testen ---------- */
+  .try {
+    background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px;
+    box-shadow: 0 8px 24px var(--shadow); padding: 28px; margin-bottom: 40px;
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; align-items: start;
+  }
+  .try h3 { margin: 0 0 8px; font-size: 22px; line-height: 1.3; }
+  .try p { margin: 0 0 14px; color: var(--muted); font-size: 15px; }
+  .try .field { display: flex; gap: 8px; }
+  .try input {
+    flex: 1; min-width: 0; font: inherit; font-size: 16px; padding: 11px 14px; border-radius: 12px;
+    border: 1.5px solid var(--border); background: var(--bg); color: var(--ink); outline: none;
+  }
+  .try input:focus { border-color: var(--link); }
+  .try .add {
+    width: 46px; flex: none; border: 0; border-radius: 12px; background: var(--blue); color: #fff;
+    font-size: 24px; line-height: 1; cursor: pointer;
+  }
+  .try .ex { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; align-items: center; font-size: 13px; color: var(--muted); }
+  .try .ex button {
+    font: inherit; font-size: 12.5px; border: 1px solid var(--border); background: var(--soft); color: var(--soft-ink);
+    border-radius: 999px; padding: 4px 10px; cursor: pointer;
+  }
+  .try dl { margin: 16px 0 0; display: grid; grid-template-columns: auto 1fr; gap: 5px 14px; font-size: 14px; }
+  .try dt { color: var(--muted); }
+  .try dd { margin: 0; font-weight: 700; overflow-wrap: anywhere; }
+  .try dl .off { display: none; }
+  .try .hint { margin: 14px 0 0; font-size: 12.5px; }
+  .try .phone { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: 12px; min-height: 200px; }
+  .try .phone-head { display: flex; justify-content: space-between; align-items: center; font-weight: 800; padding: 2px 4px 8px; }
+  .try .phone-head button { font: inherit; font-size: 12.5px; border: 0; background: none; color: var(--link); cursor: pointer; }
+  .try .bar { font-size: 13px; font-weight: 800; border-radius: 9px; padding: 4px 10px; margin: 8px 0 2px;
+    background: color-mix(in srgb, var(--c) 16%, transparent); color: color-mix(in srgb, var(--c) 70%, var(--ink)); }
+  .try .row { display: flex; gap: 10px; align-items: flex-start; padding: 7px 4px; }
+  .try .row.preview { opacity: .75; border: 1.5px dashed var(--border); border-radius: 10px; margin-top: 4px; }
+  .try .box { width: 20px; height: 20px; flex: none; margin-top: 2px; border-radius: 50%; border: 2px solid var(--muted); cursor: pointer; background: none; padding: 0; }
+  .try .row.done .box { background: var(--green); border-color: var(--green); }
+  .try .row.done .nm { text-decoration: line-through; color: var(--muted); }
+  .try .nm { font-size: 15px; line-height: 1.35; }
+  .try .q { display: inline-block; font-size: 12px; font-weight: 800; border-radius: 999px; padding: 0 7px; margin-right: 5px;
+    background: color-mix(in srgb, var(--yellow) 22%, transparent); color: color-mix(in srgb, var(--yellow) 60%, var(--ink)); }
+  .try .sz { display: inline-block; font-size: 12px; font-weight: 800; border-radius: 999px; padding: 0 7px; margin-left: 5px;
+    border: 1.5px solid var(--yellow); color: color-mix(in srgb, var(--yellow) 60%, var(--ink)); }
+  .try .sub { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 3px; align-items: center; font-size: 12.5px; }
+  .try .sub .chip { font-size: 11.5px; padding: 1px 8px; }
+  .try .sub b { font-size: 13px; }
+  .try .empty { color: var(--muted); font-size: 14px; text-align: center; padding: 34px 10px; }
   .shot img, .showcase .screen img { cursor: zoom-in; }
   .lightbox { position: fixed; inset: 0; z-index: 50; background: rgba(10, 14, 22, .88); display: none;
     align-items: center; justify-content: center; padding: 24px; cursor: zoom-out; }
@@ -257,6 +304,7 @@
 
   @media (max-width: 760px) {
     .showcase { grid-template-columns: 1fr; padding: 18px; }
+    .try { grid-template-columns: 1fr; padding: 18px; }
   }
   @media (max-width: 560px) {
     nav { flex-wrap: wrap; justify-content: center; padding: 10px 12px; }
@@ -323,6 +371,42 @@
           <span class="chip person">👤 Anna</span><span class="chip tag">#bio</span><span class="chip">🧀 Refrigerados</span>
         </div>
         <p style="margin-top:14px;font-size:13.5px"><code>@</code>, <code>*</code> y <code>#</code> son solo el valor por defecto – tú eliges los caracteres.</p>
+      </div>
+    </div>
+
+    <div class="try" id="try">
+      <div>
+        <h3>Pruébalo</h3>
+        <p>Escribe un artículo como lo harías en Home Assistant – verás al instante qué hace SmartLists con él.</p>
+        <div class="field">
+          <input type="text" id="try-in" autocomplete="off" spellcheck="false" aria-label="Escribir un artículo">
+          <button type="button" class="add" id="try-add" aria-label="Añadir">+</button>
+        </div>
+        <div class="ex" id="try-ex">
+          <span>Ejemplos:</span>
+          <button type="button">4x yogur 150g</button>
+          <button type="button">2,5kg patatas @Lidl</button>
+          <button type="button">3 panecillos</button>
+          <button type="button">Lavavajillas 0,99€ @dm *Max</button>
+        </div>
+        <dl id="try-out">
+          <dt data-k="name">Artículo</dt><dd data-k="name"></dd>
+          <dt data-k="count">Cantidad</dt><dd data-k="count"></dd>
+          <dt data-k="size">Tamaño</dt><dd data-k="size"></dd>
+          <dt data-k="price">Precio</dt><dd data-k="price"></dd>
+          <dt data-k="store">Tienda</dt><dd data-k="store"></dd>
+          <dt data-k="person">Persona</dt><dd data-k="person"></dd>
+          <dt data-k="tags">Etiqueta</dt><dd data-k="tags"></dd>
+          <dt data-k="cat">Categoría</dt><dd data-k="cat"></dd>
+        </dl>
+        <p class="hint">Funciona solo en tu navegador, con las listas de palabras de la integración. En Home Assistant, SmartLists recuerda además tus correcciones y el orden de los pasillos por tienda.</p>
+      </div>
+      <div class="phone">
+        <div class="phone-head"><span>Tu lista de prueba</span><button type="button" id="try-clear">Vaciar</button></div>
+        <div id="try-list"></div>
+        <div class="empty" id="try-empty">Con + o Intro el artículo aparece aquí – ordenado por categoría.</div>
+        <div hidden id="try-cats"><span data-cat="obst_gemuese">🥬 Frutas y verduras</span><span data-cat="fleisch">🥩 Carne y pescado</span><span data-cat="kuehlung">🥛 Refrigerados y lácteos</span><span data-cat="grundnahrung">🥫 Despensa y conservas</span><span data-cat="backwaren">🍞 Pan y bollería</span><span data-cat="getraenke">🥤 Bebidas</span><span data-cat="suessigkeiten">🍫 Dulces y snacks</span><span data-cat="haushalt">🧹 Hogar y limpieza</span><span data-cat="drogerie">🧴 Higiene y belleza</span><span data-cat="tiefkuehl">❄️ Congelados</span><span data-cat="tierbedarf">🐕 Mascotas</span><span data-cat="sonstiges">📦 Otros</span></div>
+        <span hidden id="try-default">Leche 2 l 1,19€ @REWE *Anna #bio</span>
       </div>
     </div>
 
@@ -684,6 +768,96 @@
     });
     lb.addEventListener("click", close);
     document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
+  })();
+
+  // „Probier es aus“: vereinfachte Fassung der Erkennung aus der Integration, läuft nur im Browser
+  (function () {
+    var root = document.getElementById("try"); if (!root) return;
+    var lang = document.documentElement.lang || "de", base = lang === "de" ? "assets/" : "../assets/";
+    var inp = document.getElementById("try-in"), out = document.getElementById("try-out"), listEl = document.getElementById("try-list");
+    var empty = document.getElementById("try-empty"), items = [], terms = null, loading = false;
+    var COLORS = { obst_gemuese: "#43A047", fleisch: "#D84315", kuehlung: "#1E88E5", grundnahrung: "#8D6E63", backwaren: "#F9A825", getraenke: "#00ACC1",
+      suessigkeiten: "#D81B60", haushalt: "#5E35B1", drogerie: "#00897B", tiefkuehl: "#039BE5", tierbedarf: "#6D4C41", sonstiges: "#78909C" };
+    var CATS = [], LABEL = {};
+    document.querySelectorAll("#try-cats span").forEach(function (el) { CATS.push(el.getAttribute("data-cat")); LABEL[el.getAttribute("data-cat")] = el.textContent; });
+    function num(v) { return parseFloat(String(v).replace(",", ".")); }
+    function fmt(n) { return n.toLocaleString(lang, { maximumFractionDigits: 3 }); }
+    function money(n) { return n.toLocaleString(lang, { style: "currency", currency: "EUR" }); }
+    function parse(text) {
+      var r = { count: null, size: null, price: null, store: null, person: null, tags: [], name: "", cat: null }, t = " " + text.trim() + " ";
+      t = t.replace(/\s(\d+(?:[.,]\d{1,2})?)\s?(?:€|eur)(?=\s)/i, function (m, p) { r.price = num(p); return " "; });
+      if (r.price == null) t = t.replace(/\s€\s?(\d+(?:[.,]\d{1,2})?)(?=\s)/, function (m, p) { r.price = num(p); return " "; });
+      t = t.replace(/\s([@*#])([^\s@*#]+)/g, function (m, k, v) {
+        if (k === "@" && !r.store) r.store = v; else if (k === "*" && !r.person) r.person = v; else if (k === "#") r.tags.push(v); else return m;
+        return " ";
+      });
+      t = t.replace(/^\s*(\d+)\s?[x×](?=\s|\d)/i, function (m, c) { r.count = +c; return " "; });
+      t = t.replace(/(^|\s)(\d+(?:[.,]\d+)?)\s?(kg|gr|mg|g|ml|cl|l)(?=\s|$)/i, function (m, a, n, u) {
+        u = u.toLowerCase(); r.size = fmt(num(n)) + " " + (u === "gr" ? "g" : u); return " ";
+      });
+      if (r.count == null) t = t.replace(/^\s*(\d+)(?=\s+\S)/, function (m, c) { r.count = +c; return " "; });
+      r.name = t.replace(/\s+/g, " ").trim();
+      if (terms && r.name) {
+        var key = r.name.toLowerCase();
+        for (var i = 0; i < terms.length; i++) if (key.indexOf(terms[i][0]) >= 0) { r.cat = terms[i][1]; break; }
+        if (!r.cat) r.cat = "sonstiges";
+      }
+      return r;
+    }
+    function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+    function row(r, preview) {
+      var d = el("div", "row" + (preview ? " preview" : "") + (r.done ? " done" : "")), box = el("button", "box"), main = el("div");
+      box.type = "button"; box.setAttribute("aria-label", "✓");
+      if (!preview) box.addEventListener("click", function () { r.done = !r.done; draw(); });
+      var nm = el("div", "nm");
+      if (r.count != null && r.count !== 1) nm.append(el("span", "q", r.count + "×"));
+      nm.append(document.createTextNode(r.name || "…"));
+      if (r.size) nm.append(el("span", "sz", r.size));
+      main.append(nm);
+      var sub = el("div", "sub");
+      if (r.store) sub.append(el("span", "chip store", r.store));
+      r.tags.forEach(function (x) { sub.append(el("span", "chip tag", "#" + x)); });
+      if (r.person) sub.append(el("span", "chip person", "👤 " + r.person));
+      if (r.price != null) sub.append(el("b", "", money(r.price)));
+      if (sub.childNodes.length) main.append(sub);
+      d.append(box, main);
+      return d;
+    }
+    function bar(cat) { var b = el("div", "bar", LABEL[cat] || cat); b.style.setProperty("--c", COLORS[cat] || "#78909C"); return b; }
+    function draw() {
+      var r = parse(inp.value), vals = { name: r.name, count: r.count != null ? r.count + "×" : "", size: r.size || "", price: r.price != null ? money(r.price) : "",
+        store: r.store || "", person: r.person || "", tags: r.tags.map(function (x) { return "#" + x; }).join(" "), cat: r.cat ? LABEL[r.cat] : "" };
+      out.querySelectorAll("[data-k]").forEach(function (e) {
+        var v = vals[e.getAttribute("data-k")]; e.classList.toggle("off", !v); if (e.tagName === "DD") e.textContent = v;
+      });
+      listEl.textContent = "";
+      items.forEach(function (it) { if (!it.cat && terms) it.cat = parse(it.name).cat; });
+      CATS.concat([null]).forEach(function (cat) {
+        var rows = items.filter(function (it) { return (it.cat || null) === cat; });
+        if (!rows.length) return;
+        if (cat) listEl.append(bar(cat));
+        rows.forEach(function (it) { listEl.append(row(it, false)); });
+      });
+      if (r.name) { if (r.cat && !items.some(function (it) { return it.cat === r.cat; })) listEl.append(bar(r.cat)); listEl.append(row(r, true)); }
+      empty.style.display = items.length ? "none" : "";
+    }
+    function load() {
+      if (terms || loading) return; loading = true;
+      fetch(base + "words-" + lang + ".json").then(function (x) { return x.json(); }).then(function (data) {
+        var all = [];
+        Object.keys(data).forEach(function (cat) { data[cat].split("|").forEach(function (w) { if (w) all.push([w, cat]); }); });
+        all.sort(function (a, b) { return b[0].length - a[0].length; });  // längere Stichwörter gewinnen
+        terms = all; draw();
+      }).catch(function () { loading = false; });
+    }
+    function add() { var r = parse(inp.value); if (!r.name) return; items.push(r); if (items.length > 12) items.shift(); inp.value = ""; draw(); inp.focus(); }
+    inp.addEventListener("input", draw);
+    inp.addEventListener("keydown", function (e) { if (e.key === "Enter") add(); });
+    document.getElementById("try-add").addEventListener("click", add);
+    document.getElementById("try-clear").addEventListener("click", function () { items = []; draw(); });
+    document.querySelectorAll("#try-ex button").forEach(function (b) { b.addEventListener("click", function () { inp.value = b.textContent; draw(); inp.focus(); }); });
+    inp.value = document.getElementById("try-default").textContent;
+    draw(); load();
   })();
 
   // Umschalter HACS-Integration | Android-App – merkt sich die Wahl in der Adresse (#hacs / #app)
