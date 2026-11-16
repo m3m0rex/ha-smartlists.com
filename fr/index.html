@@ -979,8 +979,8 @@ all_view: list</pre>
       if (r.count == null) t = t.replace(/^\s*(\d+)(?=\s+\S)/, function (m, c) { r.count = +c; return " "; });
       r.name = t.replace(/\s+/g, " ").trim();
       if (terms && r.name) {
-        var key = r.name.toLowerCase();
-        for (var i = 0; i < terms.length; i++) if (key.indexOf(terms[i][0]) >= 0) { r.cat = terms[i][1]; break; }
+        var key = r.name.toLowerCase(), spaced = key.replace(/-/g, " ");  // "washing-up liquid" wie "washing up liquid"
+        for (var i = 0; i < terms.length; i++) if (key.indexOf(terms[i][0]) >= 0 || spaced.indexOf(terms[i][0]) >= 0) { r.cat = terms[i][1]; break; }
         if (!r.cat) r.cat = "sonstiges";
       }
       return r;
