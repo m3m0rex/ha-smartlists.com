@@ -115,8 +115,8 @@
 
   /* ---------- Bereiche ---------- */
   .panel { display: none; }
-  body[data-product="hacs"] .panel.hacs, body[data-product="app"] .panel.app { display: block; }
-  body[data-product="hacs"] .only-app, body[data-product="app"] .only-hacs { display: none; }
+  body[data-product="hacs"] .panel.hacs, body[data-product="card"] .panel.card, body[data-product="app"] .panel.app { display: block; }
+  body:not([data-product="hacs"]) .only-hacs, body:not([data-product="card"]) .only-card, body:not([data-product="app"]) .only-app { display: none; }
 
   header {
     background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
@@ -289,6 +289,12 @@
   .try .sub .chip { font-size: 11.5px; padding: 1px 8px; }
   .try .sub b { font-size: 13px; }
   .try .empty { color: var(--muted); font-size: 14px; text-align: center; padding: 34px 10px; }
+  body[data-product="card"] .cmp { display: none; }
+  .gallery.phones { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); align-items: start; }
+  .lead { margin: -10px 0 18px; color: var(--muted); font-size: 15px; }
+  .yaml { margin: 0 0 24px; background: #0e1014; color: #D7E3F4; border-radius: 14px; padding: 18px 20px; font-size: 13.5px; line-height: 1.55;
+    overflow-x: auto; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  .switch small { font-size: 10px; font-weight: 800; background: var(--yellow); color: #1A1C1E; border-radius: 5px; padding: 0 5px; margin-left: 4px; vertical-align: 1px; }
   .shot img, .showcase .screen img { cursor: zoom-in; }
   .lightbox { position: fixed; inset: 0; z-index: 50; background: rgba(10, 14, 22, .88); display: none;
     align-items: center; justify-content: center; padding: 24px; cursor: zoom-out; }
@@ -311,7 +317,8 @@
     nav .brand { display: none; }
     nav a.cta { display: none; }
     .lang { padding: 5px 8px; font-size: 12.5px; }
-    .switch button { padding: 7px 12px; font-size: 13.5px; }
+    .switch button { padding: 6px 9px; font-size: 12.5px; }
+    .switch small { display: none; }
     header { padding: 48px 16px 72px; }
     main { padding: 0 12px 48px; }
     .intro-card, .callout { padding: 20px; }
@@ -327,7 +334,8 @@
 <nav>
   <div class="brand"><img src="assets/icon.png" alt="">HA SmartLists</div>
   <div class="switch" role="tablist" aria-label="Produkt wählen">
-    <button type="button" role="tab" data-product="hacs" aria-selected="true">🏠 HACS-Integration</button>
+    <button type="button" role="tab" data-product="hacs" aria-selected="true">🛒 SmartLists</button>
+    <button type="button" role="tab" data-product="card" aria-selected="false">🏷️ Discounts Card<small>NEU</small></button>
     <button type="button" role="tab" data-product="app" aria-selected="false">🤖 Android-App</button>
   </div>
   <div class="right">
@@ -340,6 +348,7 @@
       <option value="pl/" data-lang="pl">🇵🇱 PL</option>
     </select>
     <a class="cta only-hacs" href="https://github.com/m3m0rex/ha_smartlists">GitHub</a>
+    <a class="cta only-card" href="https://github.com/m3m0rex/ha_smartdiscounts-card">GitHub</a>
     <span class="cta only-app disabled" aria-disabled="true" title="Noch nicht veröffentlicht">Download</span>
   </div>
 </nav>
@@ -412,6 +421,41 @@
 
     <div class="intro-card">
       SmartLists macht aus den To-do-Listen von Home Assistant echte Einkaufslisten: mehrere Listen zu einer zusammenfassen, nach Kategorie sortieren, Mengen, Märkte und Personen als Badges, ein Einkaufsmodus für unterwegs und Teilen per QR-Code. Jede Liste bleibt eine ganz normale <code>todo.*</code>-Entität – sie funktioniert in Dashboards, mit Assist, in Automationen und in den Widgets der Home-Assistant-App.
+    </div>
+
+    <h2 class="section-title">Neu in 4.0</h2>
+    <p class="lead">Die größte Überarbeitung bisher – zuerst als Beta: in HACS „Beta-Versionen anzeigen“ einschalten.</p>
+    <div class="grid">
+      <div class="feature">
+        <div class="icon">✨</div>
+        <h3>Neues Listen-Design</h3>
+        <p>Anzahl und Größe fest markiert, getönte Kategorien zum Einklappen, Badges unter dem Namen – auch auf der geteilten Seite.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🏷️</div>
+        <h3>Angebots-Karte</h3>
+        <p>Supermarkt-Angebote, abgeglichen mit deiner Liste. Ein gewähltes Angebot steht als Badge am Artikel, abgelaufene räumst du mit einem Tipp weg.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">✏️</div>
+        <h3>Teilen-Links bearbeiten</h3>
+        <p>Rechte, Laufzeit und Passwort nachträglich ändern – der Link und der QR-Code bleiben gleich.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">💱</div>
+        <h3>Währung wählbar</h3>
+        <p>Franken, Pfund, Złoty und weitere – für Preise, Summe und Ausgaben, auch beim Eintippen erkannt.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">📈</div>
+        <h3>Preis-Verlauf</h3>
+        <p>Was ein Artikel wann und wo gekostet hat. Ob der letzte Preis automatisch wieder eingetragen wird, entscheidest du.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">⚙️</div>
+        <h3>Aufgeräumte Einstellungen</h3>
+        <p>Klar gegliedert, mit eigener Reihenfolge der Badges und besserer Ansicht am Smartphone.</p>
+      </div>
     </div>
 
     <h2 class="section-title">Listen &amp; Eingabe</h2>
@@ -527,6 +571,21 @@
       <figure class="shot"><img src="assets/share.svg" alt="Teilen-Fenster mit QR-Code" loading="lazy"><figcaption>Teilen per Link und QR-Code – nur diese Liste, befristet.</figcaption></figure>
       <figure class="shot"><img src="assets/settings.svg" alt="Einstellungen mit Bereichen" loading="lazy"><figcaption>Einstellungen an einem Ort – für mich, für alle, je Liste.</figcaption></figure>
     </div>
+    <div class="gallery phones" style="margin-top:16px">
+      <figure class="shot"><img src="assets/shot-list.png" alt="Liste nach Kategorie im neuen Design" loading="lazy"><figcaption>Liste nach Kategorie im neuen Design</figcaption></figure>
+      <figure class="shot"><img src="assets/shot-shop.png" alt="Einkaufsmodus mit Markt-Leiste" loading="lazy"><figcaption>Einkaufsmodus mit Markt-Leiste</figcaption></figure>
+      <figure class="shot"><img src="assets/shot-share.png" alt="Geteilte Seite für Leute ohne Konto" loading="lazy"><figcaption>Geteilte Seite für Leute ohne Konto</figcaption></figure>
+      <figure class="shot"><img src="assets/card-chips.png" alt="Angebote für deine Liste" loading="lazy"><figcaption>Angebote für deine Liste</figcaption></figure>
+    </div>
+
+    <div class="callout">
+      <div class="icon-big">🏷️</div>
+      <div>
+        <h3>Zusammen mit der Angebots-Karte</h3>
+        <p>Die SmartDiscounts Card ist in SmartLists 4.0 schon enthalten. Sie zeigt, welche Artikel deiner Liste gerade im Angebot sind – und wo am günstigsten.</p>
+        <p class="cross" style="text-align:left;margin-top:8px"><a data-goto="card">Zur Angebots-Karte →</a></p>
+      </div>
+    </div>
 
     <div class="callout">
       <div class="icon-big">🔒</div>
@@ -576,6 +635,122 @@
       </div>
     </div>
     <p class="cross">Lieber eine eigene App mit lokalen Listen und Widget? <a data-goto="app">Zur Android-App →</a></p>
+  </main>
+</section>
+
+<!-- =====================================================================
+     SmartDiscounts Card (Angebots-Karte)
+     ===================================================================== -->
+<section class="panel card" aria-label="SmartDiscounts Card">
+  <header>
+    <div class="logo">🏷️</div>
+    <div class="kicker">Dashboard-Karte · läuft auch ohne SmartLists</div>
+    <h1>SmartDiscounts Card</h1>
+    <p class="tagline">Die Angebote deiner Supermärkte, abgeglichen mit deiner Einkaufsliste: für jeden Artikel siehst du, wo er gerade im Angebot ist – und wo am günstigsten.</p>
+    <div class="btn-row">
+      <a class="download-btn" href="https://my.home-assistant.io/redirect/hacs_repository/?owner=m3m0rex&amp;repository=ha_smartdiscounts-card&amp;category=plugin">⬇️ In HACS öffnen</a>
+      <a class="download-btn ghost" href="https://github.com/m3m0rex/ha_smartdiscounts-card">GitHub &amp; Doku</a>
+    </div>
+    <div class="download-sub">Kostenlos · Open Source (MIT) · braucht nur Angebots-Sensoren · in SmartLists 4.0 schon enthalten</div>
+  </header>
+
+  <main>
+    <h2 class="section-title">Zwei Reiter, zwei Fragen</h2>
+    <div class="grid">
+      <div class="feature">
+        <div class="icon">📝</div>
+        <h3>Meine Liste</h3>
+        <p>Zu jedem offenen Artikel die passenden Angebote je Markt, das günstigste mit ★. „Günstigste wählen“ oder „nur REWE“ gilt für die ganze Liste.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🛍️</div>
+        <h3>Alle Angebote</h3>
+        <p>Ein Regal je Markt mit Suche und Kategorien – als Kacheln oder als Liste mit kleinen Bildern. Ein Tipp setzt ein Angebot auf die Liste.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">📊</div>
+        <h3>Tabelle auf breiten Karten</h3>
+        <p>Artikel und Märkte auf einen Blick, mit Grundpreis je Kilo oder Liter zum Vergleichen.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">✅</div>
+        <h3>In die Liste übernehmen</h3>
+        <p>Schreibt Markt, Preis und Gültigkeit an den Eintrag: mit SmartLists als Badge, sonst als lesbare Zeile in der Beschreibung.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">⏳</div>
+        <h3>Abgelaufene Angebote</h3>
+        <p>Ist ein übernommenes Angebot vorbei, weist die Karte darauf hin – entfernen oder später erinnern.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🔌</div>
+        <h3>Deine Sensoren</h3>
+        <p>Erkennt die Integrationen für REWE, EDEKA, Lidl, ALDI und Norma von selbst. Eigene REST- oder Template-Sensoren ordnest du Feld für Feld zu.</p>
+      </div>
+    </div>
+
+    <h2 class="section-title">So sieht es aus</h2>
+    <div class="gallery phones">
+      <figure class="shot"><img src="assets/card-chips.png" alt="Meine Liste: Preise der Märkte nebeneinander" loading="lazy"><figcaption>Meine Liste: Preise der Märkte nebeneinander</figcaption></figure>
+      <figure class="shot"><img src="assets/card-rows.png" alt="Meine Liste: ein Angebot je Zeile" loading="lazy"><figcaption>Meine Liste: ein Angebot je Zeile</figcaption></figure>
+      <figure class="shot"><img src="assets/card-all.png" alt="Alle Angebote als Liste" loading="lazy"><figcaption>Alle Angebote als Liste</figcaption></figure>
+    </div>
+
+    <h2 class="section-title">Konfiguration</h2>
+    <p class="lead">Eine Zeile genügt. Alles Weitere ist optional – alle Optionen und Felder stehen in der Doku auf GitHub.</p>
+    <pre class="yaml">type: custom:smartdiscounts-card
+list: todo.einkauf
+sources:
+  - auto
+  - entity: sensor.mein_markt
+    store: Kaufland
+    map:
+      name: product.name
+      price: prices.current
+      old_price: prices.regular
+      image: images.0.url
+      until: validity.to
+match: word
+list_view: rows
+all_view: list</pre>
+
+    <div class="callout">
+      <div class="icon-big">🛒</div>
+      <div>
+        <h3>Noch besser mit SmartLists</h3>
+        <p>Mit der Integration erscheint das gewählte Angebot als Badge am Artikel, der Einkaufsmodus sortiert nach Markt, und die Karte ist ohne eigene Installation dabei.</p>
+        <p class="cross" style="text-align:left;margin-top:8px"><a data-goto="hacs">Zu SmartLists →</a></p>
+      </div>
+    </div>
+
+    <h2 class="section-title">Installation</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <h4>Angebots-Sensoren einrichten</h4>
+        <p>Zum Beispiel die Integrationen ha-rewe, ha-edeka oder ha-lidl – oder ein eigener Sensor.</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h4>In HACS hinzufügen</h4>
+        <p>HACS → ⋮ → Benutzerdefinierte Repositories → <code>https://github.com/m3m0rex/ha_smartdiscounts-card</code>, Typ „Dashboard“.</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h4>Karte einfügen</h4>
+        <p>Im Dashboard „SmartDiscounts Card“ wählen und die Einkaufsliste angeben. Mit SmartLists 4.0 entfallen Schritt 2 und die Ressource.</p>
+      </div>
+    </div>
+
+    <div class="final-cta">
+      <h2>Nie wieder ein Angebot verpassen</h2>
+      <p>Kostenlos und Open Source. Läuft komplett in deinem Home Assistant.</p>
+      <div class="btn-row">
+        <a class="download-btn" href="https://my.home-assistant.io/redirect/hacs_repository/?owner=m3m0rex&amp;repository=ha_smartdiscounts-card&amp;category=plugin">⬇️ In HACS öffnen</a>
+        <a class="download-btn ghost" href="https://github.com/m3m0rex/ha_smartdiscounts-card">📖 Dokumentation</a>
+      </div>
+    </div>
+    <p class="cross">Die ganze Einkaufsliste in Home Assistant? <a data-goto="hacs">Zu SmartLists →</a></p>
   </main>
 </section>
 
@@ -727,8 +902,8 @@
   </main>
 </section>
 
-<h2 class="section-title" style="max-width:980px;margin:8px auto 16px;padding:0 22px">Integration oder App?</h2>
-<div style="max-width:980px;margin:0 auto;padding:0 20px">
+<h2 class="section-title cmp" style="max-width:980px;margin:8px auto 16px;padding:0 22px">Integration oder App?</h2>
+<div class="cmp" style="max-width:980px;margin:0 auto;padding:0 20px">
   <table class="compare">
     <tr><th></th><th>🏠 HACS-Integration</th><th>🤖 Android-App</th></tr>
     <tr><td>Läuft in</td><td>Home Assistant (Browser, HA-App, Dashboards)</td><td>Eigene App auf dem Android-Gerät</td></tr>
@@ -744,6 +919,7 @@
 <footer>
   HA SmartLists — Einkaufslisten, To-dos und Notizen mit Home Assistant.<br>
   <span class="only-hacs">Integration: <a href="https://github.com/m3m0rex/ha_smartlists">GitHub</a> · <a href="https://github.com/m3m0rex/ha_smartlists/wiki">Wiki</a> · <a href="https://github.com/m3m0rex/ha_smartlists/blob/main/LICENSE">MIT-Lizenz</a></span>
+  <span class="only-card">SmartDiscounts Card: <a href="https://github.com/m3m0rex/ha_smartdiscounts-card">GitHub</a> · MIT</span>
   <span class="only-app">App: proprietär, Nutzung der offiziellen APK für den privaten Gebrauch – siehe <a href="LICENSE.md">Lizenz</a>.</span>
 </footer>
 
@@ -864,7 +1040,7 @@
   (function () {
     var buttons = document.querySelectorAll(".switch button");
     function show(product, scroll) {
-      if (product !== "app") product = "hacs";
+      if (product !== "app" && product !== "card") product = "hacs";
       document.body.setAttribute("data-product", product);
       buttons.forEach(function (b) { b.setAttribute("aria-selected", String(b.getAttribute("data-product") === product)); });
       if (location.hash !== "#" + product && location.hash !== "#download") history.replaceState(null, "", "#" + product);
@@ -881,7 +1057,7 @@
       location.href = sel.value + location.hash;
     });
     var h = location.hash.replace("#", "");
-    show(h === "app" || h === "download" ? "app" : "hacs", false);
+    show(h === "download" ? "app" : h, false);
   })();
 </script>
 </body>

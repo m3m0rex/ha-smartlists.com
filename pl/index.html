@@ -115,8 +115,8 @@
 
   /* ---------- Bereiche ---------- */
   .panel { display: none; }
-  body[data-product="hacs"] .panel.hacs, body[data-product="app"] .panel.app { display: block; }
-  body[data-product="hacs"] .only-app, body[data-product="app"] .only-hacs { display: none; }
+  body[data-product="hacs"] .panel.hacs, body[data-product="card"] .panel.card, body[data-product="app"] .panel.app { display: block; }
+  body:not([data-product="hacs"]) .only-hacs, body:not([data-product="card"]) .only-card, body:not([data-product="app"]) .only-app { display: none; }
 
   header {
     background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
@@ -289,6 +289,12 @@
   .try .sub .chip { font-size: 11.5px; padding: 1px 8px; }
   .try .sub b { font-size: 13px; }
   .try .empty { color: var(--muted); font-size: 14px; text-align: center; padding: 34px 10px; }
+  body[data-product="card"] .cmp { display: none; }
+  .gallery.phones { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); align-items: start; }
+  .lead { margin: -10px 0 18px; color: var(--muted); font-size: 15px; }
+  .yaml { margin: 0 0 24px; background: #0e1014; color: #D7E3F4; border-radius: 14px; padding: 18px 20px; font-size: 13.5px; line-height: 1.55;
+    overflow-x: auto; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  .switch small { font-size: 10px; font-weight: 800; background: var(--yellow); color: #1A1C1E; border-radius: 5px; padding: 0 5px; margin-left: 4px; vertical-align: 1px; }
   .shot img, .showcase .screen img { cursor: zoom-in; }
   .lightbox { position: fixed; inset: 0; z-index: 50; background: rgba(10, 14, 22, .88); display: none;
     align-items: center; justify-content: center; padding: 24px; cursor: zoom-out; }
@@ -311,7 +317,8 @@
     nav .brand { display: none; }
     nav a.cta { display: none; }
     .lang { padding: 5px 8px; font-size: 12.5px; }
-    .switch button { padding: 7px 12px; font-size: 13.5px; }
+    .switch button { padding: 6px 9px; font-size: 12.5px; }
+    .switch small { display: none; }
     header { padding: 48px 16px 72px; }
     main { padding: 0 12px 48px; }
     .intro-card, .callout { padding: 20px; }
@@ -327,7 +334,8 @@
 <nav>
   <div class="brand"><img src="../assets/icon.png" alt="">HA SmartLists</div>
   <div class="switch" role="tablist" aria-label="Wybierz produkt">
-    <button type="button" role="tab" data-product="hacs" aria-selected="true">🏠 Integracja HACS</button>
+    <button type="button" role="tab" data-product="hacs" aria-selected="true">🛒 SmartLists</button>
+    <button type="button" role="tab" data-product="card" aria-selected="false">🏷️ Discounts Card<small>NOWE</small></button>
     <button type="button" role="tab" data-product="app" aria-selected="false">🤖 Aplikacja Android</button>
   </div>
   <div class="right">
@@ -340,6 +348,7 @@
       <option value="../pl/" data-lang="pl" selected>🇵🇱 PL</option>
     </select>
     <a class="cta only-hacs" href="https://github.com/m3m0rex/ha_smartlists">GitHub</a>
+    <a class="cta only-card" href="https://github.com/m3m0rex/ha_smartdiscounts-card">GitHub</a>
     <span class="cta only-app disabled" aria-disabled="true" title="Jeszcze nie wydana">Download</span>
   </div>
 </nav>
@@ -412,6 +421,41 @@
 
     <div class="intro-card">
       SmartLists zamienia listy zadań Home Assistant w prawdziwe listy zakupów: łączenie kilku list w jedną, sortowanie wg kategorii, ilości, sklepy i osoby jako odznaki, tryb zakupów i udostępnianie kodem QR. Każda lista pozostaje zwykłą encją <code>todo.*</code>– działa na pulpitach, z Assist, w automatyzacjach i w widżetach aplikacji Home Assistant.
+    </div>
+
+    <h2 class="section-title">Nowości w 4.0</h2>
+    <p class="lead">Największa przebudowa do tej pory – najpierw jako beta: włącz „Pokaż wersje beta” w HACS.</p>
+    <div class="grid">
+      <div class="feature">
+        <div class="icon">✨</div>
+        <h3>Nowy wygląd listy</h3>
+        <p>Liczba i wielkość wyraźnie oznaczone, kolorowe zwijane kategorie, odznaki pod nazwą – także na udostępnionej stronie.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🏷️</div>
+        <h3>Karta promocji</h3>
+        <p>Promocje z marketów dopasowane do twojej listy. Wybrana promocja widnieje jako odznaka przy produkcie; wygasłe usuwasz jednym dotknięciem.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">✏️</div>
+        <h3>Edycja linków udostępniania</h3>
+        <p>Zmień uprawnienia, czas i hasło później – link i kod QR pozostają te same.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">💱</div>
+        <h3>Wybór waluty</h3>
+        <p>Franki, funty, złote i inne – dla cen, sumy i wydatków, rozpoznawane także przy wpisywaniu.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">📈</div>
+        <h3>Historia cen</h3>
+        <p>Ile kosztował produkt, kiedy i gdzie. Sam decydujesz, czy ostatnia cena ma być wpisywana automatycznie.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">⚙️</div>
+        <h3>Uporządkowane ustawienia</h3>
+        <p>Przejrzyście ułożone, z własną kolejnością odznak i lepszym widokiem na smartfonie.</p>
+      </div>
     </div>
 
     <h2 class="section-title">Listy i wpisywanie</h2>
@@ -527,6 +571,21 @@
       <figure class="shot"><img src="../assets/share.svg" alt="Okno udostępniania z kodem QR" loading="lazy"><figcaption>Udostępnianie przez link i kod QR – tylko ta lista, czasowo.</figcaption></figure>
       <figure class="shot"><img src="../assets/settings.svg" alt="Ustawienia w sekcjach" loading="lazy"><figcaption>Ustawienia w jednym miejscu – dla mnie, dla wszystkich, dla listy.</figcaption></figure>
     </div>
+    <div class="gallery phones" style="margin-top:16px">
+      <figure class="shot"><img src="../assets/shot-list.png" alt="Lista według kategorii w nowym wyglądzie" loading="lazy"><figcaption>Lista według kategorii w nowym wyglądzie</figcaption></figure>
+      <figure class="shot"><img src="../assets/shot-shop.png" alt="Tryb zakupów z paskiem sklepów" loading="lazy"><figcaption>Tryb zakupów z paskiem sklepów</figcaption></figure>
+      <figure class="shot"><img src="../assets/shot-share.png" alt="Udostępniona strona dla osób bez konta" loading="lazy"><figcaption>Udostępniona strona dla osób bez konta</figcaption></figure>
+      <figure class="shot"><img src="../assets/card-chips.png" alt="Promocje dla twojej listy" loading="lazy"><figcaption>Promocje dla twojej listy</figcaption></figure>
+    </div>
+
+    <div class="callout">
+      <div class="icon-big">🏷️</div>
+      <div>
+        <h3>Razem z kartą promocji</h3>
+        <p>SmartDiscounts Card jest już częścią SmartLists 4.0. Pokazuje, które produkty z listy są teraz w promocji – i gdzie najtaniej.</p>
+        <p class="cross" style="text-align:left;margin-top:8px"><a data-goto="card">Do karty promocji →</a></p>
+      </div>
+    </div>
 
     <div class="callout">
       <div class="icon-big">🔒</div>
@@ -576,6 +635,122 @@
       </div>
     </div>
     <p class="cross">Wolisz osobną aplikację z lokalnymi listami i widżetem? <a data-goto="app">Do aplikacji Android →</a></p>
+  </main>
+</section>
+
+<!-- =====================================================================
+     SmartDiscounts Card (Angebots-Karte)
+     ===================================================================== -->
+<section class="panel card" aria-label="SmartDiscounts Card">
+  <header>
+    <div class="logo">🏷️</div>
+    <div class="kicker">Karta dashboardu · działa też bez SmartLists</div>
+    <h1>SmartDiscounts Card</h1>
+    <p class="tagline">Promocje z twoich marketów dopasowane do listy zakupów: przy każdym produkcie widzisz, gdzie jest w promocji – i gdzie najtaniej.</p>
+    <div class="btn-row">
+      <a class="download-btn" href="https://my.home-assistant.io/redirect/hacs_repository/?owner=m3m0rex&amp;repository=ha_smartdiscounts-card&amp;category=plugin">⬇️ Otwórz w HACS</a>
+      <a class="download-btn ghost" href="https://github.com/m3m0rex/ha_smartdiscounts-card">GitHub i dokumentacja</a>
+    </div>
+    <div class="download-sub">Za darmo · open source (MIT) · wymaga tylko sensorów promocji · już zawarte w SmartLists 4.0</div>
+  </header>
+
+  <main>
+    <h2 class="section-title">Dwie zakładki, dwa pytania</h2>
+    <div class="grid">
+      <div class="feature">
+        <div class="icon">📝</div>
+        <h3>Moja lista</h3>
+        <p>Dla każdego otwartego produktu pasujące promocje z każdego sklepu, najtańsza z ★. „Wybierz najtańsze” lub „tylko REWE” działa na całą listę.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🛍️</div>
+        <h3>Wszystkie promocje</h3>
+        <p>Półka dla każdego sklepu z wyszukiwaniem i kategoriami – jako kafelki lub lista z małymi zdjęciami. Jedno dotknięcie dodaje promocję do listy.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">📊</div>
+        <h3>Tabela na szerokich kartach</h3>
+        <p>Produkty i sklepy na jednym ekranie, z ceną za kilogram lub litr do porównania.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">✅</div>
+        <h3>Przenieś na listę</h3>
+        <p>Zapisuje sklep, cenę i ważność przy wpisie: z SmartLists jako odznakę, w innym razie jako czytelny wiersz w opisie.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">⏳</div>
+        <h3>Wygasłe promocje</h3>
+        <p>Gdy przeniesiona promocja się skończy, karta o tym przypomni – usuń ją lub wróć do tego później.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🔌</div>
+        <h3>Twoje sensory</h3>
+        <p>Sama rozpoznaje integracje REWE, EDEKA, Lidl, ALDI i Norma. Własne sensory REST lub szablonowe przypisujesz pole po polu.</p>
+      </div>
+    </div>
+
+    <h2 class="section-title">Tak to wygląda</h2>
+    <div class="gallery phones">
+      <figure class="shot"><img src="../assets/card-chips.png" alt="Moja lista: ceny sklepów obok siebie" loading="lazy"><figcaption>Moja lista: ceny sklepów obok siebie</figcaption></figure>
+      <figure class="shot"><img src="../assets/card-rows.png" alt="Moja lista: jedna promocja w wierszu" loading="lazy"><figcaption>Moja lista: jedna promocja w wierszu</figcaption></figure>
+      <figure class="shot"><img src="../assets/card-all.png" alt="Wszystkie promocje jako lista" loading="lazy"><figcaption>Wszystkie promocje jako lista</figcaption></figure>
+    </div>
+
+    <h2 class="section-title">Konfiguracja</h2>
+    <p class="lead">Wystarczy jedna linia. Reszta jest opcjonalna – wszystkie opcje i pola są w dokumentacji na GitHubie.</p>
+    <pre class="yaml">type: custom:smartdiscounts-card
+list: todo.einkauf
+sources:
+  - auto
+  - entity: sensor.mein_markt
+    store: Kaufland
+    map:
+      name: product.name
+      price: prices.current
+      old_price: prices.regular
+      image: images.0.url
+      until: validity.to
+match: word
+list_view: rows
+all_view: list</pre>
+
+    <div class="callout">
+      <div class="icon-big">🛒</div>
+      <div>
+        <h3>Jeszcze lepiej z SmartLists</h3>
+        <p>Z integracją wybrana promocja pojawia się jako odznaka przy produkcie, tryb zakupów sortuje według sklepu, a karta jest dołączona bez osobnej instalacji.</p>
+        <p class="cross" style="text-align:left;margin-top:8px"><a data-goto="hacs">Do SmartLists →</a></p>
+      </div>
+    </div>
+
+    <h2 class="section-title">Instalacja</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <h4>Skonfiguruj sensory promocji</h4>
+        <p>Na przykład integracje ha-rewe, ha-edeka lub ha-lidl – albo własny sensor.</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h4>Dodaj w HACS</h4>
+        <p>HACS → ⋮ → Niestandardowe repozytoria → <code>https://github.com/m3m0rex/ha_smartdiscounts-card</code>, typ „Dashboard”.</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h4>Dodaj kartę</h4>
+        <p>Wybierz „SmartDiscounts Card” w dashboardzie i wskaż listę zakupów. Z SmartLists 4.0 krok 2 i zasób są zbędne.</p>
+      </div>
+    </div>
+
+    <div class="final-cta">
+      <h2>Nie przegap żadnej promocji</h2>
+      <p>Za darmo i open source. Działa w całości w twoim Home Assistant.</p>
+      <div class="btn-row">
+        <a class="download-btn" href="https://my.home-assistant.io/redirect/hacs_repository/?owner=m3m0rex&amp;repository=ha_smartdiscounts-card&amp;category=plugin">⬇️ Otwórz w HACS</a>
+        <a class="download-btn ghost" href="https://github.com/m3m0rex/ha_smartdiscounts-card">📖 Dokumentacja</a>
+      </div>
+    </div>
+    <p class="cross">Cała lista zakupów w Home Assistant? <a data-goto="hacs">Do SmartLists →</a></p>
   </main>
 </section>
 
@@ -727,8 +902,8 @@
   </main>
 </section>
 
-<h2 class="section-title" style="max-width:980px;margin:8px auto 16px;padding:0 22px">Integracja czy aplikacja?</h2>
-<div style="max-width:980px;margin:0 auto;padding:0 20px">
+<h2 class="section-title cmp" style="max-width:980px;margin:8px auto 16px;padding:0 22px">Integracja czy aplikacja?</h2>
+<div class="cmp" style="max-width:980px;margin:0 auto;padding:0 20px">
   <table class="compare">
     <tr><th></th><th>🏠 Integracja HACS</th><th>🤖 Aplikacja Android</th></tr>
     <tr><td>Działa w</td><td>Home Assistant (przeglądarka, aplikacja HA, pulpity)</td><td>Osobna aplikacja na urządzeniu z Androidem</td></tr>
@@ -744,6 +919,7 @@
 <footer>
   HA SmartLists — listy zakupów, zadania i notatki z Home Assistant.<br>
   <span class="only-hacs">Integracja: <a href="https://github.com/m3m0rex/ha_smartlists">GitHub</a> · <a href="https://github.com/m3m0rex/ha_smartlists/wiki">Wiki</a> · <a href="https://github.com/m3m0rex/ha_smartlists/blob/main/LICENSE">Licencja MIT</a></span>
+  <span class="only-card">SmartDiscounts Card: <a href="https://github.com/m3m0rex/ha_smartdiscounts-card">GitHub</a> · MIT</span>
   <span class="only-app">Aplikacja: własnościowa, korzystanie z oficjalnego APK do użytku prywatnego – zob. <a href="../LICENSE.md">licencja</a>.</span>
 </footer>
 
@@ -864,7 +1040,7 @@
   (function () {
     var buttons = document.querySelectorAll(".switch button");
     function show(product, scroll) {
-      if (product !== "app") product = "hacs";
+      if (product !== "app" && product !== "card") product = "hacs";
       document.body.setAttribute("data-product", product);
       buttons.forEach(function (b) { b.setAttribute("aria-selected", String(b.getAttribute("data-product") === product)); });
       if (location.hash !== "#" + product && location.hash !== "#download") history.replaceState(null, "", "#" + product);
@@ -881,7 +1057,7 @@
       location.href = sel.value + location.hash;
     });
     var h = location.hash.replace("#", "");
-    show(h === "app" || h === "download" ? "app" : "hacs", false);
+    show(h === "download" ? "app" : h, false);
   })();
 </script>
 </body>
