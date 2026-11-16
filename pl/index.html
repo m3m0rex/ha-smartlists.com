@@ -3,9 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#0D47A1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0A2552" media="(prefers-color-scheme: dark)">
 <title>HA SmartLists – listy zakupów dla Home Assistant</title>
 <meta name="description" content="SmartLists: prawdziwe listy zakupów dla Home Assistant – jako integracja HACS z kategoriami, trybem zakupów i udostępnianiem przez link albo jako aplikacja na Androida z lokalnymi listami i widżetem.">
 <link rel="icon" href="../assets/icon.png">
+<script>
+  // Sprache automatisch: auf der (deutschen) Startseite sofort – noch bevor etwas angezeigt wird – in die Sprache
+  // wechseln, die im Sprachmenü gewählt wurde, sonst in die erste passende Sprache des Browsers (sonst Englisch).
+  (function () {
+    if (document.documentElement.lang !== "de") return;
+    var langs = ["de", "en", "fr", "es", "it", "pl"], want = null;
+    try { want = localStorage.getItem("smartlists-site-lang"); } catch (e) {}
+    if (langs.indexOf(want) < 0) {
+      want = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || "en"])
+        .map(function (l) { return String(l).slice(0, 2).toLowerCase(); })
+        .filter(function (l) { return langs.indexOf(l) >= 0; })[0] || "en";
+    }
+    if (want !== "de") location.replace(want + "/" + location.search + location.hash);
+  })();
+</script>
 <link rel="alternate" hreflang="de" href="https://ha-smartlists.com/">
 <link rel="alternate" hreflang="en" href="https://ha-smartlists.com/en/">
 <link rel="alternate" hreflang="fr" href="https://ha-smartlists.com/fr/">
@@ -25,6 +43,32 @@
     --border: #DCE6F2;
     --yellow: #F5B700;
     --green: #2E7D32;
+    /* Farben, die sich im dunklen Design ändern */
+    --link: var(--blue);
+    --soft: var(--blue-light);
+    --soft-ink: var(--blue-dark);
+    --person-bg: #EDE7FF; --person-ink: #5E46D8;
+    --tag-bg: #E3F4E6; --tag-ink: var(--green);
+    --star-bg: #FFF4D6;
+    --shadow: rgba(21, 101, 192, 0.08);
+    color-scheme: light dark;
+  }
+  /* Dunkles Design: folgt der Einstellung des Systems bzw. Browsers */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ink: #E6EAF0;
+      --muted: #9AA7B5;
+      --bg: #0F1319;
+      --card-bg: #181D25;
+      --border: #2A3340;
+      --link: #7CB8F7;
+      --soft: #16283D;
+      --soft-ink: #A9D0FA;
+      --person-bg: #2A2450; --person-ink: #B9A8FF;
+      --tag-bg: #17301B; --tag-ink: #81C784;
+      --star-bg: #3A2F0B;
+      --shadow: rgba(0, 0, 0, 0.35);
+    }
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -35,7 +79,7 @@
     color: var(--ink);
     line-height: 1.6;
   }
-  a { color: var(--blue); }
+  a { color: var(--link); }
 
   /* ---------- Navigation mit Umschalter ---------- */
   nav {
@@ -113,14 +157,14 @@
   main { max-width: 980px; margin: -48px auto 0; padding: 0 20px 64px; }
   .intro-card {
     background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px;
-    padding: 28px 32px; box-shadow: 0 8px 24px rgba(21, 101, 192, 0.08);
+    padding: 28px 32px; box-shadow: 0 8px 24px var(--shadow);
     margin-bottom: 40px; font-size: 16px; color: var(--muted); text-align: center;
   }
 
   /* Demo im Geräte-Rahmen (Mockup) */
   .showcase {
     background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px;
-    box-shadow: 0 8px 24px rgba(21, 101, 192, 0.08);
+    box-shadow: 0 8px 24px var(--shadow);
     padding: 28px; margin-bottom: 40px;
     display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 28px; align-items: center;
   }
@@ -130,16 +174,16 @@
   .showcase .screen img { display: block; width: 100%; border-radius: 12px; }
   .showcase h3 { margin: 0 0 10px; font-size: 22px; line-height: 1.3; }
   .showcase p { margin: 0 0 12px; color: var(--muted); font-size: 15px; }
-  .showcase code { background: var(--blue-light); color: var(--blue-dark); border-radius: 6px; padding: 2px 7px; font-size: 14px; }
+  .showcase code { background: var(--soft); color: var(--soft-ink); border-radius: 6px; padding: 2px 7px; font-size: 14px; }
   .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-  .chip { font-size: 12.5px; font-weight: 700; border-radius: 999px; padding: 3px 10px; background: var(--blue-light); color: var(--blue-dark); }
+  .chip { font-size: 12.5px; font-weight: 700; border-radius: 999px; padding: 3px 10px; background: var(--soft); color: var(--soft-ink); }
   .chip.store { background: #C62828; color: #fff; border-radius: 5px; }
-  .chip.person { background: #EDE7FF; color: #5E46D8; }
-  .chip.tag { background: #E3F4E6; color: var(--green); }
+  .chip.person { background: var(--person-bg); color: var(--person-ink); }
+  .chip.tag { background: var(--tag-bg); color: var(--tag-ink); }
 
   h2.section-title {
     font-size: 14px; text-transform: uppercase; letter-spacing: 1.2px;
-    color: var(--blue); font-weight: 700; margin: 48px 0 20px; padding-left: 2px;
+    color: var(--link); font-weight: 700; margin: 48px 0 20px; padding-left: 2px;
   }
   .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
   .feature {
@@ -148,13 +192,13 @@
   }
   .feature:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(21, 101, 192, 0.10); }
   .feature .icon {
-    width: 44px; height: 44px; border-radius: 12px; background: var(--blue-light);
+    width: 44px; height: 44px; border-radius: 12px; background: var(--soft);
     display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 14px;
   }
   .feature h3 { margin: 0 0 8px; font-size: 17px; font-weight: 700; color: var(--ink); }
   .feature p { margin: 0; font-size: 14.5px; color: var(--muted); }
   .feature .new { font-size: 11px; font-weight: 800; color: #fff; background: var(--green); border-radius: 5px; padding: 1px 6px; margin-left: 6px; vertical-align: 2px; }
-  .feature.star .icon { background: #FFF4D6; color: var(--yellow); }
+  .feature.star .icon { background: var(--star-bg); color: var(--yellow); }
 
   .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
   .shot { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 12px; margin: 0; }
@@ -162,14 +206,14 @@
   .shot figcaption { font-size: 13.5px; color: var(--muted); padding: 10px 4px 2px; }
 
   .callout {
-    margin-top: 24px; background: var(--blue-light); border-radius: 16px; padding: 28px 32px;
+    margin-top: 24px; background: var(--soft); border-radius: 16px; padding: 28px 32px;
     display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap;
   }
   .callout:first-of-type { margin-top: 56px; }
   .callout .icon-big { font-size: 34px; line-height: 1; }
-  .callout h3 { margin: 0 0 6px; color: var(--blue-dark); font-size: 18px; }
+  .callout h3 { margin: 0 0 6px; color: var(--soft-ink); font-size: 18px; }
   .callout p { margin: 0; color: var(--ink); font-size: 15px; max-width: 620px; }
-  .callout code { background: #fff; border-radius: 6px; padding: 1px 6px; font-size: 13.5px; }
+  .callout code { background: var(--card-bg); border-radius: 6px; padding: 1px 6px; font-size: 13.5px; }
 
   .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
   .step { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
@@ -179,12 +223,12 @@
   }
   .step h4 { margin: 0 0 6px; font-size: 15.5px; }
   .step p { margin: 0; font-size: 14px; color: var(--muted); }
-  .step code { background: var(--blue-light); border-radius: 5px; padding: 1px 5px; font-size: 12.5px; word-break: break-all; }
+  .step code { background: var(--soft); border-radius: 5px; padding: 1px 5px; font-size: 12.5px; word-break: break-all; }
 
   .compare { width: 100%; border-collapse: separate; border-spacing: 0; background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; font-size: 14.5px; }
   .compare th, .compare td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
   .compare tr:last-child td { border-bottom: 0; }
-  .compare th { background: var(--blue-light); color: var(--blue-dark); font-size: 13px; text-transform: uppercase; letter-spacing: .6px; }
+  .compare th { background: var(--soft); color: var(--soft-ink); font-size: 13px; text-transform: uppercase; letter-spacing: .6px; }
   .compare td:first-child { color: var(--muted); width: 34%; }
 
   .final-cta {
@@ -209,7 +253,7 @@
     background: rgba(255,255,255,.16); color: #fff; font-size: 22px; cursor: pointer; }
   @keyframes lbfade { from { opacity: 0; } to { opacity: 1; } }
   footer { text-align: center; padding: 32px 20px 48px; color: var(--muted); font-size: 13.5px; }
-  footer a { color: var(--blue); text-decoration: none; }
+  footer a { color: var(--link); text-decoration: none; }
 
   @media (max-width: 760px) {
     .showcase { grid-template-columns: 1fr; padding: 18px; }
@@ -223,6 +267,10 @@
     header { padding: 48px 16px 72px; }
     main { padding: 0 12px 48px; }
     .intro-card, .callout { padding: 20px; }
+  }
+  @media (prefers-color-scheme: dark) {
+    header, .final-cta { background: linear-gradient(135deg, #12508F 0%, #0A2E63 100%); }
+    nav { background: rgba(10, 37, 82, 0.96); }
   }
 </style>
 </head>
@@ -652,19 +700,12 @@
     document.querySelectorAll("[data-goto]").forEach(function (a) {
       a.addEventListener("click", function (e) { e.preventDefault(); show(a.getAttribute("data-goto"), true); });
     });
-    // Sprache: Auswahl merken; auf der deutschen Startseite einmalig in die Browsersprache wechseln
+    // Sprache: Auswahl merken; die automatische Wahl nach Browsersprache steht oben im <head>
     var sel = document.querySelector(".lang");
     sel.addEventListener("change", function () {
       try { localStorage.setItem("smartlists-site-lang", sel.selectedOptions[0].getAttribute("data-lang")); } catch (e) {}
       location.href = sel.value + location.hash;
     });
-    if (document.documentElement.lang === "de") {
-      var chosen = null;
-      try { chosen = localStorage.getItem("smartlists-site-lang"); } catch (e) {}
-      var want = (navigator.languages || [navigator.language || "de"]).map(function (l) { return String(l).slice(0, 2).toLowerCase(); })
-        .filter(function (l) { return ["de", "en", "fr", "es", "it", "pl"].indexOf(l) >= 0; })[0] || "en";
-      if (!chosen && want !== "de") { location.replace(want + "/" + location.hash); return; }
-    }
     var h = location.hash.replace("#", "");
     show(h === "app" || h === "download" ? "app" : "hacs", false);
   })();
