@@ -970,7 +970,9 @@ all_view: list</pre>
         if (k === "@" && !r.store) r.store = v; else if (k === "*" && !r.person) r.person = v; else if (k === "#") r.tags.push(v); else return m;
         return " ";
       });
-      t = t.replace(/^\s*(\d+)\s?[x×](?=\s|\d)/i, function (m, c) { r.count = +c; return " "; });
+      // "2x" als eigenes Wort ist die Anzahl – egal wo es steht; in Anführungszeichen ("2x") bleibt es Text
+      t = t.replace(/(^|\s)(\d{1,3})[x×](?=\s|$)/i, function (m, a, c) { r.count = +c; return " "; });
+      if (r.count == null) t = t.replace(/^\s*(\d+)\s?[x×](?=\s|\d)/i, function (m, c) { r.count = +c; return " "; });
       t = t.replace(/(^|\s)(\d+(?:[.,]\d+)?)\s?(kg|gr|mg|g|ml|cl|l)(?=\s|$)/i, function (m, a, n, u) {
         u = u.toLowerCase(); r.size = fmt(num(n)) + " " + (u === "gr" ? "g" : u); return " ";
       });
