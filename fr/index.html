@@ -304,10 +304,10 @@
   .rec.soon { font-style: italic; opacity: .8; }
   .rec .rp { display: block; margin-top: 4px; color: var(--muted); font-size: 14px; line-height: 1.45; }
   /* Echte Angebots-Karte mit Beispieldaten */
-  .sd-demo { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; align-items: start;
+  .sd-demo { max-width: 760px; margin: 0 auto;
     --primary-color: #1565C0; --primary-text-color: var(--ink); --secondary-text-color: var(--muted); --card-background-color: var(--card-bg);
     --secondary-background-color: var(--bg); --divider-color: var(--border); }
-  .sd-slot { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; box-shadow: 0 8px 24px var(--shadow); max-height: 640px; overflow: auto; padding: 4px; }
+  .sd-slot { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; box-shadow: 0 8px 24px var(--shadow); padding: 6px; }
   @media (prefers-color-scheme: dark) { .sd-demo { --primary-color: #64B5F6; } }
   .gallery.phones { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); align-items: start; }
   .lead { margin: -10px 0 18px; color: var(--muted); font-size: 15px; }
@@ -668,12 +668,12 @@
   </header>
 
   <main>
-    <h2 class="section-title">Deux onglets, deux questions</h2>
+    <h2 class="section-title">Trois onglets, trois questions</h2>
     <div class="grid">
       <div class="feature">
         <div class="icon">📝</div>
         <h3>Ma liste</h3>
-        <p>Pour chaque article ouvert, les promos correspondantes par magasin, la moins chère avec ★. « Choisir les moins chères » ou « seulement REWE » vaut pour toute la liste.</p>
+        <p>Pour chaque article ouvert, les promos correspondantes par magasin, la moins chère avec ★. « Choisir les moins chères » ou « seulement REWE » vaut pour toute la liste. Quatre vues, des tuiles au tableau.</p>
       </div>
       <div class="feature">
         <div class="icon">🛍️</div>
@@ -681,9 +681,9 @@
         <p>Un rayon par magasin avec recherche et catégories – en tuiles ou en liste avec petites images. Un tap ajoute une promo à la liste.</p>
       </div>
       <div class="feature">
-        <div class="icon">📊</div>
-        <h3>Tableau sur les cartes larges</h3>
-        <p>Articles et magasins en un coup d'œil, avec le prix au kilo ou au litre pour comparer.</p>
+        <div class="icon">⭐</div>
+        <h3>À surveiller</h3>
+        <p>Ce que tu n'achètes qu'en promo : la carte montre où c'est avantageux en ce moment et te prévient si tu veux.</p>
       </div>
       <div class="feature">
         <div class="icon">✅</div>
@@ -703,11 +703,9 @@
     </div>
 
     <h2 class="section-title">À quoi ça ressemble</h2>
-    <p class="lead">Voici la vraie carte avec des données d'exemple – à essayer : choisis des promos, ajoute-les à la liste, change de vue.</p>
+    <p class="lead">Voici la vraie carte avec des données d'exemple – à essayer : change d'onglet et de vue, choisis des promos, ajoute-les à la liste.</p>
     <div class="sd-demo" id="sd-demo">
       <div class="sd-slot" data-cfg='{"list_view":"chips"}'></div>
-      <div class="sd-slot" data-cfg='{"default_tab":"all","all_view":"list","max_per_store":4}'></div>
-      <div class="sd-slot" data-cfg='{"default_tab":"all","group_by":"category","all_view":"tiles"}'></div>
     </div>
 
     <h2 class="section-title">Configuration</h2>

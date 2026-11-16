@@ -304,10 +304,10 @@
   .rec.soon { font-style: italic; opacity: .8; }
   .rec .rp { display: block; margin-top: 4px; color: var(--muted); font-size: 14px; line-height: 1.45; }
   /* Echte Angebots-Karte mit Beispieldaten */
-  .sd-demo { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; align-items: start;
+  .sd-demo { max-width: 760px; margin: 0 auto;
     --primary-color: #1565C0; --primary-text-color: var(--ink); --secondary-text-color: var(--muted); --card-background-color: var(--card-bg);
     --secondary-background-color: var(--bg); --divider-color: var(--border); }
-  .sd-slot { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; box-shadow: 0 8px 24px var(--shadow); max-height: 640px; overflow: auto; padding: 4px; }
+  .sd-slot { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; box-shadow: 0 8px 24px var(--shadow); padding: 6px; }
   @media (prefers-color-scheme: dark) { .sd-demo { --primary-color: #64B5F6; } }
   .gallery.phones { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); align-items: start; }
   .lead { margin: -10px 0 18px; color: var(--muted); font-size: 15px; }
@@ -668,12 +668,12 @@
   </header>
 
   <main>
-    <h2 class="section-title">Due schede, due domande</h2>
+    <h2 class="section-title">Tre schede, tre domande</h2>
     <div class="grid">
       <div class="feature">
         <div class="icon">📝</div>
         <h3>La mia lista</h3>
-        <p>Per ogni articolo aperto le offerte per negozio, la più conveniente con ★. «Scegli le più convenienti» o «solo REWE» vale per tutta la lista.</p>
+        <p>Per ogni articolo aperto le offerte per negozio, la più conveniente con ★. «Scegli le più convenienti» o «solo REWE» vale per tutta la lista. Quattro viste, dalle tessere alla tabella.</p>
       </div>
       <div class="feature">
         <div class="icon">🛍️</div>
@@ -681,9 +681,9 @@
         <p>Uno scaffale per negozio con ricerca e categorie – a riquadri o come elenco con piccole immagini. Un tocco mette un'offerta in lista.</p>
       </div>
       <div class="feature">
-        <div class="icon">📊</div>
-        <h3>Tabella sulle schede larghe</h3>
-        <p>Articoli e negozi a colpo d'occhio, con il prezzo al chilo o al litro per confrontare.</p>
+        <div class="icon">⭐</div>
+        <h3>Da tenere d'occhio</h3>
+        <p>Quello che compri solo in offerta: la scheda mostra dove conviene adesso e ti avvisa se vuoi.</p>
       </div>
       <div class="feature">
         <div class="icon">✅</div>
@@ -703,11 +703,9 @@
     </div>
 
     <h2 class="section-title">Ecco come appare</h2>
-    <p class="lead">Questa è la scheda vera con dati di esempio – provala: scegli le offerte, mettile in lista, cambia vista.</p>
+    <p class="lead">Questa è la scheda vera con dati di esempio – provala: cambia scheda e vista, scegli le offerte, mettile in lista.</p>
     <div class="sd-demo" id="sd-demo">
       <div class="sd-slot" data-cfg='{"list_view":"chips"}'></div>
-      <div class="sd-slot" data-cfg='{"default_tab":"all","all_view":"list","max_per_store":4}'></div>
-      <div class="sd-slot" data-cfg='{"default_tab":"all","group_by":"category","all_view":"tiles"}'></div>
     </div>
 
     <h2 class="section-title">Configurazione</h2>
