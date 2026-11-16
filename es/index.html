@@ -303,6 +303,12 @@
   .rec b { display: block; font-size: 16px; } .rec code { font-size: 12.5px; background: var(--soft); color: var(--soft-ink); border-radius: 5px; padding: 0 5px; font-weight: 400; }
   .rec.soon { font-style: italic; opacity: .8; }
   .rec .rp { display: block; margin-top: 4px; color: var(--muted); font-size: 14px; line-height: 1.45; }
+  /* Echte Angebots-Karte mit Beispieldaten */
+  .sd-demo { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; align-items: start;
+    --primary-color: #1565C0; --primary-text-color: var(--ink); --secondary-text-color: var(--muted); --card-background-color: var(--card-bg);
+    --secondary-background-color: var(--bg); --divider-color: var(--border); }
+  .sd-slot { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; box-shadow: 0 8px 24px var(--shadow); max-height: 640px; overflow: auto; padding: 4px; }
+  @media (prefers-color-scheme: dark) { .sd-demo { --primary-color: #64B5F6; } }
   .gallery.phones { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); align-items: start; }
   .lead { margin: -10px 0 18px; color: var(--muted); font-size: 15px; }
   .yaml { margin: 0 0 24px; background: #0e1014; color: #D7E3F4; border-radius: 14px; padding: 18px 20px; font-size: 13.5px; line-height: 1.55;
@@ -584,12 +590,6 @@
       <figure class="shot"><img src="../assets/share.svg" alt="Ventana de compartir con código QR" loading="lazy"><figcaption>Compartir por enlace y código QR – solo esta lista, con fecha límite.</figcaption></figure>
       <figure class="shot"><img src="../assets/settings.svg" alt="Ajustes por secciones" loading="lazy"><figcaption>Ajustes en un solo lugar – para mí, para todos, por lista.</figcaption></figure>
     </div>
-    <div class="gallery phones" style="margin-top:16px">
-      <figure class="shot"><img src="../assets/shot-list.png" alt="Lista por categoría con el nuevo diseño" loading="lazy"><figcaption>Lista por categoría con el nuevo diseño</figcaption></figure>
-      <figure class="shot"><img src="../assets/shot-shop.png" alt="Modo compra con barra de tiendas" loading="lazy"><figcaption>Modo compra con barra de tiendas</figcaption></figure>
-      <figure class="shot"><img src="../assets/shot-share.png" alt="Página compartida para personas sin cuenta" loading="lazy"><figcaption>Página compartida para personas sin cuenta</figcaption></figure>
-      <figure class="shot"><img src="../assets/card-chips.png" alt="Ofertas para tu lista" loading="lazy"><figcaption>Ofertas para tu lista</figcaption></figure>
-    </div>
 
     <div class="callout">
       <div class="icon-big">🏷️</div>
@@ -703,10 +703,11 @@
     </div>
 
     <h2 class="section-title">Así se ve</h2>
-    <div class="gallery phones">
-      <figure class="shot"><img src="../assets/card-chips.png" alt="Mi lista: precios de las tiendas lado a lado" loading="lazy"><figcaption>Mi lista: precios de las tiendas lado a lado</figcaption></figure>
-      <figure class="shot"><img src="../assets/card-rows.png" alt="Mi lista: una oferta por fila" loading="lazy"><figcaption>Mi lista: una oferta por fila</figcaption></figure>
-      <figure class="shot"><img src="../assets/card-all.png" alt="Todas las ofertas en lista" loading="lazy"><figcaption>Todas las ofertas en lista</figcaption></figure>
+    <p class="lead">Esta es la tarjeta real con datos de ejemplo – pruébala: elige ofertas, añádelas a la lista, cambia la vista.</p>
+    <div class="sd-demo" id="sd-demo">
+      <div class="sd-slot" data-cfg='{"list_view":"chips"}'></div>
+      <div class="sd-slot" data-cfg='{"default_tab":"all","all_view":"list","max_per_store":4}'></div>
+      <div class="sd-slot" data-cfg='{"default_tab":"all","group_by":"category","all_view":"tiles"}'></div>
     </div>
 
     <h2 class="section-title">Configuración</h2>
@@ -1070,6 +1071,56 @@ all_view: list</pre>
     document.querySelectorAll("#try-ex button").forEach(function (b) { b.addEventListener("click", function () { inp.value = b.textContent; draw(); inp.focus(); }); });
     inp.value = document.getElementById("try-default").textContent;
     draw(); load();
+  })();
+
+  // Echte Angebots-Karte mit Beispieldaten (läuft nur im Browser, die Liste lebt nur auf dieser Seite)
+  (function () {
+    var box = document.getElementById("sd-demo"); if (!box) return;
+    var base = (document.documentElement.lang || "de") === "de" ? "assets/" : "../assets/", started = false;
+    function img(e) { return "data:image/svg+xml," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" fill="#fff"/><text x="32" y="45" font-size="38" text-anchor="middle">' + e + "</text></svg>"); }
+    function day(n) { var d = new Date(Date.now() + n * 864e5); return d.toISOString().slice(0, 10); }
+    var W = day(5), T = day(0);
+    var SENS = {
+      "sensor.rewe": ["REWE", [["Landliebe Butter", "1,29 €", "1 kg = 5,16 €", "🧈", "Kühlung"], ["Jacobs Krönung", "5,79 €", "1 kg = 11,58 €", "☕", "Getränke"], ["Warsteiner Pils", "10,99 €", "1 l = 1,10 €", "🍺", "Getränke"], ["Bio Orangen", "1,99 €", "", "🍊", "Obst und Gemüse"], ["Wagner Big City Pizza", "2,22 €", "1 kg = 5,29 €", "🍕", "Tiefkühl"]]],
+      "sensor.edeka": ["EDEKA", [["Kerrygold Butter", "1,49 €", "1 kg = 5,96 €", "🧈", "Kühlung"], ["Melitta Filterkaffee", "5,49 €", "1 kg = 10,98 €", "☕", "Getränke"], ["Rispentomaten", "1,79 €", "1 kg = 3,58 €", "🍅", "Obst und Gemüse"], ["Haribo Goldbären", "0,79 €", "1 kg = 3,95 €", "🍬", "Süßes"]]],
+      "sensor.lidl": ["Lidl", [["Dallmayr Prodomo Kaffee", "4,99 €", "1 kg = 9,98 €", "☕", "Getränke", "7,49 €"], ["Clementinen", "1,49 €", "1 kg = 1,49 €", "🍊", "Obst und Gemüse", "2,29 €"], ["Steinofen Pizza Speciale", "1,79 €", "1 kg = 5,11 €", "🍕", "Tiefkühl", "3,49 €"]]]
+    };
+    var items = [["1", "Butter 2"], ["2", "Kaffee"], ["3", "Pils"], ["4", "Pizza"], ["5", "Brötchen"]].map(function (x) { return { uid: x[0], summary: x[1], description: "", status: "needs_action" }; });
+    var stamp = 0, cards = [], next = 10;
+    function hass() {
+      var states = { "todo.demo": { entity_id: "todo.demo", state: String(items.length), last_updated: "l" + stamp, attributes: { friendly_name: "Einkauf" } } };
+      Object.keys(SENS).forEach(function (id) {
+        states[id] = { entity_id: id, state: String(SENS[id][1].length), last_updated: new Date().toISOString().slice(0, 11) + "06:00:00Z", attributes: { friendly_name: SENS[id][0], discounts: SENS[id][1].map(function (o) {
+          return { title: o[0], price: o[1], price_per_unit: o[2], image_url: img(o[3]), category: o[4], old_price: o[5], end_date: o[5] ? T : W }; }) } };
+      });
+      return { language: document.documentElement.lang || "de", config: { components: ["todo"] }, user: { is_admin: false }, states: states, services: {},
+        callWS: function (m) { return Promise.resolve(m.type === "todo/item/list" ? { items: items.map(function (i) { return Object.assign({}, i); }) } : {}); },
+        callService: function (d, sv, data) {
+          if (d === "todo" && sv === "add_item") items.push({ uid: String(next++), summary: data.item, description: data.description || "", status: "needs_action" });
+          if (d === "todo" && sv === "update_item") items.forEach(function (i) { if (i.uid === data.item) { if (data.rename) i.summary = data.rename; if (data.description != null) i.description = data.description; } });
+          if (d === "todo" && sv === "remove_item") { var gone = [].concat(data.item); items = items.filter(function (i) { return gone.indexOf(i.uid) < 0; }); }
+          stamp++; setTimeout(push, 0); return Promise.resolve();
+        } };
+    }
+    function push() { var h = hass(); cards.forEach(function (c) { c.hass = h; }); }
+    function start() {
+      if (started) return; started = true;
+      if (!customElements.get("ha-card")) customElements.define("ha-card", class extends HTMLElement {});
+      var sc = document.createElement("script"); sc.src = base + "smartdiscounts-card.js";
+      sc.onload = function () {
+        box.querySelectorAll(".sd-slot").forEach(function (slot) {
+          var c = document.createElement("smartdiscounts-card");
+          c.setConfig(Object.assign({ list: "todo.demo" }, JSON.parse(slot.getAttribute("data-cfg") || "{}")));
+          slot.append(c); cards.push(c);
+        });
+        push();
+      };
+      document.head.append(sc);
+    }
+    // erst laden, wenn die Seite der Karte gezeigt wird
+    function check() { if (document.body.getAttribute("data-product") === "card") start(); }
+    new MutationObserver(check).observe(document.body, { attributes: true, attributeFilter: ["data-product"] });
+    setTimeout(check, 0);
   })();
 
   // Umschalter HACS-Integration | Android-App – merkt sich die Wahl in der Adresse (#hacs / #app)
