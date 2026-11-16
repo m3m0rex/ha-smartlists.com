@@ -289,7 +289,9 @@
   .try .sub .chip { font-size: 11.5px; padding: 1px 8px; }
   .try .sub b { font-size: 13px; }
   .try .empty { color: var(--muted); font-size: 14px; text-align: center; padding: 34px 10px; }
-  body[data-product="card"] .cmp { display: none; }
+  .compare .yes { color: var(--green); } .compare .soon-col { color: var(--muted); opacity: .75; }
+  .compare.three { min-width: 620px; }
+  @media (prefers-color-scheme: dark) { .compare .yes { color: #6FCF73; } }
   .gallery.phones { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); align-items: start; }
   .lead { margin: -10px 0 18px; color: var(--muted); font-size: 15px; }
   .yaml { margin: 0 0 24px; background: #0e1014; color: #D7E3F4; border-radius: 14px; padding: 18px 20px; font-size: 13.5px; line-height: 1.55;
@@ -902,17 +904,18 @@ all_view: list</pre>
   </main>
 </section>
 
-<h2 class="section-title cmp" style="max-width:980px;margin:8px auto 16px;padding:0 22px">Integration oder App?</h2>
-<div class="cmp" style="max-width:980px;margin:0 auto;padding:0 20px">
-  <table class="compare">
-    <tr><th></th><th>🏠 HACS-Integration</th><th>🤖 Android-App</th></tr>
-    <tr><td>Läuft in</td><td>Home Assistant (Browser, HA-App, Dashboards)</td><td>Eigene App auf dem Android-Gerät</td></tr>
-    <tr><td>Ohne Home Assistant nutzbar</td><td>–</td><td>✓ lokale Listen</td></tr>
-    <tr><td>Kategorien &amp; Badges</td><td>✓</td><td>✓ wenn mit der Integration gekoppelt</td></tr>
-    <tr><td>Einkaufsmodus, Offline-Einkauf</td><td>✓</td><td>Listen liegen lokal auf dem Gerät</td></tr>
-    <tr><td>Teilen per Link für Leute ohne Konto</td><td>✓</td><td>–</td></tr>
-    <tr><td>Widget zum Abhaken</td><td>über die Widgets der HA-App</td><td>✓ eigenes Widget</td></tr>
-    <tr><td>Kosten &amp; Lizenz</td><td>kostenlos, Open Source (MIT)</td><td>kostenlos, proprietär</td></tr>
+<h2 class="section-title" style="max-width:980px;margin:8px auto 6px;padding:0 22px">Drei Bausteine</h2>
+<p class="lead" style="max-width:980px;margin:0 auto 14px;padding:0 22px">Einzeln oder zusammen nutzbar.</p>
+<div style="max-width:980px;margin:0 auto;padding:0 20px;overflow-x:auto">
+  <table class="compare three">
+    <tr><th></th><th>🛒 SmartLists</th><th>🏷️ Discounts Card</th><th class="soon-col">🤖 Android-App</th></tr>
+    <tr><td>Was es ist</td><td>Integration, Karte und eigene Seite</td><td>Dashboard-Karte</td><td class="soon-col">App (bald)</td></tr>
+    <tr><td>Läuft in</td><td>Home Assistant</td><td>Home Assistant</td><td class="soon-col">Android</td></tr>
+    <tr><td>Braucht SmartLists</td><td>–</td><td><b class="yes">nein</b></td><td class="soon-col">nein</td></tr>
+    <tr><td>Kategorien, Badges, Einkaufsmodus</td><td><b class="yes">✓</b></td><td>–</td><td class="soon-col">✓</td></tr>
+    <tr><td>Supermarkt-Angebote</td><td><b class="yes">✓ (Karte enthalten)</b></td><td><b class="yes">✓</b></td><td class="soon-col">–</td></tr>
+    <tr><td>Teilen per Link</td><td><b class="yes">✓</b></td><td>–</td><td class="soon-col">–</td></tr>
+    <tr><td>Lizenz</td><td>MIT, kostenlos</td><td>MIT, kostenlos</td><td class="soon-col">proprietär</td></tr>
   </table>
 </div>
 

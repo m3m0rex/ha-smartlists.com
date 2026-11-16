@@ -289,7 +289,9 @@
   .try .sub .chip { font-size: 11.5px; padding: 1px 8px; }
   .try .sub b { font-size: 13px; }
   .try .empty { color: var(--muted); font-size: 14px; text-align: center; padding: 34px 10px; }
-  body[data-product="card"] .cmp { display: none; }
+  .compare .yes { color: var(--green); } .compare .soon-col { color: var(--muted); opacity: .75; }
+  .compare.three { min-width: 620px; }
+  @media (prefers-color-scheme: dark) { .compare .yes { color: #6FCF73; } }
   .gallery.phones { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); align-items: start; }
   .lead { margin: -10px 0 18px; color: var(--muted); font-size: 15px; }
   .yaml { margin: 0 0 24px; background: #0e1014; color: #D7E3F4; border-radius: 14px; padding: 18px 20px; font-size: 13.5px; line-height: 1.55;
@@ -902,17 +904,18 @@ all_view: list</pre>
   </main>
 </section>
 
-<h2 class="section-title cmp" style="max-width:980px;margin:8px auto 16px;padding:0 22px">Intégration ou app ?</h2>
-<div class="cmp" style="max-width:980px;margin:0 auto;padding:0 20px">
-  <table class="compare">
-    <tr><th></th><th>🏠 Intégration HACS</th><th>🤖 App Android</th></tr>
-    <tr><td>Fonctionne dans</td><td>Home Assistant (navigateur, app HA, tableaux de bord)</td><td>App dédiée sur l'appareil Android</td></tr>
-    <tr><td>Utilisable sans Home Assistant</td><td>–</td><td>✓ listes locales</td></tr>
-    <tr><td>Catégories &amp; badges</td><td>✓</td><td>✓ si associée à l'intégration</td></tr>
-    <tr><td>Mode courses, courses hors ligne</td><td>✓</td><td>Listes stockées sur l'appareil</td></tr>
-    <tr><td>Partage par lien pour personnes sans compte</td><td>✓</td><td>–</td></tr>
-    <tr><td>Widget pour cocher</td><td>via les widgets de l'app HA</td><td>✓ widget propre</td></tr>
-    <tr><td>Coût &amp; licence</td><td>gratuit, open source (MIT)</td><td>gratuit, propriétaire</td></tr>
+<h2 class="section-title" style="max-width:980px;margin:8px auto 6px;padding:0 22px">Trois briques</h2>
+<p class="lead" style="max-width:980px;margin:0 auto 14px;padding:0 22px">À utiliser seules ou ensemble.</p>
+<div style="max-width:980px;margin:0 auto;padding:0 20px;overflow-x:auto">
+  <table class="compare three">
+    <tr><th></th><th>🛒 SmartLists</th><th>🏷️ Discounts Card</th><th class="soon-col">🤖 App Android</th></tr>
+    <tr><td>Ce que c'est</td><td>Intégration, carte et page dédiée</td><td>Carte de tableau de bord</td><td class="soon-col">Appli (bientôt)</td></tr>
+    <tr><td>Fonctionne dans</td><td>Home Assistant</td><td>Home Assistant</td><td class="soon-col">Android</td></tr>
+    <tr><td>Nécessite SmartLists</td><td>–</td><td><b class="yes">non</b></td><td class="soon-col">non</td></tr>
+    <tr><td>Catégories, badges, mode courses</td><td><b class="yes">✓</b></td><td>–</td><td class="soon-col">✓</td></tr>
+    <tr><td>Promos des supermarchés</td><td><b class="yes">✓ (carte incluse)</b></td><td><b class="yes">✓</b></td><td class="soon-col">–</td></tr>
+    <tr><td>Partage par lien</td><td><b class="yes">✓</b></td><td>–</td><td class="soon-col">–</td></tr>
+    <tr><td>licence</td><td>MIT, gratuit</td><td>MIT, gratuit</td><td class="soon-col">propriétaire</td></tr>
   </table>
 </div>
 

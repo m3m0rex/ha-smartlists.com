@@ -547,8 +547,22 @@ T: dict[str, tuple[str, str, str, str, str]] = {
     "Nie wieder ein Angebot verpassen": ('Never miss an offer again', 'Ne rate plus aucune promo', 'No te pierdas ninguna oferta', "Non perdere più un'offerta", 'Nie przegap żadnej promocji'),
     "Die ganze Einkaufsliste in Home Assistant?": ('The whole shopping list in Home Assistant?', 'Toute la liste de courses dans Home Assistant ?', '¿Toda la lista de la compra en Home Assistant?', 'Tutta la lista della spesa in Home Assistant?', 'Cała lista zakupów w Home Assistant?'),
     "SmartDiscounts Card:": ('SmartDiscounts Card:', 'SmartDiscounts Card :', 'SmartDiscounts Card:', 'SmartDiscounts Card:', 'SmartDiscounts Card:'),
+    "Drei Bausteine": ('Three building blocks', 'Trois briques', 'Tres piezas', 'Tre componenti', 'Trzy elementy'),
+    "Einzeln oder zusammen nutzbar.": ('Use them on their own or together.', 'À utiliser seules ou ensemble.', 'Se usan por separado o juntas.', 'Da usare da soli o insieme.', 'Do użycia osobno lub razem.'),
+    "Was es ist": ('What it is', "Ce que c'est", 'Qué es', "Che cos'è", 'Co to jest'),
+    "Integration, Karte und eigene Seite": ('Integration, card and its own page', 'Intégration, carte et page dédiée', 'Integración, tarjeta y página propia', 'Integrazione, scheda e pagina dedicata', 'Integracja, karta i własna strona'),
+    "Dashboard-Karte": ('Dashboard card', 'Carte de tableau de bord', 'Tarjeta de panel', 'Scheda dashboard', 'Karta dashboardu'),
+    "App (bald)": ('App (soon)', 'Appli (bientôt)', 'App (pronto)', 'App (presto)', 'Aplikacja (wkrótce)'),
+    "Braucht SmartLists": ('Needs SmartLists', 'Nécessite SmartLists', 'Necesita SmartLists', 'Richiede SmartLists', 'Wymaga SmartLists'),
+    "nein": ('no', 'non', 'no', 'no', 'nie'),
+    "Kategorien, Badges, Einkaufsmodus": ('Categories, badges, shopping mode', 'Catégories, badges, mode courses', 'Categorías, insignias, modo compra', 'Categorie, badge, modalità spesa', 'Kategorie, odznaki, tryb zakupów'),
+    "Supermarkt-Angebote": ('Supermarket offers', 'Promos des supermarchés', 'Ofertas del supermercado', 'Offerte dei supermercati', 'Promocje z marketów'),
+    "✓ (Karte enthalten)": ('✓ (card included)', '✓ (carte incluse)', '✓ (tarjeta incluida)', '✓ (scheda inclusa)', '✓ (karta w zestawie)'),
+    "Teilen per Link": ('Share by link', 'Partage par lien', 'Compartir por enlace', 'Condivisione tramite link', 'Udostępnianie linkiem'),
+    "MIT, kostenlos": ('MIT, free', 'MIT, gratuit', 'MIT, gratis', 'MIT, gratis', 'MIT, za darmo'),
+    "proprietär": ('proprietary', 'propriétaire', 'propietaria', 'proprietaria', 'własnościowa'),
 }
-KEEP |= {'🏷️ Discounts Card', 'https://github.com/m3m0rex/ha_smartdiscounts-card', '🛒 SmartLists', '· MIT', 'type: custom:smartdiscounts-card\nlist: todo.einkauf\nsources:\n  - auto\n  - entity: sensor.mein_markt\n    store: Kaufland\n    map:\n      name: product.name\n      price: prices.current\n      old_price: prices.regular\n      image: images.0.url\n      until: validity.to\nmatch: word\nlist_view: rows\nall_view: list', 'SmartDiscounts Card'}
+KEEP |= {'Home Assistant', 'Android', '🏷️ Discounts Card', 'https://github.com/m3m0rex/ha_smartdiscounts-card', '🛒 SmartLists', '· MIT', 'type: custom:smartdiscounts-card\nlist: todo.einkauf\nsources:\n  - auto\n  - entity: sensor.mein_markt\n    store: Kaufland\n    map:\n      name: product.name\n      price: prices.current\n      old_price: prices.regular\n      image: images.0.url\n      until: validity.to\nmatch: word\nlist_view: rows\nall_view: list', 'SmartDiscounts Card'}
 
 LANG_IDX = {lang: i for i, lang in enumerate(LANGS)}
 ATTR = re.compile(r'\b(alt|title|aria-label|content)="([^"]*)"')

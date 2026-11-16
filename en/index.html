@@ -289,7 +289,9 @@
   .try .sub .chip { font-size: 11.5px; padding: 1px 8px; }
   .try .sub b { font-size: 13px; }
   .try .empty { color: var(--muted); font-size: 14px; text-align: center; padding: 34px 10px; }
-  body[data-product="card"] .cmp { display: none; }
+  .compare .yes { color: var(--green); } .compare .soon-col { color: var(--muted); opacity: .75; }
+  .compare.three { min-width: 620px; }
+  @media (prefers-color-scheme: dark) { .compare .yes { color: #6FCF73; } }
   .gallery.phones { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); align-items: start; }
   .lead { margin: -10px 0 18px; color: var(--muted); font-size: 15px; }
   .yaml { margin: 0 0 24px; background: #0e1014; color: #D7E3F4; border-radius: 14px; padding: 18px 20px; font-size: 13.5px; line-height: 1.55;
@@ -902,17 +904,18 @@ all_view: list</pre>
   </main>
 </section>
 
-<h2 class="section-title cmp" style="max-width:980px;margin:8px auto 16px;padding:0 22px">Integration or app?</h2>
-<div class="cmp" style="max-width:980px;margin:0 auto;padding:0 20px">
-  <table class="compare">
-    <tr><th></th><th>🏠 HACS integration</th><th>🤖 Android app</th></tr>
-    <tr><td>Runs in</td><td>Home Assistant (browser, HA app, dashboards)</td><td>Its own app on the Android device</td></tr>
-    <tr><td>Usable without Home Assistant</td><td>–</td><td>✓ local lists</td></tr>
-    <tr><td>Categories &amp; badges</td><td>✓</td><td>✓ when paired with the integration</td></tr>
-    <tr><td>Shopping mode, offline shopping</td><td>✓</td><td>Lists are stored on the device</td></tr>
-    <tr><td>Sharing via link for people without an account</td><td>✓</td><td>–</td></tr>
-    <tr><td>Widget to check off</td><td>via the widgets of the HA app</td><td>✓ own widget</td></tr>
-    <tr><td>Cost &amp; licence</td><td>free, open source (MIT)</td><td>free, proprietary</td></tr>
+<h2 class="section-title" style="max-width:980px;margin:8px auto 6px;padding:0 22px">Three building blocks</h2>
+<p class="lead" style="max-width:980px;margin:0 auto 14px;padding:0 22px">Use them on their own or together.</p>
+<div style="max-width:980px;margin:0 auto;padding:0 20px;overflow-x:auto">
+  <table class="compare three">
+    <tr><th></th><th>🛒 SmartLists</th><th>🏷️ Discounts Card</th><th class="soon-col">🤖 Android app</th></tr>
+    <tr><td>What it is</td><td>Integration, card and its own page</td><td>Dashboard card</td><td class="soon-col">App (soon)</td></tr>
+    <tr><td>Runs in</td><td>Home Assistant</td><td>Home Assistant</td><td class="soon-col">Android</td></tr>
+    <tr><td>Needs SmartLists</td><td>–</td><td><b class="yes">no</b></td><td class="soon-col">no</td></tr>
+    <tr><td>Categories, badges, shopping mode</td><td><b class="yes">✓</b></td><td>–</td><td class="soon-col">✓</td></tr>
+    <tr><td>Supermarket offers</td><td><b class="yes">✓ (card included)</b></td><td><b class="yes">✓</b></td><td class="soon-col">–</td></tr>
+    <tr><td>Share by link</td><td><b class="yes">✓</b></td><td>–</td><td class="soon-col">–</td></tr>
+    <tr><td>licence</td><td>MIT, free</td><td>MIT, free</td><td class="soon-col">proprietary</td></tr>
   </table>
 </div>
 
