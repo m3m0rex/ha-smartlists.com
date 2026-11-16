@@ -1079,9 +1079,9 @@ all_view: list</pre>
     function day(n) { var d = new Date(Date.now() + n * 864e5); return d.toISOString().slice(0, 10); }
     var W = day(5), T = day(0);
     var SENS = {
-      "sensor.rewe": ["REWE", [["Landliebe Butter", "1,29 €", "1 kg = 5,16 €", "🧈", "Kühlung"], ["Jacobs Krönung", "5,79 €", "1 kg = 11,58 €", "☕", "Getränke"], ["Warsteiner Pils", "10,99 €", "1 l = 1,10 €", "🍺", "Getränke"], ["Bio Orangen", "1,99 €", "", "🍊", "Obst und Gemüse"], ["Wagner Big City Pizza", "2,22 €", "1 kg = 5,29 €", "🍕", "Tiefkühl"]]],
-      "sensor.edeka": ["EDEKA", [["Kerrygold Butter", "1,49 €", "1 kg = 5,96 €", "🧈", "Kühlung"], ["Melitta Filterkaffee", "5,49 €", "1 kg = 10,98 €", "☕", "Getränke"], ["Rispentomaten", "1,79 €", "1 kg = 3,58 €", "🍅", "Obst und Gemüse"], ["Haribo Goldbären", "0,79 €", "1 kg = 3,95 €", "🍬", "Süßes"]]],
-      "sensor.lidl": ["Lidl", [["Dallmayr Prodomo Kaffee", "4,99 €", "1 kg = 9,98 €", "☕", "Getränke", "7,49 €"], ["Clementinen", "1,49 €", "1 kg = 1,49 €", "🍊", "Obst und Gemüse", "2,29 €"], ["Steinofen Pizza Speciale", "1,79 €", "1 kg = 5,11 €", "🍕", "Tiefkühl", "3,49 €"]]]
+      "sensor.rewe": ["REWE", [["Butter mild gesäuert", "1,29 €", "1 kg = 5,16 €", "🧈", "Kühlung"], ["Kaffee klassisch gemahlen", "5,79 €", "1 kg = 11,58 €", "☕", "Getränke"], ["Premium Pils Kasten", "10,99 €", "1 l = 1,10 €", "🍺", "Getränke"], ["Bio Orangen", "1,99 €", "", "🍊", "Obst und Gemüse"], ["Pizza Salami Steinofen", "2,22 €", "1 kg = 5,29 €", "🍕", "Tiefkühl"]]],
+      "sensor.edeka": ["EDEKA", [["Irische Butter", "1,49 €", "1 kg = 5,96 €", "🧈", "Kühlung"], ["Filterkaffee mild", "5,49 €", "1 kg = 10,98 €", "☕", "Getränke"], ["Rispentomaten", "1,79 €", "1 kg = 3,58 €", "🍅", "Obst und Gemüse"], ["Fruchtgummi Bärchen", "0,79 €", "1 kg = 3,95 €", "🍬", "Süßes"]]],
+      "sensor.lidl": ["Lidl", [["Kaffee Crema ganze Bohne", "4,99 €", "1 kg = 9,98 €", "☕", "Getränke", "7,49 €"], ["Clementinen", "1,49 €", "1 kg = 1,49 €", "🍊", "Obst und Gemüse", "2,29 €"], ["Pizza Speciale Steinofen", "1,79 €", "1 kg = 5,11 €", "🍕", "Tiefkühl", "3,49 €"]]]
     };
     var items = [["1", "Butter 2"], ["2", "Kaffee"], ["3", "Pils"], ["4", "Pizza"], ["5", "Brötchen"]].map(function (x) { return { uid: x[0], summary: x[1], description: "", status: "needs_action" }; });
     var stamp = 0, cards = [], next = 10;
