@@ -66,6 +66,8 @@
     display: flex; align-items: center; justify-content: space-between; gap: 12px;
   }
   nav .brand { font-weight: 800; font-size: 17px; display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+  nav a.brand { color: inherit; text-decoration: none; }
+  img.pi { width: 18px; height: 18px; border-radius: 5px; background: #fff; padding: 1px; vertical-align: -4px; margin-right: 6px; }
   nav .brand img { width: 26px; height: 26px; border-radius: 7px; background: #fff; padding: 2px; }
   .switch {
     display: inline-flex; background: rgba(255,255,255,0.14); border-radius: 999px; padding: 4px;
@@ -300,6 +302,16 @@
   .phone .pr b.st { background: #b5121b; color: #fff; } .phone .pr b.of { border: 1px solid #2f5d33; color: #6cc070; } .phone .pr b.n { color: #a3aab1; font-weight: 600; }
   .phone .pn { display: flex; justify-content: space-around; border-top: 1px solid #2e3236; margin-top: 6px; padding-top: 9px; font-size: 11px; color: #a3aab1; }
   .phone .pn .on { color: #5aa9ee; font-weight: 700; }
+  /* echte Bilder der App im Smartphone-Rahmen; Schieber blendet zwischen hell (links) und dunkel (rechts) */
+  .shot { position: relative; width: 250px; aspect-ratio: 412 / 892; flex: none; border-radius: 30px; border: 6px solid #2a3140; overflow: hidden; background: #111315; box-shadow: 0 18px 40px rgba(0,0,0,.35); }
+  .shot img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; object-fit: cover; }
+  .shot img.top { clip-path: inset(0 calc(100% - var(--p)) 0 0); }
+  .shot .bar { position: absolute; top: 0; bottom: 0; left: var(--p); width: 2px; margin-left: -1px; background: #fff; box-shadow: 0 0 0 1px rgba(0,0,0,.25); pointer-events: none; }
+  .shot .bar::after { content: "‹ ›"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 36px; height: 36px; border-radius: 50%; background: #fff; color: #1565C0; font-weight: 800; font-size: 13px; display: grid; place-items: center; box-shadow: 0 2px 8px rgba(0,0,0,.4); }
+  .shot input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; touch-action: pan-y; }
+  .shots { display: flex; gap: 28px; justify-content: center; flex-wrap: wrap; margin: 4px 0 30px; }
+  .shots figure { margin: 0; text-align: center; } .shots figcaption { margin-top: 10px; color: var(--muted); font-size: 14px; font-weight: 600; }
+  @media (max-width: 760px) { .shot { margin: 0 auto; } }
   .checks { list-style: none; margin: 10px 0 0; padding: 0; }
   .checks li { position: relative; padding: 3px 0 3px 24px; color: var(--ink); font-size: 14.5px; }
   .checks li::before { content: "✓"; position: absolute; left: 2px; color: var(--green); font-weight: 700; }
@@ -308,7 +320,26 @@
   .need { border: 1px solid var(--green); background: var(--card-bg); box-shadow: 0 8px 24px var(--shadow); border-radius: 14px; padding: 16px 20px; margin: 0 0 34px; position: relative; }
   .need h2 { margin: 0 0 8px; font-size: 16px; color: var(--ink); }
   .need ul { margin: 0; padding-left: 20px; } .need li { margin: 3px 0; } .need li.opt { color: var(--muted); }
-  .compare.wide { min-width: 900px; font-size: 14px; }
+  .compare.wide { min-width: 1040px; font-size: 14px; border: 0; border-radius: 0; }
+  /* Vergleich: erst die wichtigsten Zeilen, Rest aufklappbar; Sprungmenü bleibt unter der Kopfleiste stehen */
+  .cmp-wrap { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
+  .cmp-jump { position: sticky; top: var(--navh, 56px); z-index: 5; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; padding: 10px 2px; background: var(--bg); }
+  .cmp-jump > span { color: var(--muted); font-size: 13px; white-space: nowrap; }
+  @media (max-width: 700px) { .cmp-jump { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; } .cmp-wrap { padding: 0 12px; } }
+  .cmp-jump button { padding: 6px 14px; border: 1px solid var(--border); border-radius: 999px; background: var(--card-bg); color: var(--ink); font: inherit; font-size: 13.5px; font-weight: 600; white-space: nowrap; cursor: pointer; }
+  .cmp-jump button:hover, .cmp-jump button.on { border-color: var(--link); color: var(--link); }
+  .cmp-jump button.all { margin-left: auto; border: 0; background: none; color: var(--link); padding: 6px 4px; }
+  .cmp-scroll { overflow-x: auto; border: 1px solid var(--border); border-radius: 14px; background: var(--card-bg); }
+  .compare.wide th { padding: 18px 16px; min-width: 158px; font-size: 14px; text-transform: none; letter-spacing: 0; }
+  .compare.wide th .n { display: flex; gap: 2px; align-items: center; justify-content: center; white-space: nowrap; }
+  .compare.wide th small { margin-top: 5px; font-size: 12.5px; line-height: 1.35; }
+  .compare.wide th.app { border-left: 1px solid var(--border); }
+  .compare.wide tr.key td:first-child { color: var(--ink); font-weight: 600; }
+  .cmp-wrap.short tr.more, .cmp-wrap.short tr.grp { display: none; }
+  .cmp-wrap.short .when-open, .cmp-wrap:not(.short) .when-short { display: none; }
+  .cmp-more { display: flex; justify-content: center; padding: 14px; border-top: 1px solid var(--border); }
+  .cmp-more button { padding: 10px 22px; border-radius: 999px; border: 1px solid var(--link); background: none; color: var(--link); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
+  .cmp-more button:hover { background: var(--soft); }
   .compare.wide th, .compare.wide td { text-align: center; vertical-align: middle; padding: 10px 12px; }
   .compare.wide th:first-child, .compare.wide td:first-child { text-align: left; width: 30%; }
   .compare.wide th small, .compare.wide td small { display: block; font-weight: 400; font-size: 12px; color: var(--muted); text-transform: none; letter-spacing: 0; }
@@ -403,6 +434,8 @@
 <p>Die Integration SmartLists und die Karte SmartDiscounts laufen ausschließlich in deinem eigenen Home Assistant. Ich erhalte davon keine Daten. Das Nachschlagen von Produkten im Internet ist ausgeschaltet, bis du es selbst einschaltest und einen Dienst auswählst.</p>
 <h2>7. App SmartLists Go</h2>
 <p>Die App speichert Listen, Notizen und Einstellungen auf deinem Gerät. Verbindest du sie mit Home Assistant, tauscht sie Daten nur mit den Adressen aus, die du einträgst. Es gibt kein Konto bei mir, keine Auswertung der Nutzung und keine Werbung. Fehlerberichte sendet die App nicht von selbst; du kannst einen Bericht erstellen, prüfen und selbst absenden.</p>
+<p>Meldest du dich über die Anmeldeseite deines Home Assistant an, ruft dein Home Assistant dabei einmal die Seite ha-smartlists.com/app/ ab, um die App zu erkennen. Dabei fällt beim Anbieter dieser Webseite dasselbe an wie bei jedem Seitenaufruf (Abschnitt 2), also die IP-Adresse deines Home Assistant. Die Seite selbst setzt keine Cookies, enthält keine Skripte und speichert nichts. Zugangsdaten oder Inhalte deiner Listen werden dabei nicht übertragen.</p>
+<p>Das Nachschlagen von Strichcodes im Internet ist ausgeschaltet. Schaltest du es ein und wählst einen Dienst, sendet die App den gescannten Code an diesen Dienst; für dessen Verarbeitung gilt seine eigene Datenschutzerklärung.</p>
 <h2>8. Kontakt</h2>
 <p>Wenn du mir eine E-Mail schreibst, verarbeite ich deine Angaben, um die Anfrage zu beantworten (Art. 6 Abs. 1 Buchst. f DSGVO). Die Nachricht wird gelöscht, sobald sie erledigt ist und keine Aufbewahrungspflicht besteht. Der „zweite Kontaktweg“ im Impressum ist ein Formular von Online-Impressum.de; dafür gilt die Datenschutzerklärung dieses Anbieters.</p>
 <h2>9. Deine Rechte</h2>
