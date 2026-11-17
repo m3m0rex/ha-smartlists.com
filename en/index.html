@@ -335,7 +335,26 @@
   .need { border: 1px solid var(--green); background: var(--card-bg); box-shadow: 0 8px 24px var(--shadow); border-radius: 14px; padding: 16px 20px; margin: 0 0 34px; position: relative; }
   .need h2 { margin: 0 0 8px; font-size: 16px; color: var(--ink); }
   .need ul { margin: 0; padding-left: 20px; } .need li { margin: 3px 0; } .need li.opt { color: var(--muted); }
-  .compare.wide { min-width: 900px; font-size: 14px; }
+  .compare.wide { min-width: 1040px; font-size: 14px; border: 0; border-radius: 0; }
+  /* Vergleich: erst die wichtigsten Zeilen, Rest aufklappbar; Sprungmenü bleibt unter der Kopfleiste stehen */
+  .cmp-wrap { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
+  .cmp-jump { position: sticky; top: var(--navh, 56px); z-index: 5; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; padding: 10px 2px; background: var(--bg); }
+  .cmp-jump > span { color: var(--muted); font-size: 13px; white-space: nowrap; }
+  @media (max-width: 700px) { .cmp-jump { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; } .cmp-wrap { padding: 0 12px; } }
+  .cmp-jump button { padding: 6px 14px; border: 1px solid var(--border); border-radius: 999px; background: var(--card-bg); color: var(--ink); font: inherit; font-size: 13.5px; font-weight: 600; white-space: nowrap; cursor: pointer; }
+  .cmp-jump button:hover, .cmp-jump button.on { border-color: var(--link); color: var(--link); }
+  .cmp-jump button.all { margin-left: auto; border: 0; background: none; color: var(--link); padding: 6px 4px; }
+  .cmp-scroll { overflow-x: auto; border: 1px solid var(--border); border-radius: 14px; background: var(--card-bg); }
+  .compare.wide th { padding: 18px 16px; min-width: 158px; font-size: 14px; text-transform: none; letter-spacing: 0; }
+  .compare.wide th .n { display: flex; gap: 2px; align-items: center; justify-content: center; white-space: nowrap; }
+  .compare.wide th small { margin-top: 5px; font-size: 12.5px; line-height: 1.35; }
+  .compare.wide th.app { border-left: 1px solid var(--border); }
+  .compare.wide tr.key td:first-child { color: var(--ink); font-weight: 600; }
+  .cmp-wrap.short tr.more, .cmp-wrap.short tr.grp { display: none; }
+  .cmp-wrap.short .when-open, .cmp-wrap:not(.short) .when-short { display: none; }
+  .cmp-more { display: flex; justify-content: center; padding: 14px; border-top: 1px solid var(--border); }
+  .cmp-more button { padding: 10px 22px; border-radius: 999px; border: 1px solid var(--link); background: none; color: var(--link); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
+  .cmp-more button:hover { background: var(--soft); }
   .compare.wide th, .compare.wide td { text-align: center; vertical-align: middle; padding: 10px 12px; }
   .compare.wide th:first-child, .compare.wide td:first-child { text-align: left; width: 30%; }
   .compare.wide th small, .compare.wide td small { display: block; font-weight: 400; font-size: 12px; color: var(--muted); text-transform: none; letter-spacing: 0; }
@@ -1003,39 +1022,43 @@ all_view: list</pre>
   </main>
 </section>
 
-<h2 class="section-title" style="max-width:980px;margin:8px auto 6px;padding:0 22px">What do I need for what?</h2>
-<p class="lead" style="max-width:980px;margin:0 auto 14px;padding:0 22px">Each row a feature, each column a way to use SmartLists. Home Assistant on the left, the app on the right.</p>
-<div style="max-width:980px;margin:0 auto;padding:0 20px;overflow-x:auto">
+<h2 class="section-title" style="max-width:1180px;margin:8px auto 6px;padding:0 22px">What do I need for what?</h2>
+<p class="lead" style="max-width:1180px;margin:0 auto 6px;padding:0 22px">The most important features at a glance. Home Assistant on the left, the app on the right.</p>
+<div class="cmp-wrap short" id="cmp">
+  <div class="cmp-jump"><span>Jump to:</span><button type="button" data-g="listen">Lists</button><button type="button" data-g="teilen">Sharing</button><button type="button" data-g="angebote">Offers</button><button type="button" data-g="notizen">Notes and security</button><button type="button" data-g="sonstiges">Other</button><button type="button" class="all" data-cmp-toggle><span class="when-short">Show all</span><span class="when-open">Show less</span></button></div>
+  <div class="cmp-scroll">
   <table class="compare wide">
-    <tr><th></th><th><img class="pi" src="../assets/icon.png" alt="">SmartLists<small>in Home Assistant</small></th><th>🏷️ SmartDiscounts<small>in Home Assistant, without SmartLists</small></th><th>📱 SmartLists Go<small>on the device only</small></th><th>📱 SmartLists Go<small>with Home Assistant</small></th><th>📱 SmartLists Go<small>with SmartLists</small></th></tr>
-    <tr class="grp"><td colspan="6">Lists</td></tr>
-    <tr><td>Create, check off and sort lists</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td></tr>
-    <tr><td>Shorthand in the text<small>2x · 1 kg · 1.19 € · @store · *person · #tag</small></td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td></tr>
-    <tr><td>Categories like in the shop, suggestions</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><b class="yes">✓</b><small>basic, on the device</small></td><td><b class="yes">✓</b><small>basic, on the device</small></td><td><b class="yes">✓</b><small>learned for the household</small></td></tr>
-    <tr><td>Combined lists</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b><small>device and Home Assistant mixed</small></td><td><b class="yes">✓</b><small>including those from SmartLists</small></td></tr>
-    <tr><td>Shopping mode</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td></tr>
-    <tr><td>Scan barcodes</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><span class="plan">planned</span></td><td><span class="plan">planned</span></td><td><span class="plan">planned</span></td></tr>
-    <tr class="grp"><td colspan="6">Sharing</td></tr>
-    <tr><td>The same list on several devices</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td></tr>
-    <tr><td>Own lists per person, permissions</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td></tr>
-    <tr><td>Share via link, no account</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><span class="no">–</span></td></tr>
-    <tr class="grp"><td colspan="6">Offers<small>always need offer sensors in Home Assistant</small></td></tr>
-    <tr><td>Browse and search offers</td><td><b class="yes">✓</b><small>with SmartDiscounts</small></td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td></tr>
-    <tr><td>Matching with the list, price comparison</td><td><b class="yes">✓</b><small>hint on the item</small></td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td></tr>
-    <tr><td>Offer as a badge on the item</td><td><b class="yes">✓</b></td><td><span class="no">–</span><small>readable line in the description</small></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td></tr>
-    <tr><td>Watch list and notifications</td><td><b class="yes">✓</b><small>for the household</small></td><td><b class="yes">✓</b><small>per device or to-do list</small></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><b class="yes">✓</b><small>for the household</small></td></tr>
-    <tr class="grp"><td colspan="6">Notes and security</td></tr>
-    <tr><td>Notes</td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td></tr>
-    <tr><td>App lock, encrypted notes</td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><span class="plan">planned</span></td><td><span class="plan">planned</span></td><td><span class="plan">planned</span></td></tr>
-    <tr><td>Backup</td><td><b class="yes">✓</b><small>with Home Assistant</small></td><td><span class="no">–</span></td><td><b class="yes">✓</b><small>as a file</small></td><td><b class="yes">✓</b><small>as a file</small></td><td><b class="yes">✓</b><small>as a file or in Home Assistant</small></td></tr>
-    <tr class="grp"><td colspan="6">Other</td></tr>
-    <tr><td>Works offline</td><td><b class="yes">✓</b><small>changes are sent later</small></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td></tr>
-    <tr><td>Home screen widget</td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><span class="plan">planned</span></td><td><span class="plan">planned</span></td><td><span class="plan">planned</span></td></tr>
-    <tr><td>Voice control, automations</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><span class="no">–</span></td></tr>
-    <tr><td>Cost and licence</td><td>free, MIT</td><td>free, MIT</td><td colspan="3">free, code not public</td></tr>
+    <tr><th></th><th><span class="n"><img class="pi" src="../assets/icon.png" alt="">SmartLists</span><small>in Home Assistant</small></th><th><span class="n">🏷️ SmartDiscounts</span><small>in Home Assistant, without SmartLists</small></th><th class="app"><span class="n">📱 SmartLists Go</span><small>on the device only</small></th><th><span class="n">📱 SmartLists Go</span><small>with Home Assistant</small></th><th><span class="n">📱 SmartLists Go</span><small>with SmartLists</small></th></tr>
+    <tr class="grp" id="cmp-listen"><td colspan="6">Lists</td></tr>
+    <tr class="key"><td>Create, check off and sort lists</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td></tr>
+    <tr class="more"><td>Shorthand in the text<small>2x · 1 kg · 1.19 € · @store · *person · #tag</small></td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td></tr>
+    <tr class="more"><td>Categories like in the shop, suggestions</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><b class="yes">✓</b><small>basic, on the device</small></td><td><b class="yes">✓</b><small>basic, on the device</small></td><td><b class="yes">✓</b><small>learned for the household</small></td></tr>
+    <tr class="more"><td>Combined lists</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b><small>device and Home Assistant mixed</small></td><td><b class="yes">✓</b><small>including those from SmartLists</small></td></tr>
+    <tr class="key"><td>Shopping mode</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td></tr>
+    <tr class="more"><td>Scan barcodes</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><span class="plan">planned</span></td><td><span class="plan">planned</span></td><td><span class="plan">planned</span></td></tr>
+    <tr class="grp" id="cmp-teilen"><td colspan="6">Sharing</td></tr>
+    <tr class="key"><td>The same list on several devices</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td></tr>
+    <tr class="more"><td>Own lists per person, permissions</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td></tr>
+    <tr class="more"><td>Share via link, no account</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><span class="no">–</span></td></tr>
+    <tr class="grp" id="cmp-angebote"><td colspan="6">Offers<small>always need offer sensors in Home Assistant</small></td></tr>
+    <tr class="key"><td>Browse and search offers</td><td><b class="yes">✓</b><small>with SmartDiscounts</small></td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td></tr>
+    <tr class="key"><td>Matching with the list, price comparison</td><td><b class="yes">✓</b><small>hint on the item</small></td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td></tr>
+    <tr class="more"><td>Offer as a badge on the item</td><td><b class="yes">✓</b></td><td><span class="no">–</span><small>readable line in the description</small></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td></tr>
+    <tr class="more"><td>Watch list and notifications</td><td><b class="yes">✓</b><small>for the household</small></td><td><b class="yes">✓</b><small>per device or to-do list</small></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><b class="yes">✓</b><small>for the household</small></td></tr>
+    <tr class="grp" id="cmp-notizen"><td colspan="6">Notes and security</td></tr>
+    <tr class="key"><td>Notes</td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td></tr>
+    <tr class="more"><td>App lock, encrypted notes</td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><span class="plan">planned</span></td><td><span class="plan">planned</span></td><td><span class="plan">planned</span></td></tr>
+    <tr class="more"><td>Backup</td><td><b class="yes">✓</b><small>with Home Assistant</small></td><td><span class="no">–</span></td><td><b class="yes">✓</b><small>as a file</small></td><td><b class="yes">✓</b><small>as a file</small></td><td><b class="yes">✓</b><small>as a file or in Home Assistant</small></td></tr>
+    <tr class="grp" id="cmp-sonstiges"><td colspan="6">Other</td></tr>
+    <tr class="key"><td>Works offline</td><td><b class="yes">✓</b><small>changes are sent later</small></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td></tr>
+    <tr class="more"><td>Home screen widget</td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><span class="plan">planned</span></td><td><span class="plan">planned</span></td><td><span class="plan">planned</span></td></tr>
+    <tr class="more"><td>Voice control, automations</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><span class="no">–</span></td></tr>
+    <tr class="key"><td>Cost and licence</td><td>free, MIT</td><td>free, MIT</td><td colspan="3">free, code not public</td></tr>
   </table>
+  <div class="cmp-more"><button type="button" data-cmp-toggle><span class="when-short">Show all 20 features ▾</span><span class="when-open">Show only the most important ▴</span></button></div>
+  </div>
 </div>
-<p class="legend"><span>✓ available</span><span>planned: comes with the app</span><span>– not available there</span></p>
+<p class="legend" style="max-width:1180px"><span>✓ available</span><span>planned: comes with the app</span><span>– not available there</span></p>
 
 <footer>
   SmartLists — shopping lists, to-dos and notes with Home Assistant.<br>
@@ -1233,6 +1256,29 @@ all_view: list</pre>
     });
     var h = location.hash.replace("#", "");
     show(h === "download" ? "app" : h, false);
+  })();
+  // Vergleich: aufklappen und zu einem Abschnitt springen
+  (function () {
+    var wrap = document.getElementById("cmp");
+    if (!wrap) return;
+    var nav = document.querySelector("nav"), jump = wrap.querySelector(".cmp-jump");
+    function navh() { var h = nav ? nav.offsetHeight : 0; document.documentElement.style.setProperty("--navh", h + "px"); return h; }
+    navh(); window.addEventListener("resize", navh);
+    function to(el) { window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - navh() - jump.offsetHeight - 4 }); }
+    wrap.querySelectorAll("[data-cmp-toggle]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var short = wrap.classList.toggle("short");
+        jump.querySelectorAll("[data-g]").forEach(function (x) { x.classList.remove("on"); });
+        if (short) window.scrollTo({ top: wrap.getBoundingClientRect().top + window.scrollY - navh() - 8 });
+      });
+    });
+    jump.querySelectorAll("[data-g]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        wrap.classList.remove("short");
+        jump.querySelectorAll("[data-g]").forEach(function (x) { x.classList.toggle("on", x === b); });
+        to(document.getElementById("cmp-" + b.getAttribute("data-g")));
+      });
+    });
   })();
 </script>
 </body>
