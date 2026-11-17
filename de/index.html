@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>HA SmartLists</title>
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://ha-smartlists.com/">
+<script>
+  // Deutsch ist die Startseite (ohne /de/). Wer /de/ aufruft, will Deutsch: Wahl merken, damit die Startseite
+  // nicht in die Browser-Sprache weiterleitet, und dorthin wechseln – Reiter (#card) und Parameter bleiben.
+  try { localStorage.setItem("smartlists-site-lang", "de"); } catch (e) {}
+  location.replace("../" + location.search + location.hash);
+</script>
+<meta http-equiv="refresh" content="0; url=../">
+</head>
+<body><p><a href="../">ha-smartlists.com</a></p></body>
+</html>
