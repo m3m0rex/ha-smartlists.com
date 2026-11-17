@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#0D47A1" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0A2552" media="(prefers-color-scheme: dark)">
-<title>HA SmartLists – listes de courses pour Home Assistant</title>
+<title>SmartLists – listes de courses pour Home Assistant</title>
 <meta name="description" content="SmartLists : de vraies listes de courses pour Home Assistant – en intégration HACS avec catégories, mode courses et partage par lien, ou en app Android avec listes locales et widget.">
 <link rel="icon" href="../assets/icon.png">
 <script>
@@ -329,6 +329,19 @@
   .checks li { position: relative; padding: 3px 0 3px 24px; color: var(--ink); font-size: 14.5px; }
   .checks li::before { content: "✓"; position: absolute; left: 2px; color: var(--green); font-weight: 700; }
   @media (max-width: 760px) { .panel.app header .hero { grid-template-columns: 1fr; text-align: center; gap: 28px; } .panel.app header .hero .logo { margin-left: auto; } .panel.app header .hero .soon { margin: 0 auto 12px; } .phone { margin: 0 auto; } }
+  /* „Das brauchst du“: Pflicht oben, Zusätze darunter in Grau */
+  .need { border: 1px solid var(--green); background: var(--card-bg); box-shadow: 0 8px 24px var(--shadow); border-radius: 14px; padding: 16px 20px; margin: 0 0 34px; position: relative; }
+  .need h2 { margin: 0 0 8px; font-size: 16px; color: var(--ink); }
+  .need ul { margin: 0; padding-left: 20px; } .need li { margin: 3px 0; } .need li.opt { color: var(--muted); }
+  .compare.wide { min-width: 900px; font-size: 14px; }
+  .compare.wide th, .compare.wide td { text-align: center; vertical-align: middle; padding: 10px 12px; }
+  .compare.wide th:first-child, .compare.wide td:first-child { text-align: left; width: 30%; }
+  .compare.wide th small, .compare.wide td small { display: block; font-weight: 400; font-size: 12px; color: var(--muted); text-transform: none; letter-spacing: 0; }
+  .compare.wide tr.grp td { text-align: left; background: var(--soft); color: var(--soft-ink); font-weight: 700; font-size: 12.5px; text-transform: uppercase; letter-spacing: .6px; }
+  .compare.wide tr.grp td small { display: inline; margin-left: 6px; }
+  .compare .no { color: var(--muted); opacity: .6; } .compare .plan { color: #B7791F; font-weight: 600; font-size: 12.5px; }
+  @media (prefers-color-scheme: dark) { .compare .plan { color: #F0C35A; } }
+  .legend { max-width: 980px; margin: 10px auto 0; padding: 0 22px; color: var(--muted); font-size: 13px; display: flex; gap: 18px; flex-wrap: wrap; }
   .lead { margin: -10px 0 18px; color: var(--muted); font-size: 15px; }
   .yaml { margin: 0 0 24px; background: #0e1014; color: #D7E3F4; border-radius: 14px; padding: 18px 20px; font-size: 13.5px; line-height: 1.55;
     overflow-x: auto; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
@@ -370,11 +383,11 @@
 <body data-product="hacs">
 
 <nav>
-  <div class="brand"><img src="../assets/icon.png" alt="">HA SmartLists</div>
+  <div class="brand"><img src="../assets/icon.png" alt="">SmartLists</div>
   <div class="switch" role="tablist" aria-label="Choisir le produit">
     <button type="button" role="tab" data-product="hacs" aria-selected="true">🛒 SmartLists</button>
-    <button type="button" role="tab" data-product="card" aria-selected="false">🏷️ Discounts Card<small>NOUVEAU</small></button>
-    <button type="button" role="tab" data-product="app" aria-selected="false">📱 App</button>
+    <button type="button" role="tab" data-product="card" aria-selected="false">🏷️ SmartDiscounts<small>NOUVEAU</small></button>
+    <button type="button" role="tab" data-product="app" aria-selected="false">📱 SmartLists Go</button>
   </div>
   <div class="right">
     <select class="lang" aria-label="Langue">
@@ -408,6 +421,14 @@
   </header>
 
   <main>
+    <div class="need">
+      <h2>Ce qu’il te faut</h2>
+      <ul>
+        <li>Home Assistant 2025.3 ou plus récent</li>
+        <li>HACS</li>
+        <li class="opt">Pour les promos en plus : SmartDiscounts et des capteurs de promos</li>
+      </ul>
+    </div>
     <div class="showcase">
       <div class="screen"><img src="../assets/demo.gif" alt="Saisie de « Milk 2 l 1,19€ @REWE *Anna #organic » : aperçu avec quantité, prix, badges et catégorie, puis l'article arrive dans Frais" loading="lazy"></div>
       <div>
@@ -614,7 +635,7 @@
       <div class="icon-big">🏷️</div>
       <div>
         <h3>Avec la carte des promos</h3>
-        <p>La SmartDiscounts Card est un projet à part et s’installe séparément via HACS. Elle montre quels articles de ta liste sont en promo en ce moment – et où ils sont le moins chers.</p>
+        <p>La SmartDiscounts est un projet à part et s’installe séparément via HACS. Elle montre quels articles de ta liste sont en promo en ce moment – et où ils sont le moins chers.</p>
         <p class="cross" style="text-align:left;margin-top:8px"><a data-goto="card">Vers la carte des promos →</a></p>
       </div>
     </div>
@@ -666,18 +687,18 @@
         <a class="download-btn ghost" href="https://github.com/m3m0rex/ha_smartlists/wiki">📖 Documentation</a>
       </div>
     </div>
-    <p class="cross">Plutôt une app dédiée avec listes locales et widget ? <a data-goto="app">Vers l’app →</a></p>
+    <p class="cross">Plutôt une app dédiée avec listes locales et widget ? <a data-goto="app">Vers SmartLists Go →</a></p>
   </main>
 </section>
 
 <!-- =====================================================================
-     SmartDiscounts Card (Angebots-Karte)
+     SmartDiscounts (Angebots-Karte)
      ===================================================================== -->
-<section class="panel card" aria-label="SmartDiscounts Card">
+<section class="panel card" aria-label="SmartDiscounts">
   <header>
     <div class="logo">🏷️</div>
     <div class="kicker">Carte de tableau de bord · fonctionne aussi sans SmartLists</div>
-    <h1>SmartDiscounts Card</h1>
+    <h1>SmartDiscounts</h1>
     <p class="tagline">Les promos de tes supermarchés, comparées à ta liste de courses : pour chaque article, tu vois où il est en promo – et où il est le moins cher.</p>
     <div class="btn-row">
       <a class="download-btn" href="https://my.home-assistant.io/redirect/hacs_repository/?owner=m3m0rex&amp;repository=ha_smartdiscounts-card&amp;category=plugin">⬇️ Ouvrir dans HACS</a>
@@ -687,6 +708,15 @@
   </header>
 
   <main>
+    <div class="need">
+      <h2>Ce qu’il te faut</h2>
+      <ul>
+        <li>Home Assistant 2024.9 ou plus récent</li>
+        <li>HACS</li>
+        <li>Au moins un capteur de promos, p. ex. des intégrations de FaserF</li>
+        <li class="opt">SmartLists n’est pas nécessaire – avec SmartLists, la promo apparaît en badge sur l’article</li>
+      </ul>
+    </div>
     <h2 class="section-title">Ce que fait la carte</h2>
     <div class="grid">
       <div class="feature">
@@ -772,7 +802,7 @@ all_view: list</pre>
       <a class="rec" href="https://github.com/FaserF/ha-norma"><span class="rdot">🔴</span><span><b>Norma <code>ha-norma</code></b><span class="rp">Promos de la semaine et prospectus.</span></span></a>
       <a class="rec soon" href="https://github.com/FaserF/ha-penny"><span class="rdot">🔴</span><span><b>PENNY <code>ha-penny</code></b><span class="rp">Tickets de caisse numériques (eBons) et points de fidélité.</span><span class="rp">Pas encore de promos de prospectus.</span></span></a>
     </div>
-    <p class="lead" style="margin-top:14px">HA SmartLists et la Discounts Card sont des projets indépendants, sans lien avec FaserF ni avec les magasins cités.</p>
+    <p class="lead" style="margin-top:14px">SmartLists et la SmartDiscounts sont des projets indépendants, sans lien avec FaserF ni avec les magasins cités.</p>
 
     <h2 class="section-title">Installation</h2>
     <div class="steps">
@@ -789,7 +819,7 @@ all_view: list</pre>
       <div class="step">
         <div class="num">3</div>
         <h4>Ajouter la carte</h4>
-        <p>Choisis « SmartDiscounts Card » dans le tableau de bord et indique la liste de courses.</p>
+        <p>Choisis « SmartDiscounts » dans le tableau de bord et indique la liste de courses.</p>
       </div>
     </div>
 
@@ -799,6 +829,14 @@ all_view: list</pre>
       <div class="btn-row">
         <a class="download-btn" href="https://my.home-assistant.io/redirect/hacs_repository/?owner=m3m0rex&amp;repository=ha_smartdiscounts-card&amp;category=plugin">⬇️ Ouvrir dans HACS</a>
         <a class="download-btn ghost" href="https://github.com/m3m0rex/ha_smartdiscounts-card">📖 Documentation</a>
+      </div>
+    </div>
+    <div class="callout">
+      <div class="icon-big">📱</div>
+      <div>
+        <h3>Dans SmartLists Go</h3>
+        <p>L’app affiche les promos dans sa propre vue. Pour cela il lui faut SmartLists, pas cette carte.</p>
+        <p class="cross" style="text-align:left;margin-top:8px"><a data-goto="app">Vers SmartLists Go →</a></p>
       </div>
     </div>
     <p class="cross">Toute la liste de courses dans Home Assistant ? <a data-goto="hacs">Vers SmartLists →</a></p>
@@ -812,7 +850,7 @@ all_view: list</pre>
   <header>
     <div class="hero">
       <div>
-        <div class="kicker">App pour Android · iPhone prévu</div>
+        <div class="kicker">SmartLists Go · app pour Android · iPhone prévu</div>
         <h1>Ta liste de courses. Sur ton smartphone, chez toi.</h1>
         <p class="tagline">Listes, tâches et notes – uniquement sur l’appareil ou reliées à ton Home Assistant. Sans compte, sans serveur tiers.</p>
         <div class="soon" id="download">🚧 En cours – Android d’abord, iPhone prévu</div>
@@ -833,12 +871,21 @@ all_view: list</pre>
   </header>
 
   <main>
-    <h2 class="section-title">Deux façons de l’utiliser</h2>
-    <p class="lead">Tu choisis au premier lancement – et tu peux changer à tout moment.</p>
+    <div class="need">
+      <h2>Ce qu’il te faut</h2>
+      <ul>
+        <li>Juste un smartphone – pas de compte, pas de Home Assistant</li>
+        <li class="opt">Pour des listes partagées : Home Assistant</li>
+        <li class="opt">Pour les catégories du foyer, les droits et les promos : SmartLists en plus</li>
+        <li class="opt">Pour les promos aussi : des capteurs de promos. L’app n’a pas besoin de SmartDiscounts.</li>
+      </ul>
+    </div>
+    <h2 class="section-title">Trois niveaux</h2>
+    <p class="lead">Commence où tu veux – et passe au niveau suivant quand tu veux.</p>
     <div class="grid">
       <div class="feature">
         <div class="icon">📱</div>
-        <h3>Uniquement sur ton appareil</h3>
+        <h3>1 · Uniquement sur ton appareil</h3>
         <p>Pour qui veut simplement une bonne app de listes.</p>
         <ul class="checks">
           <li>Sans compte, sans connexion</li>
@@ -848,15 +895,24 @@ all_view: list</pre>
       </div>
       <div class="feature">
         <div class="icon">🏠</div>
-        <h3>Avec Home Assistant</h3>
-        <p>Pour qui veut partager ses listes et voir les promos.</p>
+        <h3>2 · Avec Home Assistant</h3>
+        <p>Pour qui veut partager ses listes.</p>
         <ul class="checks">
           <li>Les mêmes listes sur tous les appareils de la famille</li>
-          <li>Promos et comparaison des prix de tes magasins</li>
+          <li>Listes de l’appareil et de Home Assistant dans une seule vue</li>
           <li>Les modifications hors ligne sont synchronisées plus tard</li>
         </ul>
       </div>
-    </div>
+      <div class="feature">
+        <div class="icon">🛒</div>
+        <h3>3 · Avec SmartLists</h3>
+        <p>Pour qui veut tout. SmartLists tourne dans ton Home Assistant.</p>
+        <ul class="checks">
+          <li>Catégories et suggestions de tout le foyer</li>
+          <li>Listes par personne, avec droits</li>
+          <li>Promos, comparaison des prix et liste de suivi</li>
+        </ul>
+      </div>
     </div>
 
     <h2 class="section-title">Ce que fait l’app</h2>
@@ -944,25 +1000,45 @@ all_view: list</pre>
   </main>
 </section>
 
-<h2 class="section-title" style="max-width:980px;margin:8px auto 6px;padding:0 22px">Trois briques</h2>
-<p class="lead" style="max-width:980px;margin:0 auto 14px;padding:0 22px">À utiliser seules ou ensemble.</p>
+<h2 class="section-title" style="max-width:980px;margin:8px auto 6px;padding:0 22px">De quoi ai-je besoin pour quoi ?</h2>
+<p class="lead" style="max-width:980px;margin:0 auto 14px;padding:0 22px">Chaque ligne une fonction, chaque colonne une façon d’utiliser SmartLists. À gauche Home Assistant, à droite l’app.</p>
 <div style="max-width:980px;margin:0 auto;padding:0 20px;overflow-x:auto">
-  <table class="compare three">
-    <tr><th></th><th>🛒 SmartLists</th><th>🏷️ Discounts Card</th><th class="soon-col">📱 App</th></tr>
-    <tr><td>Ce que c'est</td><td>Intégration, carte et page dédiée</td><td>Carte de tableau de bord</td><td class="soon-col">Appli (en cours)</td></tr>
-    <tr><td>Fonctionne dans</td><td>Home Assistant</td><td>Home Assistant</td><td class="soon-col">Android (iPhone prévu)</td></tr>
-    <tr><td>Nécessite SmartLists</td><td>–</td><td><b class="yes">non</b></td><td class="soon-col">non</td></tr>
-    <tr><td>Catégories, badges, mode courses</td><td><b class="yes">✓</b></td><td>–</td><td class="soon-col">✓</td></tr>
-    <tr><td>Promos des supermarchés</td><td><b class="yes">✓ (avec la Discounts Card)</b></td><td><b class="yes">✓</b></td><td class="soon-col">–</td></tr>
-    <tr><td>Partage par lien</td><td><b class="yes">✓</b></td><td>–</td><td class="soon-col">–</td></tr>
-    <tr><td>licence</td><td>MIT, gratuit</td><td>MIT, gratuit</td><td class="soon-col">propriétaire</td></tr>
+  <table class="compare wide">
+    <tr><th></th><th>🛒 SmartLists<small>dans Home Assistant</small></th><th>🏷️ SmartDiscounts<small>dans Home Assistant, sans SmartLists</small></th><th>📱 SmartLists Go<small>uniquement sur l’appareil</small></th><th>📱 SmartLists Go<small>avec Home Assistant</small></th><th>📱 SmartLists Go<small>avec SmartLists</small></th></tr>
+    <tr class="grp"><td colspan="6">Listes</td></tr>
+    <tr><td>Créer, cocher et trier des listes</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td></tr>
+    <tr><td>Raccourcis dans le texte<small>2x · 1 kg · 1,19 € · @magasin · *personne · #mot-clé</small></td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td></tr>
+    <tr><td>Catégories comme en magasin, suggestions</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><b class="yes">✓</b><small>simple, sur l’appareil</small></td><td><b class="yes">✓</b><small>simple, sur l’appareil</small></td><td><b class="yes">✓</b><small>apprises pour le foyer</small></td></tr>
+    <tr><td>Listes combinées</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b><small>appareil et Home Assistant mélangés</small></td><td><b class="yes">✓</b><small>y compris celles de SmartLists</small></td></tr>
+    <tr><td>Mode courses</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td></tr>
+    <tr><td>Scanner les codes-barres</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><span class="plan">prévu</span></td><td><span class="plan">prévu</span></td><td><span class="plan">prévu</span></td></tr>
+    <tr class="grp"><td colspan="6">Partage</td></tr>
+    <tr><td>La même liste sur plusieurs appareils</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td></tr>
+    <tr><td>Listes par personne, droits</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td></tr>
+    <tr><td>Partage par lien, sans compte</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><span class="no">–</span></td></tr>
+    <tr class="grp"><td colspan="6">Promos<small>nécessitent toujours des capteurs de promos dans Home Assistant</small></td></tr>
+    <tr><td>Voir et rechercher les promos</td><td><b class="yes">✓</b><small>avec SmartDiscounts</small></td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td></tr>
+    <tr><td>Rapprochement avec la liste, comparaison des prix</td><td><b class="yes">✓</b><small>indication sur l’article</small></td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td></tr>
+    <tr><td>Promo en badge sur l’article</td><td><b class="yes">✓</b></td><td><span class="no">–</span><small>ligne lisible dans la description</small></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td></tr>
+    <tr><td>Liste de suivi et notifications</td><td><b class="yes">✓</b><small>pour le foyer</small></td><td><b class="yes">✓</b><small>par appareil ou liste de tâches</small></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><b class="yes">✓</b><small>pour le foyer</small></td></tr>
+    <tr class="grp"><td colspan="6">Notes et sécurité</td></tr>
+    <tr><td>Notes</td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td></tr>
+    <tr><td>Verrouillage de l’app, notes chiffrées</td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><span class="plan">prévu</span></td><td><span class="plan">prévu</span></td><td><span class="plan">prévu</span></td></tr>
+    <tr><td>Sauvegarde</td><td><b class="yes">✓</b><small>avec Home Assistant</small></td><td><span class="no">–</span></td><td><b class="yes">✓</b><small>en fichier</small></td><td><b class="yes">✓</b><small>en fichier</small></td><td><b class="yes">✓</b><small>en fichier ou dans Home Assistant</small></td></tr>
+    <tr class="grp"><td colspan="6">Divers</td></tr>
+    <tr><td>Utilisable hors ligne</td><td><b class="yes">✓</b><small>les modifications sont envoyées plus tard</small></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td></tr>
+    <tr><td>Widget sur l’écran d’accueil</td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><span class="plan">prévu</span></td><td><span class="plan">prévu</span></td><td><span class="plan">prévu</span></td></tr>
+    <tr><td>Commande vocale, automatisations</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><span class="no">–</span></td></tr>
+    <tr><td>Prix et licence</td><td>gratuit, MIT</td><td>gratuit, MIT</td><td colspan="3">gratuit, code non public</td></tr>
   </table>
 </div>
+<p class="legend"><span>✓ disponible</span><span>prévu : arrive avec l’app</span><span>– n’existe pas là</span></p>
 
 <footer>
-  HA SmartLists — listes de courses, tâches et notes avec Home Assistant.<br>
+  SmartLists — listes de courses, tâches et notes avec Home Assistant.<br>
+  Ce n’est pas un produit officiel de Home Assistant ni de l’Open Home Foundation.<br>
   <span class="only-hacs">Intégration : <a href="https://github.com/m3m0rex/ha_smartlists">GitHub</a> · <a href="https://github.com/m3m0rex/ha_smartlists/wiki">Wiki</a> · <a href="https://github.com/m3m0rex/ha_smartlists/blob/main/LICENSE">Licence MIT</a></span>
-  <span class="only-card">SmartDiscounts Card : <a href="https://github.com/m3m0rex/ha_smartdiscounts-card">GitHub</a> · MIT</span>
+  <span class="only-card">SmartDiscounts : <a href="https://github.com/m3m0rex/ha_smartdiscounts-card">GitHub</a> · MIT</span>
   <span class="only-app">App : propriétaire, usage de l'APK officiel à titre privé – voir <a href="../LICENSE.md">licence</a>.</span>
 </footer>
 
