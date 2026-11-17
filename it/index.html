@@ -355,7 +355,7 @@
   <div class="switch" role="tablist" aria-label="Scegli il prodotto">
     <button type="button" role="tab" data-product="hacs" aria-selected="true">🛒 SmartLists</button>
     <button type="button" role="tab" data-product="card" aria-selected="false">🏷️ Discounts Card<small>NUOVO</small></button>
-    <button type="button" role="tab" data-product="app" aria-selected="false">🤖 App Android</button>
+    <button type="button" role="tab" data-product="app" aria-selected="false">📱 App</button>
   </div>
   <div class="right">
     <select class="lang" aria-label="Lingua">
@@ -647,7 +647,7 @@
         <a class="download-btn ghost" href="https://github.com/m3m0rex/ha_smartlists/wiki">📖 Documentazione</a>
       </div>
     </div>
-    <p class="cross">Preferisci un'app dedicata con liste locali e widget? <a data-goto="app">All'app Android →</a></p>
+    <p class="cross">Preferisci un'app dedicata con liste locali e widget? <a data-goto="app">All’app →</a></p>
   </main>
 </section>
 
@@ -787,148 +787,114 @@ all_view: list</pre>
 </section>
 
 <!-- =====================================================================
-     Android-App (Inhalt wie bisher)
+     App
      ===================================================================== -->
-<section class="panel app" aria-label="App Android">
+<section class="panel app" aria-label="App">
   <header>
     <div class="logo">📋</div>
-    <div class="kicker">App per Android</div>
+    <div class="kicker">App per Android · iPhone previsto</div>
     <h1>HA SmartLists</h1>
-    <p class="tagline">Liste della spesa, cose da fare e note – in locale sul dispositivo, collegate a Home Assistant se vuoi. Senza backend proprio.</p>
-    <!-- noch nicht veröffentlicht: Knopf ausgegraut. Zum Freischalten wieder als Link auf download/ha-smartlists.apk -->
-    <span class="download-btn disabled" id="download" aria-disabled="true">⬇️ Scarica l'APK</span>
-    <div class="soon">🚧 Non ancora pubblicata – presto disponibile</div>
-    <div class="download-sub">Android 13 o successivo · installazione diretta, senza Play Store</div>
+    <p class="tagline">La tua lista della spesa. Sul tuo smartphone, a casa tua. Liste, cose da fare e note – solo sul dispositivo o collegate al tuo Home Assistant. Senza account, senza server di terzi.</p>
+    <div class="soon" id="download">🚧 In lavorazione – prima Android, iPhone previsto</div>
+    <div class="download-sub">Gratis · senza pubblicità · più avanti su Google Play e come APK da questa pagina</div>
   </header>
 
   <main>
-    <div class="intro-card">
-      HA SmartLists è un'app Android nativa per liste della spesa, cose da fare e note. Le liste restano tutte sul dispositivo o si collegano a Home Assistant; si possono importare più liste di Home Assistant e unirle a piacere. Tutto passa direttamente tra app e Home Assistant – nessun servizio cloud né server intermedio.
-    </div>
-
-    <h2 class="section-title">Liste e organizzazione</h2>
-    <div class="grid">
-      <div class="feature">
-        <div class="icon">📝</div>
-        <h3>Liste locali</h3>
-        <p>Crea, rinomina, elimina e riempi liste della spesa o di cose da fare completamente offline – senza Home Assistant.</p>
-      </div>
-      <div class="feature">
-        <div class="icon">🏠</div>
-        <h3>Collega Home Assistant</h3>
-        <p>Importa liste esistenti da Home Assistant e gestiscile nell'app – le modifiche si sincronizzano in entrambe le direzioni.</p>
-      </div>
-      <div class="feature">
-        <div class="icon">🔀</div>
-        <h3>Liste unite con modalità conflitti</h3>
-        <p>Unisci più liste locali e di Home Assistant in una vista. Per ogni lista unita: sincronizzazione bidirezionale, Home Assistant prioritario o solo locale.</p>
-      </div>
-      <div class="feature star">
-        <div class="icon">⭐</div>
-        <h3>Preferiti, rinomina, elimina</h3>
-        <p>Una pressione lunga su un articolo apre un menu per preferiti, rinomina, copia o elimina – i preferiti salgono in cima da soli.</p>
-      </div>
-      <div class="feature">
-        <div class="icon">🙈</div>
-        <h3>Nascondere liste</h3>
-        <p>Le liste che ora non servono si possono segnare come «invisibili». Restano salvate ma spariscono da panoramiche e selettori.</p>
-      </div>
-      <div class="feature">
-        <div class="icon">📥</div>
-        <h3>Importazione testo</h3>
-        <p>Trasferisci liste da altre app (ad es. checklist di ColorNote o CSV semplice) come articoli con copia e incolla.</p>
-      </div>
-    </div>
-
-    <h2 class="section-title">Note</h2>
-    <div class="grid">
-      <div class="feature">
-        <div class="icon">🗒️</div>
-        <h3>Area note dedicata</h3>
-        <p>Note con titolo e testo, separate dalle liste della spesa. Salvate in locale o sincronizzate con Home Assistant.</p>
-      </div>
-      <div class="feature">
-        <div class="icon">☁️</div>
-        <h3>Migrazione a Home Assistant</h3>
-        <p>Le liste di note locali si possono migrare a Home Assistant in qualsiasi momento, con tutto il contenuto.</p>
-      </div>
-      <div class="feature">
-        <div class="icon">🔍</div>
-        <h3>Lettura chiara, modifica semplice</h3>
-        <p>Una nota si apre prima in sola lettura a schermo intero con link cliccabili – un tocco sulla matita passa alla modifica.</p>
-      </div>
-    </div>
-
-    <h2 class="section-title">Widget e uso quotidiano</h2>
+    <h2 class="section-title">Due modi di usarla</h2>
+    <p class="lead">Decidi al primo avvio – e puoi cambiare quando vuoi.</p>
     <div class="grid">
       <div class="feature">
         <div class="icon">📱</div>
-        <h3>Widget della schermata Home</h3>
-        <p>Mostra una lista, lista unita o lista di note sulla schermata Home, spunta nel widget, colori e carattere personalizzabili.</p>
+        <h3>Solo sul tuo dispositivo</h3>
+        <p>Per chi vuole semplicemente una buona app di liste: niente account, niente accesso, funziona offline. Backup in un file, cifrato se vuoi.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🏠</div>
+        <h3>Con Home Assistant</h3>
+        <p>Per chi vuole condividere liste e vedere le offerte: le stesse liste su tutti i dispositivi della famiglia, offerte e confronto prezzi dai tuoi negozi. Le modifiche offline vengono sincronizzate dopo.</p>
+      </div>
+    </div>
+
+    <h2 class="section-title">Cosa fa l’app</h2>
+    <div class="grid">
+      <div class="feature">
+        <div class="icon">📝</div>
+        <h3>Liste come scrivi</h3>
+        <p>«2x latte 1 l @negozio» – l’app riconosce quantità, formato e negozio e ordina come in negozio.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🔀</div>
+        <h3>Liste combinate</h3>
+        <p>Più liste in un’unica vista – anche miste tra dispositivo e Home Assistant.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🏷️</div>
+        <h3>Offerte e confronto prezzi</h3>
+        <p>Cosa della tua lista è in offerta adesso e dove costa meno. Con Home Assistant.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🗒️</div>
+        <h3>Note</h3>
+        <p>Separate dalle liste, bloccate o cifrate se vuoi.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">📱</div>
+        <h3>Widget</h3>
+        <p>La lista nella schermata iniziale: vedere, spuntare, aggiungere.</p>
       </div>
       <div class="feature">
         <div class="icon">💾</div>
-        <h3>Backup e ripristino</h3>
-        <p>Liste locali, liste unite e impostazioni si salvano in Home Assistant a mano o in automatico, si gestiscono e si ripristinano per data.</p>
-      </div>
-      <div class="feature">
-        <div class="icon">🔄</div>
-        <h3>Stato sincronizzazione e registro</h3>
-        <p>Lo stato della connessione è sempre visibile. Una pagina di dettaglio mostra la coda delle modifiche in attesa e un registro delle ultime sincronizzazioni.</p>
+        <h3>Backup</h3>
+        <p>In un file o nel tuo Home Assistant – cifrato con password se vuoi.</p>
       </div>
     </div>
 
     <div class="callout">
-      <div class="icon-big">🧩</div>
+      <div class="icon-big">🧭</div>
       <div>
-        <h3>Insieme all'integrazione HACS</h3>
-        <p>Con l'integrazione SmartLists in Home Assistant l'app si abbina da sola: stessi badge, categorie e suggerimenti, liste combinate da Home Assistant e categorie memorizzate in comune. <a data-goto="hacs">Di più sull'integrazione →</a></p>
+        <h3>Prima prova, poi collega</h3>
+        <p>Inizia sul dispositivo. Se in seguito ti colleghi a Home Assistant, scegli tu quali liste e note traslocano. Il resto rimane sul tuo smartphone ed è invisibile a Home Assistant.</p>
       </div>
     </div>
     <div class="callout">
-      <div class="icon-big">👨‍👩‍👧‍👦</div>
+      <div class="icon-big">🧩</div>
       <div>
-        <h3>Perfetto per le famiglie</h3>
-        <p>Più persone usano le stesse liste di Home Assistant dai propri dispositivi. Tutti vedono cosa manca – senza messaggi avanti e indietro.</p>
+        <h3>Insieme a SmartLists in Home Assistant</h3>
+        <p>Con l’integrazione SmartLists l’app mostra le stesse categorie, badge e suggerimenti della scheda in Home Assistant.</p>
+        <p class="cross" style="text-align:left;margin-top:8px"><a data-goto="hacs">A SmartLists →</a></p>
       </div>
     </div>
     <div class="callout">
       <div class="icon-big">🔒</div>
       <div>
-        <h3>Privacy</h3>
-        <p>Le credenziali di Home Assistant sono salvate solo cifrate sul dispositivo. Nessun server esterno, niente pubblicità né tracciamento – la comunicazione va direttamente tra l'app e il tuo Home Assistant.</p>
+        <h3>Tutto resta da te</h3>
+        <p>Niente pubblicità, niente tracciamento, nessun server di terzi. L’app parla solo con il tuo Home Assistant – e solo se la colleghi. La ricerca online dei codici a barre è disattivata finché non la attivi.</p>
       </div>
     </div>
 
-    <h2 class="section-title">Come funziona</h2>
+    <h2 class="section-title">In tre passaggi</h2>
     <div class="steps">
       <div class="step">
         <div class="num">1</div>
-        <h4>Scarica l'APK</h4>
-        <p>Con il pulsante di download in alto. L'installazione da fonti sconosciute va consentita una volta.</p>
+        <h4>Installare</h4>
+        <p>Da Google Play o come APK da questa pagina – appena l’app sarà pubblicata.</p>
       </div>
       <div class="step">
         <div class="num">2</div>
-        <h4>Apri l'app</h4>
-        <p>Crea subito liste locali – oppure collega Home Assistant in Impostazioni → Connessione.</p>
+        <h4>Scegli il modo</h4>
+        <p>Solo sul dispositivo – oppure accedi al tuo Home Assistant come nel browser.</p>
       </div>
       <div class="step">
         <div class="num">3</div>
-        <h4>Inserisci un token di lunga durata</h4>
-        <p>Crealo in Home Assistant dal tuo profilo, poi incollalo nell'app in «Token integrazione».</p>
-      </div>
-      <div class="step">
-        <div class="num">4</div>
         <h4>Si parte</h4>
-        <p>Carica le liste, crea liste unite, configura il widget – fatto.</p>
+        <p>Scrivi il primo articolo. Widget e tutto il resto li imposti quando ti servono.</p>
       </div>
     </div>
 
     <div class="final-cta">
-      <h2>Pronto a iniziare?</h2>
-      <p>Gratis, senza login, senza cloud obbligatorio.</p>
-      <span class="download-btn disabled" aria-disabled="true">⬇️ Scarica l'APK</span>
-      <div class="soon">🚧 Non ancora pubblicata – presto disponibile</div>
+      <h2>Ancora un po’ di pazienza</h2>
+      <p>L’app è in fase di ricostruzione. Gratis, senza login, senza obbligo di cloud.</p>
+      <div class="soon">🚧 In lavorazione – prima Android, iPhone previsto</div>
     </div>
     <p class="cross">Tutto direttamente in Home Assistant, senza app? <a data-goto="hacs">All'integrazione HACS →</a></p>
   </main>
@@ -938,9 +904,9 @@ all_view: list</pre>
 <p class="lead" style="max-width:980px;margin:0 auto 14px;padding:0 22px">Da usare da soli o insieme.</p>
 <div style="max-width:980px;margin:0 auto;padding:0 20px;overflow-x:auto">
   <table class="compare three">
-    <tr><th></th><th>🛒 SmartLists</th><th>🏷️ Discounts Card</th><th class="soon-col">🤖 App Android</th></tr>
-    <tr><td>Che cos'è</td><td>Integrazione, scheda e pagina dedicata</td><td>Scheda dashboard</td><td class="soon-col">App (presto)</td></tr>
-    <tr><td>Funziona in</td><td>Home Assistant</td><td>Home Assistant</td><td class="soon-col">Android</td></tr>
+    <tr><th></th><th>🛒 SmartLists</th><th>🏷️ Discounts Card</th><th class="soon-col">📱 App</th></tr>
+    <tr><td>Che cos'è</td><td>Integrazione, scheda e pagina dedicata</td><td>Scheda dashboard</td><td class="soon-col">App (in lavorazione)</td></tr>
+    <tr><td>Funziona in</td><td>Home Assistant</td><td>Home Assistant</td><td class="soon-col">Android (iPhone previsto)</td></tr>
     <tr><td>Richiede SmartLists</td><td>–</td><td><b class="yes">no</b></td><td class="soon-col">no</td></tr>
     <tr><td>Categorie, badge, modalità spesa</td><td><b class="yes">✓</b></td><td>–</td><td class="soon-col">✓</td></tr>
     <tr><td>Offerte dei supermercati</td><td><b class="yes">✓ (con la Discounts Card)</b></td><td><b class="yes">✓</b></td><td class="soon-col">–</td></tr>
