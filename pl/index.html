@@ -91,6 +91,8 @@
     display: flex; align-items: center; justify-content: space-between; gap: 12px;
   }
   nav .brand { font-weight: 800; font-size: 17px; display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+  nav a.brand { color: inherit; text-decoration: none; }
+  img.pi { width: 18px; height: 18px; border-radius: 5px; background: #fff; padding: 1px; vertical-align: -4px; margin-right: 6px; }
   nav .brand img { width: 26px; height: 26px; border-radius: 7px; background: #fff; padding: 2px; }
   .switch {
     display: inline-flex; background: rgba(255,255,255,0.14); border-radius: 999px; padding: 4px;
@@ -384,9 +386,9 @@
 <body data-product="hacs">
 
 <nav>
-  <div class="brand"><img src="../assets/icon.png" alt="">SmartLists</div>
+  <a class="brand" href="./"><img src="../assets/icon.png" alt="">SmartLists</a>
   <div class="switch" role="tablist" aria-label="Wybierz produkt">
-    <button type="button" role="tab" data-product="hacs" aria-selected="true">🛒 SmartLists</button>
+    <button type="button" role="tab" data-product="hacs" aria-selected="true"><img class="pi" src="../assets/icon.png" alt="">SmartLists</button>
     <button type="button" role="tab" data-product="card" aria-selected="false">🏷️ SmartDiscounts<small>NOWE</small></button>
     <button type="button" role="tab" data-product="app" aria-selected="false">📱 SmartLists Go</button>
   </div>
@@ -1005,7 +1007,7 @@ all_view: list</pre>
 <p class="lead" style="max-width:980px;margin:0 auto 14px;padding:0 22px">Każdy wiersz to funkcja, każda kolumna to sposób używania SmartLists. Po lewej Home Assistant, po prawej aplikacja.</p>
 <div style="max-width:980px;margin:0 auto;padding:0 20px;overflow-x:auto">
   <table class="compare wide">
-    <tr><th></th><th>🛒 SmartLists<small>w Home Assistant</small></th><th>🏷️ SmartDiscounts<small>w Home Assistant, bez SmartLists</small></th><th>📱 SmartLists Go<small>tylko na urządzeniu</small></th><th>📱 SmartLists Go<small>z Home Assistant</small></th><th>📱 SmartLists Go<small>ze SmartLists</small></th></tr>
+    <tr><th></th><th><img class="pi" src="../assets/icon.png" alt="">SmartLists<small>w Home Assistant</small></th><th>🏷️ SmartDiscounts<small>w Home Assistant, bez SmartLists</small></th><th>📱 SmartLists Go<small>tylko na urządzeniu</small></th><th>📱 SmartLists Go<small>z Home Assistant</small></th><th>📱 SmartLists Go<small>ze SmartLists</small></th></tr>
     <tr class="grp"><td colspan="6">Listy</td></tr>
     <tr><td>Tworzenie, odhaczanie i sortowanie list</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td></tr>
     <tr><td>Skróty w tekście<small>2x · 1 kg · 1,19 € · @sklep · *osoba · #etykieta</small></td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td></tr>
