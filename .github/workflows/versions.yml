@@ -1,0 +1,32 @@
+# Keeps downloads/versions.json up to date: the latest stable release of SmartLists and SmartDiscounts.
+# Runs once a day and on demand (Actions → "Update version numbers" → Run workflow).
+name: Update version numbers
+
+on:
+  schedule:
+    - cron: "17 5 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Read the latest stable releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 .github/scripts/versions.py
+      - name: Commit if something changed
+        run: |
+          if git diff --quiet -- downloads/versions.json; then
+            echo "Nothing changed."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add downloads/versions.json
+          git commit -m "Version numbers updated"
+          git push

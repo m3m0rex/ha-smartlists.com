@@ -1,0 +1,57 @@
+# Publishes a version of SmartLists Go for the update check of the app and for the website:
+# fills downloads/version.json. Start it by hand: Actions → "Publish app version" → Run workflow.
+# The APK must already be reachable at the given https address (e.g. in downloads/ of this repository
+# or as an asset of a GitHub release).
+name: Publish app version
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version of the APK, e.g. 0.2.0 (as in pubspec.yaml)"
+        required: true
+      apk:
+        description: "https address of the APK file"
+        required: true
+      notes_de:
+        description: "What is new (German, one or two sentences)"
+        required: false
+        default: ""
+      notes_en:
+        description: "What is new (English, one or two sentences)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Download the APK and write version.json
+        env:
+          VERSION: ${{ inputs.version }}
+          APK: ${{ inputs.apk }}
+          NOTES_DE: ${{ inputs.notes_de }}
+          NOTES_EN: ${{ inputs.notes_en }}
+        run: |
+          case "$APK" in https://*) ;; *) echo "The address must start with https://"; exit 1;; esac
+          curl -fsSL "$APK" -o /tmp/app.apk
+          SHA=$(sha256sum /tmp/app.apk | cut -d' ' -f1)
+          SHA="$SHA" python3 - <<'PY'
+          import datetime, json, os, pathlib
+          data = {"app": "SmartLists Go", "version": os.environ["VERSION"].strip().lstrip("v"), "apk": os.environ["APK"].strip(),
+                  "sha256": os.environ["SHA"], "released": datetime.date.today().isoformat(),
+                  "notes": {"de": os.environ["NOTES_DE"].strip(), "en": os.environ["NOTES_EN"].strip()}}
+          pathlib.Path("downloads/version.json").write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+          print(json.dumps(data, indent=2, ensure_ascii=False))
+          PY
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add downloads/version.json
+          git diff --cached --quiet || git commit -m "SmartLists Go ${{ inputs.version }}"
+          git push

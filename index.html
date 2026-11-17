@@ -155,6 +155,8 @@
   .soon { margin: 12px auto 0; display: table; font-size: 13.5px; font-weight: 700; color: #fff;
     background: rgba(255,255,255,0.16); border-radius: 999px; padding: 4px 12px; }
   .download-sub { margin-top: 14px; font-size: 13px; color: #BFD7F5; }
+  /* aktuelle stabile Version – kommt aus downloads/versions.json bzw. version.json, die ein Workflow pflegt */
+  .ver { margin-top: 10px; font-size: 13px; } .ver a { display: inline-block; padding: 4px 12px; border-radius: 999px; background: rgba(255,255,255,.14); color: #fff; text-decoration: none; } .ver a:hover { background: rgba(255,255,255,.24); } .ver b { font-weight: 800; }
 
   main { max-width: 980px; margin: -48px auto 0; padding: 0 20px 64px; }
   .intro-card {
@@ -450,6 +452,7 @@
       <a class="download-btn ghost" href="https://github.com/m3m0rex/ha_smartlists">GitHub &amp; Doku</a>
     </div>
     <div class="download-sub">Kostenlos · Open Source (MIT) · Home Assistant 2025.3 oder neuer · 6 Sprachen</div>
+    <div class="ver" data-ver="smartlists" hidden><a href="#" rel="noopener">Aktuelle Version <b></b></a></div>
   </header>
 
   <main>
@@ -737,6 +740,7 @@
       <a class="download-btn ghost" href="https://github.com/m3m0rex/ha_smartdiscounts-card">GitHub &amp; Doku</a>
     </div>
     <div class="download-sub">Kostenlos · Open Source (MIT) · braucht nur Angebots-Sensoren · läuft mit und ohne SmartLists</div>
+    <div class="ver" data-ver="smartdiscounts" hidden><a href="#" rel="noopener">Aktuelle Version <b></b></a></div>
   </header>
 
   <main>
@@ -887,6 +891,7 @@ all_view: list</pre>
         <p class="tagline">Listen, To-dos und Notizen – nur auf dem Gerät oder verbunden mit deinem Home Assistant. Ohne Konto, ohne fremden Server.</p>
         <div class="soon" id="download">🚧 In Arbeit – Android zuerst, iPhone in Planung</div>
         <div class="download-sub">Kostenlos · ohne Werbung · später bei Google Play und als APK von dieser Seite</div>
+        <div class="ver" data-ver="app" hidden><a href="#" rel="noopener">Aktuelle Version <b></b></a></div>
       </div>
       <div class="shot ba" style="--p:50%"><img src="assets/app/ha_start_dark.png" alt="SmartLists Go" width="412" height="892"><img class="top" src="assets/app/ha_start.png" alt="" width="412" height="892"><span class="bar"></span><input type="range" min="0" max="100" value="50" aria-label="Hell / Dunkel"></div>
     </div>
@@ -1263,6 +1268,22 @@ all_view: list</pre>
     });
     var h = location.hash.replace("#", "");
     show(h === "download" ? "app" : h, false);
+  })();
+  // Aktuelle Versionen eintragen (eigene Dateien dieser Webseite, kein fremder Dienst)
+  (function () {
+    function show(key, version, url) {
+      if (!version) return;
+      document.querySelectorAll('.ver[data-ver="' + key + '"]').forEach(function (box) {
+        box.querySelector("b").textContent = version;
+        var a = box.querySelector("a");
+        if (url && /^https:\/\//.test(url)) a.href = url; else a.removeAttribute("href");
+        box.hidden = false;
+      });
+    }
+    fetch("/downloads/versions.json").then(function (r) { return r.ok ? r.json() : {}; }).then(function (v) {
+      ["smartlists", "smartdiscounts"].forEach(function (k) { if (v[k]) show(k, v[k].version, v[k].url); });
+    }).catch(function () {});
+    fetch("/downloads/version.json").then(function (r) { return r.ok ? r.json() : {}; }).then(function (v) { show("app", v.version, v.apk); }).catch(function () {});
   })();
   // Bilder der App: Schieber zwischen hell und dunkel
   document.querySelectorAll(".shot.ba input").forEach(function (i) {
