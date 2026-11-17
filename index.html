@@ -337,6 +337,7 @@
   .shot .bar::after { content: "‹ ›"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 36px; height: 36px; border-radius: 50%; background: #fff; color: #1565C0; font-weight: 800; font-size: 13px; display: grid; place-items: center; box-shadow: 0 2px 8px rgba(0,0,0,.4); }
   .shot input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; touch-action: pan-y; }
   .shots { display: flex; gap: 28px; justify-content: center; flex-wrap: wrap; margin: 4px 0 30px; }
+  .shots.four { gap: 20px; } .shots.four .shot { width: 205px; border-radius: 26px; border-width: 5px; } .shots.four figcaption { max-width: 205px; }
   .shots figure { margin: 0; text-align: center; } .shots figcaption { margin-top: 10px; color: var(--muted); font-size: 14px; font-weight: 600; }
   @media (max-width: 760px) { .shot { margin: 0 auto; } }
   .checks { list-style: none; margin: 10px 0 0; padding: 0; }
@@ -659,11 +660,12 @@
     </div>
 
     <h2 class="section-title">So sieht es aus</h2>
-    <div class="gallery">
-      <figure class="shot"><img src="assets/hero.svg" alt="SmartLists-Seite mit kombinierter Liste, Kategorien, Badges und Preisen" loading="lazy"><figcaption>Seite „SmartLists“ – kombinierte Liste mit Kategorien, Badges und Preisen.</figcaption></figure>
-      <figure class="shot"><img src="assets/shopping-mode.svg" alt="Einkaufsmodus am Gerät" loading="lazy"><figcaption>Einkaufsmodus: große Zeilen, Markt-Leiste.</figcaption></figure>
-      <figure class="shot"><img src="assets/share.svg" alt="Teilen-Fenster mit QR-Code" loading="lazy"><figcaption>Teilen per Link und QR-Code – nur diese Liste, befristet.</figcaption></figure>
-      <figure class="shot"><img src="assets/settings.svg" alt="Einstellungen mit Bereichen" loading="lazy"><figcaption>Einstellungen an einem Ort – für mich, für alle, je Liste.</figcaption></figure>
+    <p class="lead">Echte Bilder der Karte mit Beispieldaten. Zieh den Schieber nach links oder rechts: links hell, rechts dunkel.</p>
+    <div class="shots four">
+      <figure><div class="shot ba" style="--p:50%"><img src="assets/card/card_list_dark.png" alt="SmartLists" width="412" height="892" loading="lazy"><img class="top" src="assets/card/card_list.png" alt="" width="412" height="892" loading="lazy"><span class="bar"></span><input type="range" min="0" max="100" value="50" aria-label="Hell / Dunkel"></div><figcaption>Liste mit Kategorien und Fälligem</figcaption></figure>
+      <figure><div class="shot ba" style="--p:50%"><img src="assets/card/card_shop_dark.png" alt="SmartLists" width="412" height="892" loading="lazy"><img class="top" src="assets/card/card_shop.png" alt="" width="412" height="892" loading="lazy"><span class="bar"></span><input type="range" min="0" max="100" value="50" aria-label="Hell / Dunkel"></div><figcaption>Einkaufsmodus</figcaption></figure>
+      <figure><div class="shot ba" style="--p:50%"><img src="assets/card/card_due_dark.png" alt="SmartLists" width="412" height="892" loading="lazy"><img class="top" src="assets/card/card_due.png" alt="" width="412" height="892" loading="lazy"><span class="bar"></span><input type="range" min="0" max="100" value="50" aria-label="Hell / Dunkel"></div><figcaption>Fällig am, Wiederholen, Kalender</figcaption></figure>
+      <figure><div class="shot ba" style="--p:50%"><img src="assets/card/card_share_dark.png" alt="SmartLists" width="412" height="892" loading="lazy"><img class="top" src="assets/card/card_share.png" alt="" width="412" height="892" loading="lazy"><span class="bar"></span><input type="range" min="0" max="100" value="50" aria-label="Hell / Dunkel"></div><figcaption>Geteilter Link im Browser</figcaption></figure>
     </div>
 
     <div class="callout">
