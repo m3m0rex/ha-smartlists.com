@@ -380,6 +380,7 @@ T: dict[str, tuple[str, str, str, str, str]] = {
         "Più persone usano le stesse liste di Home Assistant dai propri dispositivi. Tutti vedono cosa manca – senza messaggi avanti e indietro.",
         "Kilka osób korzysta z tych samych list Home Assistant na swoich urządzeniach. Każdy widzi, czego brakuje – bez wysyłania wiadomości."),
     "Datenschutz": ("Privacy", "Confidentialité", "Privacidad", "Privacy", "Prywatność"),
+    "Impressum": ("Legal notice", "Mentions légales", "Aviso legal", "Note legali", "Nota prawna"),
     "Zugangsdaten zu Home Assistant werden ausschließlich verschlüsselt auf dem Gerät gespeichert. Es gibt keinen externen Server, keine Werbung und kein Tracking – die Kommunikation läuft direkt zwischen App und der eigenen Home-Assistant-Instanz.": (
         "Home Assistant credentials are stored only encrypted on the device. No external server, no ads, no tracking – communication runs directly between the app and your own Home Assistant.",
         "Les identifiants Home Assistant sont stockés uniquement chiffrés sur l'appareil. Pas de serveur externe, pas de pub, pas de pistage – la communication passe directement entre l'app et ton Home Assistant.",
@@ -761,6 +762,9 @@ def page(lang: str, missing: set[str]) -> str:
     # Pfade aus dem Unterordner
     out = out.replace('src="assets/', 'src="../assets/').replace('href="assets/', 'href="../assets/').replace('href="LICENSE.md"', 'href="../LICENSE.md"')
     out = out.replace("demo-de.gif", "demo.gif")
+    # Impressum und Datenschutz gibt es deutsch und englisch (build_legal.py); die anderen Sprachen zeigen auf Englisch
+    legal = "" if lang == "en" else "../en/"
+    out = out.replace('href="impressum/"', f'href="{legal}legal-notice/"').replace('href="datenschutz/"', f'href="{legal}privacy/"')
     # Sprachauswahl: Pfade relativ zum Unterordner, aktuelle Sprache gewählt
     out = out.replace('value="./" data-lang="de" selected', 'value="../" data-lang="de"')
     for other in LANGS:
