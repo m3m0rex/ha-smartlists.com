@@ -55,7 +55,7 @@ PAGES = {
 <h2>Verbraucherstreitbeilegung</h2>
 <p>Ich bin nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
 <h2>Hinweis</h2>
-<p>SmartLists, SmartDiscounts und SmartLists App sind private, unentgeltliche Projekte und stehen in keiner Verbindung zu Home Assistant oder der Open Home Foundation.</p>""",
+<p>SmartLists, SmartDiscounts und SmartLists Go sind private, unentgeltliche Projekte und stehen in keiner Verbindung zu Home Assistant oder der Open Home Foundation.</p>""",
         "privacy_body": f"""<h1>Datenschutzerklärung</h1><p class="lead">Stand: November 2026</p>
 <div class="short"><div><b>Keine Cookies</b>Diese Webseite setzt keine Cookies.</div><div><b>Kein Tracking</b>Keine Statistik, keine Werbung, keine eingebundenen Dienste.</div><div><b>Kein Konto</b>Kein Formular, keine Anmeldung, kein Newsletter.</div></div>
 <h2>1. Verantwortlicher</h2>
@@ -73,7 +73,7 @@ PAGES = {
 <p>Diese Webseite verweist unter anderem auf GitHub und auf my.home-assistant.io. Erst wenn du einen solchen Link anklickst, werden Daten an den jeweiligen Anbieter übertragen. Dort gelten dessen Datenschutzbestimmungen.</p>
 <h2>6. SmartLists und SmartDiscounts in Home Assistant</h2>
 <p>Die Integration SmartLists und die Karte SmartDiscounts laufen ausschließlich in deinem eigenen Home Assistant. Ich erhalte davon keine Daten. Das Nachschlagen von Produkten im Internet ist ausgeschaltet, bis du es selbst einschaltest und einen Dienst auswählst.</p>
-<h2>7. App SmartLists App</h2>
+<h2>7. App SmartLists Go</h2>
 <p>Die App speichert Listen, Notizen und Einstellungen auf deinem Gerät. Verbindest du sie mit Home Assistant, tauscht sie Daten nur mit den Adressen aus, die du einträgst. Es gibt kein Konto bei mir, keine Auswertung der Nutzung und keine Werbung. Fehlerberichte sendet die App nicht von selbst; du kannst einen Bericht erstellen, prüfen und selbst absenden.</p>
 <p>Meldest du dich über die Anmeldeseite deines Home Assistant an, ruft dein Home Assistant dabei einmal die Seite ha-smartlists.com/app/ ab, um die App zu erkennen. Dabei fällt beim Anbieter dieser Webseite dasselbe an wie bei jedem Seitenaufruf (Abschnitt 2), also die IP-Adresse deines Home Assistant. Die Seite selbst setzt keine Cookies, enthält keine Skripte und speichert nichts. Zugangsdaten oder Inhalte deiner Listen werden dabei nicht übertragen.</p>
 <p>Das Nachschlagen von Strichcodes im Internet ist ausgeschaltet. Schaltest du es ein und wählst einen Dienst, sendet die App den gescannten Code an diesen Dienst; für dessen Verarbeitung gilt seine eigene Datenschutzerklärung.</p>
@@ -100,7 +100,7 @@ PAGES = {
 <h2>Consumer dispute resolution</h2>
 <p>I am neither willing nor obliged to take part in dispute resolution proceedings before a consumer arbitration board.</p>
 <h2>Note</h2>
-<p>SmartLists, SmartDiscounts and SmartLists App are private, free projects and are not affiliated with Home Assistant or the Open Home Foundation.</p>""",
+<p>SmartLists, SmartDiscounts and SmartLists Go are private, free projects and are not affiliated with Home Assistant or the Open Home Foundation.</p>""",
         "privacy_body": f"""<h1>Privacy policy</h1><p class="lead">As of November 2026 · The German version is the authoritative one.</p>
 <div class="short"><div><b>No cookies</b>This website sets no cookies.</div><div><b>No tracking</b>No statistics, no advertising, no embedded services.</div><div><b>No account</b>No form, no sign-in, no newsletter.</div></div>
 <h2>1. Controller</h2>
@@ -118,7 +118,7 @@ PAGES = {
 <p>This website links to GitHub and my.home-assistant.io, among others. Data is transferred to the respective provider only when you click such a link. Their privacy rules apply there.</p>
 <h2>6. SmartLists and SmartDiscounts in Home Assistant</h2>
 <p>The SmartLists integration and the SmartDiscounts card run exclusively in your own Home Assistant. I receive no data from them. Looking up products on the internet is switched off until you switch it on yourself and choose a service.</p>
-<h2>7. The app SmartLists App</h2>
+<h2>7. The app SmartLists Go</h2>
 <p>The app stores lists, notes and settings on your device. If you connect it to Home Assistant, it exchanges data only with the addresses you enter. There is no account with me, no usage analysis and no advertising. The app never sends error reports on its own; you can create a report, check it and send it yourself.</p>
 <p>If you sign in through the sign-in page of your Home Assistant, your Home Assistant retrieves the page ha-smartlists.com/app/ once to recognise the app. The provider of this website then receives the same data as for any page view (section 2), i.e. the IP address of your Home Assistant. The page itself sets no cookies, contains no scripts and stores nothing. No credentials and no list contents are transferred.</p>
 <p>Looking up barcodes on the internet is switched off. If you switch it on and choose a service, the app sends the scanned code to that service; its own privacy policy applies to that processing.</p>

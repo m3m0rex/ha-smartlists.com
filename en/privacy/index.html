@@ -131,7 +131,7 @@
     background: rgba(255,255,255,0.16); border-radius: 999px; padding: 4px 12px; }
   .download-sub { margin-top: 14px; font-size: 13px; color: #BFD7F5; }
   /* aktuelle stabile Version – kommt aus downloads/versions.json bzw. version.json, die ein Workflow pflegt */
-  .ver { margin-top: 10px; font-size: 13px; } .ver a { display: inline-block; padding: 4px 12px; border-radius: 999px; background: rgba(255,255,255,.14); color: #fff; text-decoration: none; } .ver a:hover { background: rgba(255,255,255,.24); } .ver b { font-weight: 800; }
+  .ver { margin-top: 10px; font-size: 13px; } .ver a { display: inline-block; padding: 4px 12px; border-radius: 999px; background: rgba(255,255,255,.14); color: #fff; text-decoration: none; } .ver a[hidden] { display: none; } .ver a:hover { background: rgba(255,255,255,.24); } .ver b { font-weight: 800; }
 
   main { max-width: 980px; margin: -48px auto 0; padding: 0 20px 64px; }
   .intro-card {
@@ -446,7 +446,7 @@
 <p>This website links to GitHub and my.home-assistant.io, among others. Data is transferred to the respective provider only when you click such a link. Their privacy rules apply there.</p>
 <h2>6. SmartLists and SmartDiscounts in Home Assistant</h2>
 <p>The SmartLists integration and the SmartDiscounts card run exclusively in your own Home Assistant. I receive no data from them. Looking up products on the internet is switched off until you switch it on yourself and choose a service.</p>
-<h2>7. The app SmartLists App</h2>
+<h2>7. The app SmartLists Go</h2>
 <p>The app stores lists, notes and settings on your device. If you connect it to Home Assistant, it exchanges data only with the addresses you enter. There is no account with me, no usage analysis and no advertising. The app never sends error reports on its own; you can create a report, check it and send it yourself.</p>
 <p>If you sign in through the sign-in page of your Home Assistant, your Home Assistant retrieves the page ha-smartlists.com/app/ once to recognise the app. The provider of this website then receives the same data as for any page view (section 2), i.e. the IP address of your Home Assistant. The page itself sets no cookies, contains no scripts and stores nothing. No credentials and no list contents are transferred.</p>
 <p>Looking up barcodes on the internet is switched off. If you switch it on and choose a service, the app sends the scanned code to that service; its own privacy policy applies to that processing.</p>
