@@ -1316,7 +1316,7 @@ all_view: list</pre>
         a.hidden = false; a.parentNode.hidden = false;
       });
     }
-    fetch("/downloads/versions.json").then(function (r) { return r.ok ? r.json() : {}; }).then(function (v) {
+    fetch("/downloads/versions.json", { cache: "no-cache" }).then(function (r) { return r.ok ? r.json() : {}; }).then(function (v) {
       ["smartlists", "smartdiscounts"].forEach(function (k) { if (v[k]) { show(k, v[k].version, v[k].url); beta(k, v[k].beta); } });
     }).catch(function () {}).then(function () {
       // aktueller Stand direkt von GitHub (die Seite liegt dort ohnehin): neueste stabile Version und eine neuere Beta.
@@ -1344,7 +1344,7 @@ all_view: list</pre>
     });
     // App: Stand je System aus downloads/app.json (auch vor der Veröffentlichung); eine veröffentlichte APK kommt aus version.json
     Promise.all(["/downloads/app.json", "/downloads/version.json"].map(function (u) {
-      return fetch(u).then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; });
+      return fetch(u, { cache: "no-cache" }).then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; });
     })).then(function (res) {
       var app = res[0] || {}, rel = res[1] || {};
       document.querySelectorAll(".ver[data-app-ver]").forEach(function (box) {
