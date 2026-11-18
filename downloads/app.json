@@ -1,11 +1,11 @@
 {
   "android": {
-    "version": "0.2.10",
+    "version": "0.2.11",
     "published": false,
     "url": ""
   },
   "ios": {
-    "version": "0.2.10",
+    "version": "0.2.11",
     "published": false,
     "url": ""
   }
