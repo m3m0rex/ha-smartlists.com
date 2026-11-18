@@ -1,4 +1,4 @@
-# Publishes a version of SmartLists Go for the update check of the app and for the website:
+# Publishes a version of SmartLists App for the update check of the app and for the website:
 # fills downloads/version.json. Start it by hand: Actions → "Publish app version" → Run workflow.
 # The APK must already be reachable at the given https address (e.g. in downloads/ of this repository
 # or as an asset of a GitHub release).
@@ -42,7 +42,7 @@ jobs:
           SHA=$(sha256sum /tmp/app.apk | cut -d' ' -f1)
           SHA="$SHA" python3 - <<'PY'
           import datetime, json, os, pathlib
-          data = {"app": "SmartLists Go", "version": os.environ["VERSION"].strip().lstrip("v"), "apk": os.environ["APK"].strip(),
+          data = {"app": "SmartLists App", "version": os.environ["VERSION"].strip().lstrip("v"), "apk": os.environ["APK"].strip(),
                   "sha256": os.environ["SHA"], "released": datetime.date.today().isoformat(),
                   "notes": {"de": os.environ["NOTES_DE"].strip(), "en": os.environ["NOTES_EN"].strip()}}
           pathlib.Path("downloads/version.json").write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
@@ -53,5 +53,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add downloads/version.json
-          git diff --cached --quiet || git commit -m "SmartLists Go ${{ inputs.version }}"
+          git diff --cached --quiet || git commit -m "SmartLists App ${{ inputs.version }}"
           git push

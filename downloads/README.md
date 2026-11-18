@@ -1,4 +1,4 @@
-# Downloads of SmartLists Go
+# Downloads of SmartLists App
 
 `version.json` tells the app (the version installed from this website) which version is current.
 

@@ -14,7 +14,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 LANGS = ("en", "fr", "es", "it", "pl")
 # Texte, die gleich bleiben (Namen, Links, Code)
-KEEP = {"SmartLists", "GitHub", "Download", "REWE", "👤 Anna", "todo.*", "https://github.com/m3m0rex/ha_smartlists",
+KEEP = {"SmartLists", "SmartLists: Grocery &amp; HA Sync", "SmartLists: Grocery & HA Sync", "SmartLists App", "GitHub", "Download", "REWE", "👤 Anna", "todo.*", "https://github.com/m3m0rex/ha_smartlists",
         "🇩🇪 DE", "🇬🇧 EN", "🇫🇷 FR", "🇪🇸 ES", "🇮🇹 IT", "🇵🇱 PL",
         "Wiki"}
 
@@ -642,11 +642,11 @@ T: dict[str, tuple[str, str, str, str, str]] = {
     'Dieselben Listen auf allen Geräten der Familie': ('The same lists on all the family’s devices', 'Les mêmes listes sur tous les appareils de la famille', 'Las mismas listas en todos los dispositivos de la familia', 'Le stesse liste su tutti i dispositivi della famiglia', 'Te same listy na wszystkich urządzeniach rodziny'),
     'Angebote und Preisvergleich aus deinen Märkten': ('Offers and price comparison from your stores', 'Promos et comparaison des prix de tes magasins', 'Ofertas y comparación de precios de tus tiendas', 'Offerte e confronto prezzi dai tuoi negozi', 'Promocje i porównanie cen z twoich sklepów'),
     'Änderungen ohne Netz werden später abgeglichen': ('Changes made offline are synced later', 'Les modifications hors ligne sont synchronisées plus tard', 'Los cambios sin conexión se sincronizan después', 'Le modifiche offline vengono sincronizzate dopo', 'Zmiany offline zsynchronizują się później'),
-    '📱 SmartLists Go': ('📱 SmartLists Go', '📱 SmartLists Go', '📱 SmartLists Go', '📱 SmartLists Go', '📱 SmartLists Go'),
+    '📱 SmartLists App': ('📱 SmartLists App', '📱 SmartLists App', '📱 SmartLists App', '📱 SmartLists App', '📱 SmartLists App'),
     '🏷️ SmartDiscounts': ('🏷️ SmartDiscounts', '🏷️ SmartDiscounts', '🏷️ SmartDiscounts', '🏷️ SmartDiscounts', '🏷️ SmartDiscounts'),
     'SmartDiscounts': ('SmartDiscounts', 'SmartDiscounts', 'SmartDiscounts', 'SmartDiscounts', 'SmartDiscounts'),
-    'Zu SmartLists Go →': ('To SmartLists Go →', 'Vers SmartLists Go →', 'A SmartLists Go →', 'A SmartLists Go →', 'Do SmartLists Go →'),
-    'SmartLists Go · App für Android · iPhone in Planung': ('SmartLists Go · app for Android · iPhone planned', 'SmartLists Go · app pour Android · iPhone prévu', 'SmartLists Go · app para Android · iPhone previsto', 'SmartLists Go · app per Android · iPhone previsto', 'SmartLists Go · aplikacja na Androida · iPhone w planach'),
+    'Zu SmartLists App →': ('To SmartLists App →', 'Vers SmartLists App →', 'A SmartLists App →', 'A SmartLists App →', 'Do SmartLists App →'),
+    'SmartLists: Grocery &amp; HA Sync · App für Android · iPhone in Planung': ('SmartLists: Grocery &amp; HA Sync · app for Android · iPhone planned', 'SmartLists: Grocery &amp; HA Sync · app pour Android · iPhone prévu', 'SmartLists: Grocery &amp; HA Sync · app para Android · iPhone previsto', 'SmartLists: Grocery &amp; HA Sync · app per Android · iPhone previsto', 'SmartLists: Grocery &amp; HA Sync · aplikacja na Androida · iPhone w planach'),
     'Das brauchst du': ('What you need', 'Ce qu’il te faut', 'Lo que necesitas', 'Cosa ti serve', 'Czego potrzebujesz'),
     'HACS': ('HACS', 'HACS', 'HACS', 'HACS', 'HACS'),
     'Home Assistant 2025.3 oder neuer': ('Home Assistant 2025.3 or newer', 'Home Assistant 2025.3 ou plus récent', 'Home Assistant 2025.3 o posterior', 'Home Assistant 2025.3 o successivo', 'Home Assistant 2025.3 lub nowszy'),
@@ -669,7 +669,7 @@ T: dict[str, tuple[str, str, str, str, str]] = {
     'Kategorien und Vorschläge des ganzen Haushalts': ('Categories and suggestions of the whole household', 'Catégories et suggestions de tout le foyer', 'Categorías y sugerencias de todo el hogar', 'Categorie e suggerimenti di tutta la casa', 'Kategorie i podpowiedzi całego domu'),
     'Eigene Listen je Person, mit Rechten': ('Own lists per person, with permissions', 'Listes par personne, avec droits', 'Listas propias por persona, con permisos', 'Liste per persona, con permessi', 'Własne listy dla każdej osoby, z uprawnieniami'),
     'Angebote, Preisvergleich und Merkliste': ('Offers, price comparison and watch list', 'Promos, comparaison des prix et liste de suivi', 'Ofertas, comparación de precios y lista de seguimiento', 'Offerte, confronto prezzi e lista dei preferiti', 'Promocje, porównanie cen i lista obserwowanych'),
-    'In SmartLists Go': ('In SmartLists Go', 'Dans SmartLists Go', 'En SmartLists Go', 'In SmartLists Go', 'W SmartLists Go'),
+    'In SmartLists App': ('In SmartLists App', 'Dans SmartLists App', 'En SmartLists App', 'In SmartLists App', 'W SmartLists App'),
     'Die App zeigt Angebote in einer eigenen Ansicht. Dafür braucht sie SmartLists, nicht diese Karte.': ('The app shows offers in a view of its own. For that it needs SmartLists, not this card.', 'L’app affiche les promos dans sa propre vue. Pour cela il lui faut SmartLists, pas cette carte.', 'La app muestra las ofertas en una vista propia. Para eso necesita SmartLists, no esta tarjeta.', 'L’app mostra le offerte in una vista propria. Per questo le serve SmartLists, non questa scheda.', 'Aplikacja pokazuje promocje we własnym widoku. Potrzebuje do tego SmartLists, nie tej karty.'),
     'geplant': ('planned', 'prévu', 'previsto', 'previsto', 'w planach'),
     '✓': ('✓', '✓', '✓', '✓', '✓'),
@@ -693,7 +693,7 @@ T: dict[str, tuple[str, str, str, str, str]] = {
     'So sieht die App aus': ('What the app looks like', 'À quoi ressemble l’app', 'Así es la app', 'Com’è l’app', 'Jak wygląda aplikacja'),
     'Zieh den Schieber nach links oder rechts: links hell, rechts dunkel. Die Bilder zeigen die englische Fassung mit Beispieldaten.': ('Drag the slider left or right: light on the left, dark on the right. The pictures show the English version with example data.', 'Fais glisser le curseur à gauche ou à droite : clair à gauche, sombre à droite. Les images montrent la version anglaise avec des données d’exemple.', 'Arrastra el control a izquierda o derecha: claro a la izquierda, oscuro a la derecha. Las imágenes muestran la versión inglesa con datos de ejemplo.', 'Trascina il cursore a sinistra o a destra: chiaro a sinistra, scuro a destra. Le immagini mostrano la versione inglese con dati di esempio.', 'Przesuń suwak w lewo lub w prawo: po lewej jasny, po prawej ciemny. Obrazy pokazują wersję angielską z przykładowymi danymi.'),
     'Hell / Dunkel': ('Light / dark', 'Clair / sombre', 'Claro / oscuro', 'Chiaro / scuro', 'Jasny / ciemny'),
-    'SmartLists Go': ('SmartLists Go', 'SmartLists Go', 'SmartLists Go', 'SmartLists Go', 'SmartLists Go'),
+    'SmartLists App': ('SmartLists App', 'SmartLists App', 'SmartLists App', 'SmartLists App', 'SmartLists App'),
     'Aktuelle Version': ('Current version', 'Version actuelle', 'Versión actual', 'Versione attuale', 'Aktualna wersja'),
     'Echte Bilder der Karte im Dashboard von Home Assistant, mit Beispieldaten. Zieh den Schieber nach links oder rechts: links hell, rechts dunkel.': ('Real pictures of the card in the Home Assistant dashboard, with example data (shown in German). Drag the slider left or right: light on the left, dark on the right.', 'Vraies images de la carte avec des données d’exemple (en allemand). Fais glisser le curseur : clair à gauche, sombre à droite.', 'Imágenes reales de la tarjeta con datos de ejemplo (en alemán). Arrastra el control: claro a la izquierda, oscuro a la derecha.', 'Immagini reali della scheda con dati di esempio (in tedesco). Trascina il cursore: chiaro a sinistra, scuro a destra.', 'Prawdziwe obrazy karty z przykładowymi danymi (po niemiecku). Przesuń suwak: po lewej jasny, po prawej ciemny.'),
     'Liste mit Kategorien und Fälligem': ('List with categories and due items', 'Liste avec catégories et échéances', 'Lista con categorías y vencimientos', 'Lista con categorie e scadenze', 'Lista z kategoriami i terminami'),
