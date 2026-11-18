@@ -1318,7 +1318,30 @@ all_view: list</pre>
     }
     fetch("/downloads/versions.json").then(function (r) { return r.ok ? r.json() : {}; }).then(function (v) {
       ["smartlists", "smartdiscounts"].forEach(function (k) { if (v[k]) { show(k, v[k].version, v[k].url); beta(k, v[k].beta); } });
-    }).catch(function () {});
+    }).catch(function () {}).then(function () {
+      // aktueller Stand direkt von GitHub (die Seite liegt dort ohnehin): neueste stabile Version und eine neuere Beta.
+      // Eine Stunde im Browser gemerkt; klappt das nicht, bleibt der Stand aus versions.json stehen.
+      var repos = { smartlists: "m3m0rex/ha_smartlists", smartdiscounts: "m3m0rex/ha_smartdiscounts-card" };
+      Object.keys(repos).forEach(function (k) {
+        var key = "ver-" + k, cached = null;
+        try { cached = JSON.parse(sessionStorage.getItem(key) || "null"); } catch (e) { /* */ }
+        var use = function (list) {
+          var real = (list || []).filter(function (r) { return r && !r.draft && r.published_at; });
+          var stable = real.filter(function (r) { return !r.prerelease; }).sort(function (a, b) { return a.published_at < b.published_at ? 1 : -1; })[0];
+          var pre = real.filter(function (r) { return r.prerelease; }).sort(function (a, b) { return a.published_at < b.published_at ? 1 : -1; })[0];
+          if (stable) show(k, String(stable.tag_name).replace(/^v/, ""), stable.html_url);
+          if (pre && (!stable || pre.published_at > stable.published_at)) beta(k, { version: String(pre.tag_name).replace(/^v/, ""), url: pre.html_url });
+        };
+        if (cached && Date.now() - cached.at < 3600e3) { use(cached.list); return; }
+        fetch("https://api.github.com/repos/" + repos[k] + "/releases?per_page=30", { headers: { Accept: "application/vnd.github+json" } })
+          .then(function (r) { return r.ok ? r.json() : null; }).then(function (list) {
+            if (!Array.isArray(list)) return;
+            var slim = list.map(function (r) { return { tag_name: r.tag_name, html_url: r.html_url, draft: r.draft, prerelease: r.prerelease, published_at: r.published_at }; });
+            try { sessionStorage.setItem(key, JSON.stringify({ at: Date.now(), list: slim })); } catch (e) { /* */ }
+            use(slim);
+          }).catch(function () {});
+      });
+    });
     // App: Stand je System aus downloads/app.json (auch vor der Veröffentlichung); eine veröffentlichte APK kommt aus version.json
     Promise.all(["/downloads/app.json", "/downloads/version.json"].map(function (u) {
       return fetch(u).then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; });
