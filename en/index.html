@@ -786,7 +786,7 @@
       <div class="feature">
         <div class="icon">📝</div>
         <h3>My list</h3>
-        <p>For every open item the matching offers per store, the cheapest marked ★. "Pick cheapest" or "only REWE" applies to the whole list. Four views, from tiles to table.</p>
+        <p>For every open item the matching offers per store, the cheapest marked ★. “Pick cheapest” or “only REWE” applies to the whole list. Three views: one row per offer, one row per item, or a table.</p>
       </div>
       <div class="feature">
         <div class="icon">🛍️</div>
@@ -796,7 +796,17 @@
       <div class="feature">
         <div class="icon">⭐</div>
         <h3>Watch list</h3>
-        <p>What you only buy on offer: the card shows where it is cheap right now and lets you know if you like.</p>
+        <p>What you only buy on offer: the card shows where it is cheap right now and lets you know if you like. With SmartLists everyone has their own watch lists, stored in Home Assistant.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🧮</div>
+        <h3>Cheapest shopping trip</h3>
+        <p>One store for as much as possible – and whether two, three or more stores are worth it. Worked out by price per kilo or litre; a bigger pack that is cheaper per litre wins.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🎁</div>
+        <h3>Bonus offers and price history</h3>
+        <p>Bonus deals such as REWE Bonus are marked “only with the bonus app”, and can be compared with the bonus taken off. ▲ and ▼ show whether a product was cheaper or dearer before.</p>
       </div>
       <div class="feature">
         <div class="icon">✅</div>
@@ -843,7 +853,7 @@ all_view: list</pre>
       <div class="icon-big">🛒</div>
       <div>
         <h3>Even better with SmartLists</h3>
-        <p>With the integration the chosen offer appears as a badge on the item, the shopping mode sorts by store, and the card comes without a separate installation.</p>
+        <p>With the integration the chosen offer shows as a badge on the item, shopping mode sorts by store, and watch lists and price history live in Home Assistant – the same in every browser.</p>
         <p class="cross" style="text-align:left;margin-top:8px"><a data-goto="hacs">To SmartLists →</a></p>
       </div>
     </div>
@@ -1002,7 +1012,7 @@ all_view: list</pre>
       <div class="feature">
         <div class="icon">📱</div>
         <h3>Widget</h3>
-        <p>The list on the home screen: view, check off, add.</p>
+        <p>See the list on the home screen; a tap adds something or opens the scanner.</p>
       </div>
       <div class="feature">
         <div class="icon">💾</div>
@@ -1075,7 +1085,7 @@ all_view: list</pre>
     <tr class="more"><td>Categories like in the shop, suggestions</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><b class="yes">✓</b><small>basic, on the device</small></td><td><b class="yes">✓</b><small>basic, on the device</small></td><td><b class="yes">✓</b><small>learned for the household</small></td></tr>
     <tr class="more"><td>Combined lists</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b><small>device and Home Assistant mixed</small></td><td><b class="yes">✓</b><small>including those from SmartLists</small></td></tr>
     <tr class="key"><td>Shopping mode</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td></tr>
-    <tr class="more"><td>Scan barcodes</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><span class="plan">planned</span></td><td><span class="plan">planned</span></td><td><span class="plan">planned</span></td></tr>
+    <tr class="more"><td>Scan barcodes</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td></tr>
     <tr class="grp" id="cmp-teilen"><td colspan="6">Sharing</td></tr>
     <tr class="key"><td>The same list on several devices</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td></tr>
     <tr class="more"><td>Own lists per person, permissions</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td></tr>
@@ -1084,14 +1094,14 @@ all_view: list</pre>
     <tr class="key"><td>Browse and search offers</td><td><b class="yes">✓</b><small>with SmartDiscounts</small></td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td></tr>
     <tr class="key"><td>Matching with the list, price comparison</td><td><b class="yes">✓</b><small>hint on the item</small></td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td></tr>
     <tr class="more"><td>Offer as a badge on the item</td><td><b class="yes">✓</b></td><td><span class="no">–</span><small>readable line in the description</small></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td></tr>
-    <tr class="more"><td>Watch list and notifications</td><td><b class="yes">✓</b><small>for the household</small></td><td><b class="yes">✓</b><small>per device or to-do list</small></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><b class="yes">✓</b><small>for the household</small></td></tr>
+    <tr class="more"><td>Watch list and notifications</td><td><b class="yes">✓</b><small>per user</small></td><td><b class="yes">✓</b><small>per device or to-do list</small></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><b class="yes">✓</b><small>per user</small></td></tr>
     <tr class="grp" id="cmp-notizen"><td colspan="6">Notes and security</td></tr>
     <tr class="key"><td>Notes</td><td><b class="yes">✓</b></span></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td></tr>
-    <tr class="more"><td>App lock, encrypted notes</td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><span class="plan">planned</span></td><td><span class="plan">planned</span></td><td><span class="plan">planned</span></td></tr>
+    <tr class="more"><td>App lock, encrypted notes</td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td></tr>
     <tr class="more"><td>Backup</td><td><b class="yes">✓</b><small>with Home Assistant</small></td><td><span class="no">–</span></td><td><b class="yes">✓</b><small>as a file</small></td><td><b class="yes">✓</b><small>as a file</small></td><td><b class="yes">✓</b><small>as a file or in Home Assistant</small></td></tr>
     <tr class="grp" id="cmp-sonstiges"><td colspan="6">Other</td></tr>
     <tr class="key"><td>Works offline</td><td><b class="yes">✓</b><small>changes are sent later</small></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td></tr>
-    <tr class="more"><td>Home screen widget</td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><span class="plan">planned</span></td><td><span class="plan">planned</span></td><td><span class="plan">planned</span></td></tr>
+    <tr class="more"><td>Home screen widget</td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td></tr>
     <tr class="more"><td>Voice control, automations</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><span class="no">–</span></td></tr>
     <tr class="key"><td>Cost and licence</td><td>free, MIT</td><td>free, MIT</td><td colspan="3">free, code not public</td></tr>
   </table>

@@ -786,7 +786,7 @@
       <div class="feature">
         <div class="icon">📝</div>
         <h3>Mi lista</h3>
-        <p>Para cada artículo pendiente, las ofertas de cada tienda, la más barata con ★. «Elegir las más baratas» o «solo REWE» vale para toda la lista. Cuatro vistas, de mosaico a tabla.</p>
+        <p>Para cada artículo pendiente, las ofertas que encajan por tienda, la más barata con ★. «Elegir la más barata» o «solo REWE» vale para toda la lista. Tres vistas: una fila por oferta, una por artículo o una tabla.</p>
       </div>
       <div class="feature">
         <div class="icon">🛍️</div>
@@ -796,7 +796,17 @@
       <div class="feature">
         <div class="icon">⭐</div>
         <h3>Seguimiento</h3>
-        <p>Lo que solo compras en oferta: la tarjeta muestra dónde está barato ahora y te avisa si quieres.</p>
+        <p>Lo que solo compras en oferta: la tarjeta muestra dónde está barato ahora y te avisa si quieres. Con SmartLists cada uno tiene sus propias listas, guardadas en Home Assistant.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🧮</div>
+        <h3>Compra más barata</h3>
+        <p>Una tienda para lo máximo posible, y si merecen la pena dos, tres o más. Se calcula por precio por kilo o litro; gana un envase más grande que sale más barato por litro.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🎁</div>
+        <h3>Ofertas de bonificación e historial de precios</h3>
+        <p>Las promociones de bonificación como REWE Bonus se marcan «solo con la app de bonificación» y pueden compararse con la bonificación descontada. ▲ y ▼ muestran si un producto era antes más barato o más caro.</p>
       </div>
       <div class="feature">
         <div class="icon">✅</div>
@@ -843,7 +853,7 @@ all_view: list</pre>
       <div class="icon-big">🛒</div>
       <div>
         <h3>Aún mejor con SmartLists</h3>
-        <p>Con la integración, la oferta elegida aparece como insignia en el artículo, el modo compra ordena por tienda y la tarjeta viene sin instalación aparte.</p>
+        <p>Con la integración la oferta elegida aparece como insignia en el artículo, el modo compra ordena por tienda, y las listas de seguimiento y el historial de precios están en Home Assistant, igual en cada navegador.</p>
         <p class="cross" style="text-align:left;margin-top:8px"><a data-goto="hacs">A SmartLists →</a></p>
       </div>
     </div>
@@ -1002,7 +1012,7 @@ all_view: list</pre>
       <div class="feature">
         <div class="icon">📱</div>
         <h3>Widget</h3>
-        <p>La lista en la pantalla de inicio: ver, marcar, añadir.</p>
+        <p>Ver la lista en la pantalla de inicio; un toque añade algo o abre el escáner.</p>
       </div>
       <div class="feature">
         <div class="icon">💾</div>
@@ -1075,7 +1085,7 @@ all_view: list</pre>
     <tr class="more"><td>Categorías como en la tienda, sugerencias</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><b class="yes">✓</b><small>básico, en el dispositivo</small></td><td><b class="yes">✓</b><small>básico, en el dispositivo</small></td><td><b class="yes">✓</b><small>aprendidas para el hogar</small></td></tr>
     <tr class="more"><td>Listas combinadas</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b><small>dispositivo y Home Assistant mezclados</small></td><td><b class="yes">✓</b><small>también las de SmartLists</small></td></tr>
     <tr class="key"><td>Modo compra</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td></tr>
-    <tr class="more"><td>Escanear códigos de barras</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><span class="plan">previsto</span></td><td><span class="plan">previsto</span></td><td><span class="plan">previsto</span></td></tr>
+    <tr class="more"><td>Escanear códigos de barras</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td></tr>
     <tr class="grp" id="cmp-teilen"><td colspan="6">Compartir</td></tr>
     <tr class="key"><td>La misma lista en varios dispositivos</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td></tr>
     <tr class="more"><td>Listas propias por persona, permisos</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td></tr>
@@ -1084,14 +1094,14 @@ all_view: list</pre>
     <tr class="key"><td>Ver y buscar ofertas</td><td><b class="yes">✓</b><small>con SmartDiscounts</small></td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td></tr>
     <tr class="key"><td>Cruce con la lista, comparación de precios</td><td><b class="yes">✓</b><small>aviso en el artículo</small></td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td></tr>
     <tr class="more"><td>Oferta como insignia en el artículo</td><td><b class="yes">✓</b></td><td><span class="no">–</span><small>línea legible en la descripción</small></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td></tr>
-    <tr class="more"><td>Lista de seguimiento y avisos</td><td><b class="yes">✓</b><small>para el hogar</small></td><td><b class="yes">✓</b><small>por dispositivo o lista de tareas</small></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><b class="yes">✓</b><small>para el hogar</small></td></tr>
+    <tr class="more"><td>Lista de seguimiento y avisos</td><td><b class="yes">✓</b><small>por usuario</small></td><td><b class="yes">✓</b><small>por dispositivo o lista de tareas</small></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><b class="yes">✓</b><small>por usuario</small></td></tr>
     <tr class="grp" id="cmp-notizen"><td colspan="6">Notas y seguridad</td></tr>
     <tr class="key"><td>Notas</td><td><b class="yes">✓</b></span></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td></tr>
-    <tr class="more"><td>Bloqueo de la app, notas cifradas</td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><span class="plan">previsto</span></td><td><span class="plan">previsto</span></td><td><span class="plan">previsto</span></td></tr>
+    <tr class="more"><td>Bloqueo de la app, notas cifradas</td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td></tr>
     <tr class="more"><td>Copia de seguridad</td><td><b class="yes">✓</b><small>con Home Assistant</small></td><td><span class="no">–</span></td><td><b class="yes">✓</b><small>en un archivo</small></td><td><b class="yes">✓</b><small>en un archivo</small></td><td><b class="yes">✓</b><small>en un archivo o en Home Assistant</small></td></tr>
     <tr class="grp" id="cmp-sonstiges"><td colspan="6">Otros</td></tr>
     <tr class="key"><td>Funciona sin conexión</td><td><b class="yes">✓</b><small>los cambios se envían después</small></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td></tr>
-    <tr class="more"><td>Widget en la pantalla de inicio</td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><span class="plan">previsto</span></td><td><span class="plan">previsto</span></td><td><span class="plan">previsto</span></td></tr>
+    <tr class="more"><td>Widget en la pantalla de inicio</td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td><td><b class="yes">✓</b></td></tr>
     <tr class="more"><td>Control por voz, automatizaciones</td><td><b class="yes">✓</b></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><span class="no">–</span></td><td><span class="no">–</span></td></tr>
     <tr class="key"><td>Coste y licencia</td><td>gratis, MIT</td><td>gratis, MIT</td><td colspan="3">gratis, código no público</td></tr>
   </table>
@@ -1316,12 +1326,35 @@ all_view: list</pre>
         a.hidden = false; a.parentNode.hidden = false;
       });
     }
-    fetch("/downloads/versions.json").then(function (r) { return r.ok ? r.json() : {}; }).then(function (v) {
+    fetch("/downloads/versions.json", { cache: "no-cache" }).then(function (r) { return r.ok ? r.json() : {}; }).then(function (v) {
       ["smartlists", "smartdiscounts"].forEach(function (k) { if (v[k]) { show(k, v[k].version, v[k].url); beta(k, v[k].beta); } });
-    }).catch(function () {});
+    }).catch(function () {}).then(function () {
+      // aktueller Stand direkt von GitHub (die Seite liegt dort ohnehin): neueste stabile Version und eine neuere Beta.
+      // Eine Stunde im Browser gemerkt; klappt das nicht, bleibt der Stand aus versions.json stehen.
+      var repos = { smartlists: "m3m0rex/ha_smartlists", smartdiscounts: "m3m0rex/ha_smartdiscounts-card" };
+      Object.keys(repos).forEach(function (k) {
+        var key = "ver-" + k, cached = null;
+        try { cached = JSON.parse(sessionStorage.getItem(key) || "null"); } catch (e) { /* */ }
+        var use = function (list) {
+          var real = (list || []).filter(function (r) { return r && !r.draft && r.published_at; });
+          var stable = real.filter(function (r) { return !r.prerelease; }).sort(function (a, b) { return a.published_at < b.published_at ? 1 : -1; })[0];
+          var pre = real.filter(function (r) { return r.prerelease; }).sort(function (a, b) { return a.published_at < b.published_at ? 1 : -1; })[0];
+          if (stable) show(k, String(stable.tag_name).replace(/^v/, ""), stable.html_url);
+          if (pre && (!stable || pre.published_at > stable.published_at)) beta(k, { version: String(pre.tag_name).replace(/^v/, ""), url: pre.html_url });
+        };
+        if (cached && Date.now() - cached.at < 3600e3) { use(cached.list); return; }
+        fetch("https://api.github.com/repos/" + repos[k] + "/releases?per_page=30", { headers: { Accept: "application/vnd.github+json" } })
+          .then(function (r) { return r.ok ? r.json() : null; }).then(function (list) {
+            if (!Array.isArray(list)) return;
+            var slim = list.map(function (r) { return { tag_name: r.tag_name, html_url: r.html_url, draft: r.draft, prerelease: r.prerelease, published_at: r.published_at }; });
+            try { sessionStorage.setItem(key, JSON.stringify({ at: Date.now(), list: slim })); } catch (e) { /* */ }
+            use(slim);
+          }).catch(function () {});
+      });
+    });
     // App: Stand je System aus downloads/app.json (auch vor der Veröffentlichung); eine veröffentlichte APK kommt aus version.json
     Promise.all(["/downloads/app.json", "/downloads/version.json"].map(function (u) {
-      return fetch(u).then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; });
+      return fetch(u, { cache: "no-cache" }).then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; });
     })).then(function (res) {
       var app = res[0] || {}, rel = res[1] || {};
       document.querySelectorAll(".ver[data-app-ver]").forEach(function (box) {
