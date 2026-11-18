@@ -1,10 +1,11 @@
-# Keeps downloads/versions.json up to date: the latest stable release of SmartLists and SmartDiscounts.
-# Runs once a day and on demand (Actions → "Update version numbers" → Run workflow).
+# Keeps downloads/versions.json up to date: the latest stable release of SmartLists and SmartDiscounts,
+# and the newest beta when it is newer than the stable one.
+# Runs every hour and on demand (Actions → "Update version numbers" → Run workflow).
 name: Update version numbers
 
 on:
   schedule:
-    - cron: "17 5 * * *"
+    - cron: "17 * * * *"
   workflow_dispatch:
 
 permissions:

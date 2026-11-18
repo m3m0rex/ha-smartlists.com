@@ -16,7 +16,7 @@ LANGS = ("en", "fr", "es", "it", "pl")
 # Texte, die gleich bleiben (Namen, Links, Code)
 KEEP = {"SmartLists", "SmartLists: Grocery &amp; HA Sync", "SmartLists: Grocery & HA Sync", "SmartLists App", "GitHub", "Download", "REWE", "👤 Anna", "todo.*", "https://github.com/m3m0rex/ha_smartlists",
         "🇩🇪 DE", "🇬🇧 EN", "🇫🇷 FR", "🇪🇸 ES", "🇮🇹 IT", "🇵🇱 PL",
-        "Wiki"}
+        "Wiki", "Beta"}
 
 # Deutsch → (en, fr, es, it, pl)
 T: dict[str, tuple[str, str, str, str, str]] = {

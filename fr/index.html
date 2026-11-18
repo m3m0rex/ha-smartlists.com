@@ -156,7 +156,7 @@
     background: rgba(255,255,255,0.16); border-radius: 999px; padding: 4px 12px; }
   .download-sub { margin-top: 14px; font-size: 13px; color: #BFD7F5; }
   /* aktuelle stabile Version – kommt aus downloads/versions.json bzw. version.json, die ein Workflow pflegt */
-  .ver { margin-top: 10px; font-size: 13px; } .ver a { display: inline-block; padding: 4px 12px; border-radius: 999px; background: rgba(255,255,255,.14); color: #fff; text-decoration: none; } .ver a:hover { background: rgba(255,255,255,.24); } .ver b { font-weight: 800; }
+  .ver { margin-top: 10px; font-size: 13px; } .ver a { display: inline-block; padding: 4px 12px; border-radius: 999px; background: rgba(255,255,255,.14); color: #fff; text-decoration: none; } .ver a[hidden] { display: none; } .ver a:hover { background: rgba(255,255,255,.24); } .ver b { font-weight: 800; }
 
   main { max-width: 980px; margin: -48px auto 0; padding: 0 20px 64px; }
   .intro-card {
@@ -464,7 +464,7 @@
       <a class="download-btn ghost" href="https://github.com/m3m0rex/ha_smartlists">GitHub &amp; doc</a>
     </div>
     <div class="download-sub">Gratuit · open source (MIT) · Home Assistant 2025.3 ou plus récent · 6 langues</div>
-    <div class="ver" data-ver="smartlists" hidden><a href="#" rel="noopener">Version actuelle <b></b></a></div>
+    <div class="ver" data-ver="smartlists" hidden><a href="#" rel="noopener">Version actuelle <b></b></a> <a class="beta" href="#" rel="noopener" hidden>Beta <b></b></a></div>
   </header>
 
   <main>
@@ -756,7 +756,7 @@
       <a class="download-btn ghost" href="https://github.com/m3m0rex/ha_smartdiscounts-card">GitHub &amp; doc</a>
     </div>
     <div class="download-sub">Gratuit · open source (MIT) · ne nécessite que des capteurs de promos · fonctionne avec ou sans SmartLists</div>
-    <div class="ver" data-ver="smartdiscounts" hidden><a href="#" rel="noopener">Version actuelle <b></b></a></div>
+    <div class="ver" data-ver="smartdiscounts" hidden><a href="#" rel="noopener">Version actuelle <b></b></a> <a class="beta" href="#" rel="noopener" hidden>Beta <b></b></a></div>
   </header>
 
   <main>
@@ -1296,8 +1296,16 @@ all_view: list</pre>
         box.hidden = false;
       });
     }
+    function beta(key, b) {
+      if (!b || !b.version) return;
+      document.querySelectorAll('.ver[data-ver="' + key + '"] a.beta').forEach(function (a) {
+        a.querySelector("b").textContent = b.version;
+        if (b.url && /^https:\/\//.test(b.url)) a.href = b.url; else a.removeAttribute("href");
+        a.hidden = false; a.parentNode.hidden = false;
+      });
+    }
     fetch("/downloads/versions.json").then(function (r) { return r.ok ? r.json() : {}; }).then(function (v) {
-      ["smartlists", "smartdiscounts"].forEach(function (k) { if (v[k]) show(k, v[k].version, v[k].url); });
+      ["smartlists", "smartdiscounts"].forEach(function (k) { if (v[k]) { show(k, v[k].version, v[k].url); beta(k, v[k].beta); } });
     }).catch(function () {});
     fetch("/downloads/version.json").then(function (r) { return r.ok ? r.json() : {}; }).then(function (v) { show("app", v.version, v.apk); }).catch(function () {});
   })();
