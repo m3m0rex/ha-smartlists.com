@@ -1,1 +1,12 @@
-{}
+{
+  "smartlists": {
+    "version": "3.9.24",
+    "url": "https://github.com/m3m0rex/ha_smartlists/releases/tag/v3.9.24",
+    "published": "2026-11-15"
+  },
+  "smartdiscounts": {
+    "version": "1.1.0",
+    "url": "https://github.com/m3m0rex/ha_smartdiscounts-card/releases/tag/v1.1.0",
+    "published": "2026-11-17"
+  }
+}
