@@ -7,8 +7,20 @@
 <meta name="theme-color" content="#0D47A1" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0A2552" media="(prefers-color-scheme: dark)">
 <title>SmartLists – liste della spesa per Home Assistant</title>
-<meta name="description" content="SmartLists: vere liste della spesa per Home Assistant – come integrazione HACS con categorie, modalità spesa e condivisione via link, o come app Android con liste locali e widget.">
-<link rel="icon" href="../assets/icon.png">
+<meta name="description" content="SmartLists: liste della spesa per Home Assistant – un'integrazione HACS con categorie, modalità spesa, offerte e condivisione tramite link. In più la scheda offerte SmartDiscounts e l'app HA SmartLists Go per Android.">
+<meta name="robots" content="index, follow">
+<link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="../assets/icon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="canonical" href="https://ha-smartlists.com/it/">
+<meta property="og:url" content="https://ha-smartlists.com/it/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SmartLists">
+<meta property="og:title" content="SmartLists – liste della spesa per Home Assistant">
+<meta property="og:description" content="Liste della spesa per Home Assistant: integrazione, scheda offerte e app. Gratis, senza cloud.">
+<meta property="og:image" content="https://ha-smartlists.com/assets/icon.png">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"SmartLists","applicationCategory":"LifestyleApplication","operatingSystem":"Home Assistant","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"url":"https://ha-smartlists.com/","license":"https://opensource.org/license/mit"}</script>
 <script>
   // Sprache automatisch: auf der (deutschen) Startseite sofort – noch bevor etwas angezeigt wird – in die Sprache
   // wechseln, die im Sprachmenü gewählt wurde, sonst in die erste passende Sprache des Browsers (sonst Englisch).
@@ -156,7 +168,7 @@
     background: rgba(255,255,255,0.16); border-radius: 999px; padding: 4px 12px; }
   .download-sub { margin-top: 14px; font-size: 13px; color: #BFD7F5; }
   /* aktuelle stabile Version – kommt aus downloads/versions.json bzw. version.json, die ein Workflow pflegt */
-  .ver { margin-top: 10px; font-size: 13px; } .ver a { display: inline-block; padding: 4px 12px; border-radius: 999px; background: rgba(255,255,255,.14); color: #fff; text-decoration: none; } .ver a[hidden] { display: none; } .ver a:hover { background: rgba(255,255,255,.24); } .ver b { font-weight: 800; }
+  .ver { margin-top: 10px; font-size: 13px; } .ver a { display: inline-block; padding: 4px 12px; border-radius: 999px; background: rgba(255,255,255,.14); color: #fff; text-decoration: none; } .ver a[hidden], .ver span[hidden] { display: none; } .ver a:not([href]) { cursor: default; } .ver a:hover { background: rgba(255,255,255,.24); } .ver b { font-weight: 800; }
 
   main { max-width: 980px; margin: -48px auto 0; padding: 0 20px 64px; }
   .intro-card {
@@ -907,7 +919,7 @@ all_view: list</pre>
         <p class="tagline">Liste, cose da fare e note – solo sul dispositivo o collegate al tuo Home Assistant. Senza account, senza server di terzi.</p>
         <div class="soon" id="download">🚧 In lavorazione – prima Android, iPhone previsto</div>
         <div class="download-sub">Gratis · senza pubblicità · più avanti su Google Play e come APK da questa pagina</div>
-        <div class="ver" data-ver="app" hidden><a href="#" rel="noopener">Versione attuale <b></b></a></div>
+        <div class="ver" data-app-ver hidden><a data-os="android" hidden>Android <b></b> <span data-state="soon">· non ancora pubblicata</span></a> <a data-os="ios" hidden>iPhone <b></b> <span data-state="soon">· non ancora pubblicata</span></a></div>
       </div>
       <div class="shot ba" style="--p:50%"><img src="../assets/app/ha_start_dark.png" alt="SmartLists Go" width="412" height="892"><img class="top" src="../assets/app/ha_start.png" alt="" width="412" height="892"><span class="bar"></span><input type="range" min="0" max="100" value="50" aria-label="Chiaro / scuro"></div>
     </div>
@@ -1307,7 +1319,24 @@ all_view: list</pre>
     fetch("/downloads/versions.json").then(function (r) { return r.ok ? r.json() : {}; }).then(function (v) {
       ["smartlists", "smartdiscounts"].forEach(function (k) { if (v[k]) { show(k, v[k].version, v[k].url); beta(k, v[k].beta); } });
     }).catch(function () {});
-    fetch("/downloads/version.json").then(function (r) { return r.ok ? r.json() : {}; }).then(function (v) { show("app", v.version, v.apk); }).catch(function () {});
+    // App: Stand je System aus downloads/app.json (auch vor der Veröffentlichung); eine veröffentlichte APK kommt aus version.json
+    Promise.all(["/downloads/app.json", "/downloads/version.json"].map(function (u) {
+      return fetch(u).then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; });
+    })).then(function (res) {
+      var app = res[0] || {}, rel = res[1] || {};
+      document.querySelectorAll(".ver[data-app-ver]").forEach(function (box) {
+        ["android", "ios"].forEach(function (os) {
+          var a = box.querySelector('a[data-os="' + os + '"]'), info = app[os] || {};
+          var released = os === "android" && rel.version && /^https:\/\//.test(rel.apk || "");
+          var version = released ? rel.version : info.version;
+          if (!a || !version) return;
+          a.querySelector("b").textContent = version;
+          a.querySelector("span").hidden = !!(released || info.published);
+          if (released) a.href = rel.apk; else if (info.published && /^https:\/\//.test(info.url || "")) a.href = info.url;
+          a.hidden = false; box.hidden = false;
+        });
+      });
+    });
   })();
   // Bilder der Karte: eine Vorschau antippen tauscht das große Bild und seine Unterschrift; der Schieber bleibt, wo er ist.
   // Das große Bild antippen (ohne zu ziehen) öffnet es als Vollbild – hell oder dunkel, je nachdem, welche Seite getroffen wurde.

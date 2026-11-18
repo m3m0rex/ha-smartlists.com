@@ -16,7 +16,7 @@ LANGS = ("en", "fr", "es", "it", "pl")
 # Texte, die gleich bleiben (Namen, Links, Code)
 KEEP = {"SmartLists", "GitHub", "Download", "REWE", "👤 Anna", "todo.*", "https://github.com/m3m0rex/ha_smartlists",
         "🇩🇪 DE", "🇬🇧 EN", "🇫🇷 FR", "🇪🇸 ES", "🇮🇹 IT", "🇵🇱 PL",
-        "Wiki", "Beta"}
+        "Wiki", "Beta", "iPhone"}
 
 # Deutsch → (en, fr, es, it, pl)
 T: dict[str, tuple[str, str, str, str, str]] = {
@@ -669,6 +669,9 @@ T: dict[str, tuple[str, str, str, str, str]] = {
     'Kategorien und Vorschläge des ganzen Haushalts': ('Categories and suggestions of the whole household', 'Catégories et suggestions de tout le foyer', 'Categorías y sugerencias de todo el hogar', 'Categorie e suggerimenti di tutta la casa', 'Kategorie i podpowiedzi całego domu'),
     'Eigene Listen je Person, mit Rechten': ('Own lists per person, with permissions', 'Listes par personne, avec droits', 'Listas propias por persona, con permisos', 'Liste per persona, con permessi', 'Własne listy dla każdej osoby, z uprawnieniami'),
     'Angebote, Preisvergleich und Merkliste': ('Offers, price comparison and watch list', 'Promos, comparaison des prix et liste de suivi', 'Ofertas, comparación de precios y lista de seguimiento', 'Offerte, confronto prezzi e lista dei preferiti', 'Promocje, porównanie cen i lista obserwowanych'),
+    'SmartLists: Einkaufslisten für Home Assistant – als HACS-Integration mit Kategorien, Einkaufsmodus, Angeboten und Teilen per Link. Dazu die Angebots-Karte SmartDiscounts und die App HA SmartLists Go für Android.': ('SmartLists: shopping lists for Home Assistant – a HACS integration with categories, shopping mode, offers and sharing by link. Plus the offers card SmartDiscounts and the app HA SmartLists Go for Android.', "SmartLists : des listes de courses pour Home Assistant – une intégration HACS avec catégories, mode courses, offres et partage par lien. Avec la carte d'offres SmartDiscounts et l'app HA SmartLists Go pour Android.", 'SmartLists: listas de la compra para Home Assistant – una integración HACS con categorías, modo compra, ofertas y compartir por enlace. Además, la tarjeta de ofertas SmartDiscounts y la app HA SmartLists Go para Android.', "SmartLists: liste della spesa per Home Assistant – un'integrazione HACS con categorie, modalità spesa, offerte e condivisione tramite link. In più la scheda offerte SmartDiscounts e l'app HA SmartLists Go per Android.", 'SmartLists: listy zakupów dla Home Assistant – integracja HACS z kategoriami, trybem zakupów, ofertami i udostępnianiem przez link. Do tego karta ofert SmartDiscounts i aplikacja HA SmartLists Go na Androida.'),
+    'Einkaufslisten für Home Assistant: Integration, Angebots-Karte und App. Kostenlos, ohne Cloud.': ('Shopping lists for Home Assistant: integration, offers card and app. Free, no cloud.', "Listes de courses pour Home Assistant : intégration, carte d'offres et app. Gratuit, sans cloud.", 'Listas de la compra para Home Assistant: integración, tarjeta de ofertas y app. Gratis, sin nube.', 'Liste della spesa per Home Assistant: integrazione, scheda offerte e app. Gratis, senza cloud.', 'Listy zakupów dla Home Assistant: integracja, karta ofert i aplikacja. Za darmo, bez chmury.'),
+    '· noch nicht veröffentlicht': ('· not released yet', '· pas encore publiée', '· aún no publicada', '· non ancora pubblicata', '· jeszcze nieopublikowana'),
     'In SmartLists Go': ('In SmartLists Go', 'Dans SmartLists Go', 'En SmartLists Go', 'In SmartLists Go', 'W SmartLists Go'),
     'Die App zeigt Angebote in einer eigenen Ansicht. Dafür braucht sie SmartLists, nicht diese Karte.': ('The app shows offers in a view of its own. For that it needs SmartLists, not this card.', 'L’app affiche les promos dans sa propre vue. Pour cela il lui faut SmartLists, pas cette carte.', 'La app muestra las ofertas en una vista propia. Para eso necesita SmartLists, no esta tarjeta.', 'L’app mostra le offerte in una vista propria. Per questo le serve SmartLists, non questa scheda.', 'Aplikacja pokazuje promocje we własnym widoku. Potrzebuje do tego SmartLists, nie tej karty.'),
     'geplant': ('planned', 'prévu', 'previsto', 'previsto', 'w planach'),
@@ -764,7 +767,7 @@ def translate(src: str, lang: str, missing: set[str]) -> str:
 
     head, sep, rest = src.partition("<body")
     head = re.sub(r"<title>([^<]*)</title>", lambda m: f"<title>{tr(m.group(1))}</title>", head)
-    head = ATTR.sub(lambda m: f'{m.group(1)}="{tr(m.group(2))}"' if m.group(1) == "content" and "description" in head[max(0, m.start() - 40):m.start()] else m.group(0), head)
+    head = ATTR.sub(lambda m: f'{m.group(1)}="{tr(m.group(2))}"' if m.group(1) == "content" and any(k in head[max(0, m.start() - 40):m.start()] for k in ("description", "og:title")) else m.group(0), head)
     body_html, script_sep, script = rest.partition("<script>")
     body_html = TEXT.sub(lambda m: ">" + tr(m.group(1)) + "<", body_html)
     body_html = ATTR.sub(lambda m: f'{m.group(1)}="{tr(m.group(2))}"', body_html)
@@ -775,6 +778,9 @@ def page(lang: str, missing: set[str]) -> str:
     src = (ROOT / "index.html").read_text(encoding="utf-8")
     out = translate(src, lang, missing)
     out = out.replace('<html lang="de">', f'<html lang="{lang}">', 1)
+    # eigene Adresse je Sprache (Suchmaschinen, Vorschau beim Teilen)
+    out = out.replace('<link rel="canonical" href="https://ha-smartlists.com/">', f'<link rel="canonical" href="https://ha-smartlists.com/{lang}/">', 1)
+    out = out.replace('<meta property="og:url" content="https://ha-smartlists.com/">', f'<meta property="og:url" content="https://ha-smartlists.com/{lang}/">', 1)
     # Pfade aus dem Unterordner
     out = out.replace('src="assets/', 'src="../assets/').replace('href="assets/', 'href="../assets/').replace('href="LICENSE.md"', 'href="../LICENSE.md"')
     out = out.replace("demo-de.gif", "demo.gif")

@@ -1,0 +1,12 @@
+{
+  "android": {
+    "version": "0.1.0",
+    "published": false,
+    "url": ""
+  },
+  "ios": {
+    "version": "0.1.0",
+    "published": false,
+    "url": ""
+  }
+}
