@@ -338,7 +338,7 @@
   .shot input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; touch-action: pan-y; }
   .shots { display: flex; gap: 28px; justify-content: center; flex-wrap: wrap; margin: 4px 0 30px; }
   /* Karte im Dashboard: schlichter Rahmen statt Smartphone – das ist keine App */
-  .shots.cards { gap: 18px; } .shots.cards .shot { width: 218px; aspect-ratio: 460 / 720; border-radius: 14px; border: 1px solid var(--border); background: var(--card-bg); box-shadow: 0 8px 24px var(--shadow); } .shots.cards figcaption { max-width: 218px; }
+  .shots.cards { gap: 28px 24px; max-width: 960px; margin-left: auto; margin-right: auto; } .shots.cards figure { width: min(460px, 100%); } .shots.cards .shot { width: 100%; aspect-ratio: 460 / 720; border-radius: 14px; border: 1px solid var(--border); background: var(--card-bg); box-shadow: 0 8px 24px var(--shadow); } .shots.cards figcaption { max-width: none; font-size: 15px; }
   .shots figure { margin: 0; text-align: center; } .shots figcaption { margin-top: 10px; color: var(--muted); font-size: 14px; font-weight: 600; }
   @media (max-width: 760px) { .shot { margin: 0 auto; } }
   .checks { list-style: none; margin: 10px 0 0; padding: 0; }
