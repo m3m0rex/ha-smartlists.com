@@ -1242,7 +1242,7 @@ all_view: list</pre>
       "sensor.lidl": ["Lidl", [["Butter Süßrahm", "1,19 €", "1 kg = 4,76 €", "🧈", "Kühlung", "1,69 €"], ["Kaffee Crema ganze Bohne", "4,99 €", "1 kg = 9,98 €", "☕", "Getränke", "7,49 €"], ["Clementinen", "1,49 €", "1 kg = 1,49 €", "🍊", "Obst und Gemüse", "2,29 €"], ["Pizza Speciale Steinofen", "1,79 €", "1 kg = 5,11 €", "🍕", "Tiefkühl", "3,49 €"]]]
     };
     var items = [["1", "Butter 2"], ["2", "Kaffee"], ["3", "Pils"], ["4", "Pizza"], ["5", "Brötchen"]].map(function (x) { return { uid: x[0], summary: x[1], description: "", status: "needs_action" }; });
-    var stamp = 0, cards = [], next = 10;
+    var stamp = 0, cards = [], next = 10, userData = {};
     function hass() {
       var states = { "todo.demo": { entity_id: "todo.demo", state: String(items.length), last_updated: "l" + stamp, attributes: { friendly_name: "Einkauf" } } };
       Object.keys(SENS).forEach(function (id) {
@@ -1250,7 +1250,12 @@ all_view: list</pre>
           return { title: o[0], price: o[1], price_per_unit: o[2], image_url: img(o[3]), category: o[4], old_price: o[5], end_date: o[5] ? T : W }; }) } };
       });
       return { language: document.documentElement.lang || "de", config: { components: ["todo"] }, user: { is_admin: false }, states: states, services: {},
-        callWS: function (m) { return Promise.resolve(m.type === "todo/item/list" ? { items: items.map(function (i) { return Object.assign({}, i); }) } : {}); },
+        callWS: function (m) {
+          // Benutzer-Speicher von Home Assistant nachbilden (dort liegen ohne SmartLists die Merklisten) – gilt, solange die Seite offen ist
+          if (m.type === "frontend/get_user_data") return Promise.resolve({ value: userData[m.key] ? JSON.parse(userData[m.key]) : null });
+          if (m.type === "frontend/set_user_data") { userData[m.key] = JSON.stringify(m.value); return Promise.resolve({}); }
+          return Promise.resolve(m.type === "todo/item/list" ? { items: items.map(function (i) { return Object.assign({}, i); }) } : {});
+        },
         callService: function (d, sv, data) {
           if (d === "todo" && sv === "add_item") items.push({ uid: String(next++), summary: data.item, description: data.description || "", status: "needs_action" });
           if (d === "todo" && sv === "update_item") items.forEach(function (i) { if (i.uid === data.item) { if (data.rename) i.summary = data.rename; if (data.status) i.status = data.status; if (data.description != null) i.description = data.description; } });
