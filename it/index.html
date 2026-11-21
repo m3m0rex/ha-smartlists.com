@@ -1255,7 +1255,9 @@ all_view: list</pre>
     var SENS = {
       "sensor.rewe": ["REWE", [["Butter mild gesäuert", "1,29 €", "1 kg = 5,16 €", "🧈", "Kühlung"], ["Kaffee klassisch gemahlen", "5,79 €", "1 kg = 11,58 €", "☕", "Getränke"], ["Premium Pils Kasten", "10,99 €", "1 l = 1,10 €", "🍺", "Getränke"], ["Bio Orangen", "1,99 €", "", "🍊", "Obst und Gemüse"], ["Pizza Salami Steinofen", "2,22 €", "1 kg = 5,29 €", "🍕", "Tiefkühl"]]],
       "sensor.edeka": ["EDEKA", [["Irische Butter", "1,49 €", "1 kg = 5,96 €", "🧈", "Kühlung"], ["Filterkaffee mild", "5,49 €", "1 kg = 10,98 €", "☕", "Getränke"], ["Rispentomaten", "1,79 €", "1 kg = 3,58 €", "🍅", "Obst und Gemüse"], ["Fruchtgummi Bärchen", "0,79 €", "1 kg = 3,95 €", "🍬", "Süßes"], ["Pizza Margherita Steinofen", "1,99 €", "1 kg = 5,69 €", "🍕", "Tiefkühl"], ["Pils Kasten", "11,49 €", "1 l = 1,15 €", "🍺", "Getränke"]]],
-      "sensor.lidl": ["Lidl", [["Butter Süßrahm", "1,19 €", "1 kg = 4,76 €", "🧈", "Kühlung", "1,69 €"], ["Kaffee Crema ganze Bohne", "4,99 €", "1 kg = 9,98 €", "☕", "Getränke", "7,49 €"], ["Clementinen", "1,49 €", "1 kg = 1,49 €", "🍊", "Obst und Gemüse", "2,29 €"], ["Pizza Speciale Steinofen", "1,79 €", "1 kg = 5,11 €", "🍕", "Tiefkühl", "3,49 €"]]]
+      "sensor.lidl": ["Lidl", [["Butter Süßrahm", "1,19 €", "1 kg = 4,76 €", "🧈", "Kühlung", "1,69 €"], ["Kaffee Crema ganze Bohne", "4,99 €", "1 kg = 9,98 €", "☕", "Getränke", "7,49 €"], ["Clementinen", "1,49 €", "1 kg = 1,49 €", "🍊", "Obst und Gemüse", "2,29 €"], ["Pizza Speciale Steinofen", "1,79 €", "1 kg = 5,11 €", "🍕", "Tiefkühl", "3,49 €"]]],
+      // Vorschau der nächsten Woche: die Karte zeigt sie hinter „Jetzt / ab …“
+      "sensor.rewe_preview": ["REWE Vorschau", [["Butter mild gesäuert", "0,99 €", "1 kg = 3,96 €", "🧈", "Kühlung"], ["Pils 6 × 0,33 l", "2,99 €", "1 l = 1,51 €", "🍺", "Getränke"], ["Steinofenpizza Salami", "1,79 €", "1 kg = 5,11 €", "🍕", "Tiefkühl"]]]
     };
     var items = [["1", "Butter 2"], ["2", "Kaffee"], ["3", "Pils"], ["4", "Pizza"], ["5", "Brötchen"]].map(function (x) { return { uid: x[0], summary: x[1], description: "", status: "needs_action" }; });
     var stamp = 0, cards = [], next = 10, userData = {};
@@ -1292,7 +1294,7 @@ all_view: list</pre>
     function start() {
       if (started) return; started = true;
       if (!customElements.get("ha-card")) customElements.define("ha-card", class extends HTMLElement {});
-      var sc = document.createElement("script"); sc.src = base + "smartdiscounts-card.js?v=1.3.25";  // Version mitgeben, sonst zeigt der Browser eine alte Datei
+      var sc = document.createElement("script"); sc.src = base + "smartdiscounts-card.js?v=1.3.26";  // Version mitgeben, sonst zeigt der Browser eine alte Datei
       sc.onload = function () {
         box.querySelectorAll(".sd-slot").forEach(function (slot) {
           var c = document.createElement("smartdiscounts-card");
