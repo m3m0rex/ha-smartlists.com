@@ -784,6 +784,11 @@
     <h2 class="section-title">Co potrafi karta</h2>
     <div class="grid">
       <div class="feature">
+        <div class="icon">🛒</div>
+        <h3>Moja lista zakupów</h3>
+        <p>Pozycje twojej listy prosto w karcie: na górze to, co dodano z promocji, ze sklepem, ceną i „do”. Zmieniaj ilość i odhaczaj od razu tutaj. Z SmartLists także lista łączona.</p>
+      </div>
+      <div class="feature">
         <div class="icon">🛍️</div>
         <h3>Wszystkie promocje</h3>
         <p>Półka dla każdego sklepu z wyszukiwaniem i kategoriami – jako kafelki lub lista z małymi zdjęciami. Jedno dotknięcie dodaje promocję do listy.</p>
@@ -818,7 +823,7 @@
     <h2 class="section-title">Tak to wygląda</h2>
     <p class="lead">To prawdziwa karta z przykładowymi danymi – wypróbuj: zmieniaj zakładki i widok, wybierz promocje, dodaj je do listy.</p>
     <div class="sd-demo" id="sd-demo">
-      <div class="sd-slot" data-cfg='{"list_view":"table"}'></div>
+      <div class="sd-slot" data-cfg='{"default_tab":"shop"}'></div>
     </div>
 
     <h2 class="section-title">Konfiguracja</h2>
@@ -1248,7 +1253,7 @@ all_view: list</pre>
         callWS: function (m) { return Promise.resolve(m.type === "todo/item/list" ? { items: items.map(function (i) { return Object.assign({}, i); }) } : {}); },
         callService: function (d, sv, data) {
           if (d === "todo" && sv === "add_item") items.push({ uid: String(next++), summary: data.item, description: data.description || "", status: "needs_action" });
-          if (d === "todo" && sv === "update_item") items.forEach(function (i) { if (i.uid === data.item) { if (data.rename) i.summary = data.rename; if (data.description != null) i.description = data.description; } });
+          if (d === "todo" && sv === "update_item") items.forEach(function (i) { if (i.uid === data.item) { if (data.rename) i.summary = data.rename; if (data.status) i.status = data.status; if (data.description != null) i.description = data.description; } });
           if (d === "todo" && sv === "remove_item") { var gone = [].concat(data.item); items = items.filter(function (i) { return gone.indexOf(i.uid) < 0; }); }
           stamp++; setTimeout(push, 0); return Promise.resolve();
         } };

@@ -784,6 +784,11 @@
     <h2 class="section-title">Das kann die Karte</h2>
     <div class="grid">
       <div class="feature">
+        <div class="icon">🛒</div>
+        <h3>Meine Einkaufsliste</h3>
+        <p>Die Einträge deiner Liste direkt in der Karte: oben, was du aus den Angeboten hinzugefügt hast, mit Markt, Preis und „bis“. Anzahl ändern und abhaken geht gleich hier. Mit SmartLists auch eine kombinierte Liste.</p>
+      </div>
+      <div class="feature">
         <div class="icon">🛍️</div>
         <h3>Alle Angebote</h3>
         <p>Ein Regal je Markt mit Suche und Kategorien – als Kacheln oder als Liste mit kleinen Bildern. Ein Tipp setzt ein Angebot auf die Liste.</p>
@@ -818,7 +823,7 @@
     <h2 class="section-title">So sieht es aus</h2>
     <p class="lead">Das ist die echte Karte mit Beispieldaten – zum Ausprobieren: Reiter und Ansicht wechseln, Angebote wählen, auf die Liste setzen.</p>
     <div class="sd-demo" id="sd-demo">
-      <div class="sd-slot" data-cfg='{"list_view":"table"}'></div>
+      <div class="sd-slot" data-cfg='{"default_tab":"shop"}'></div>
     </div>
 
     <h2 class="section-title">Konfiguration</h2>
@@ -1248,7 +1253,7 @@ all_view: list</pre>
         callWS: function (m) { return Promise.resolve(m.type === "todo/item/list" ? { items: items.map(function (i) { return Object.assign({}, i); }) } : {}); },
         callService: function (d, sv, data) {
           if (d === "todo" && sv === "add_item") items.push({ uid: String(next++), summary: data.item, description: data.description || "", status: "needs_action" });
-          if (d === "todo" && sv === "update_item") items.forEach(function (i) { if (i.uid === data.item) { if (data.rename) i.summary = data.rename; if (data.description != null) i.description = data.description; } });
+          if (d === "todo" && sv === "update_item") items.forEach(function (i) { if (i.uid === data.item) { if (data.rename) i.summary = data.rename; if (data.status) i.status = data.status; if (data.description != null) i.description = data.description; } });
           if (d === "todo" && sv === "remove_item") { var gone = [].concat(data.item); items = items.filter(function (i) { return gone.indexOf(i.uid) < 0; }); }
           stamp++; setTimeout(push, 0); return Promise.resolve();
         } };
