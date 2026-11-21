@@ -327,6 +327,7 @@
   .sd-view button { font: inherit; font-weight: 600; padding: 6px 14px; border-radius: 999px; border: 1px solid var(--border); background: none; color: inherit; cursor: pointer; }
   .sd-view button.on { background: var(--primary-color, #1976D2); border-color: transparent; color: #fff; }
   .sd-demo[hidden], .sd-shot[hidden] { display: none; }
+  .sd-shot .sd-d { display: none; } @media (prefers-color-scheme: dark) { .sd-shot .sd-l { display: none; } .sd-shot .sd-d { display: inline; } }
   .sd-shot { max-width: 420px; margin: 0 auto; text-align: center; } .sd-shot img { width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--border); }
   .sd-shot figcaption { font-size: 13px; margin-top: 8px; opacity: .8; }
   .sd-slot { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; box-shadow: 0 8px 24px var(--shadow); padding: 6px; }
@@ -837,7 +838,7 @@
       <div class="sd-slot" data-cfg='{"default_tab":"shop"}'></div>
     </div>
     <figure class="sd-shot" id="sd-shot" hidden>
-      <picture><source srcset="assets/card/card_list_dark.png" media="(prefers-color-scheme: dark)"><img src="../assets/card/card_list.png" alt="My shopping list in the SmartLists style" width="460" height="720" loading="lazy"></picture>
+      <img class="sd-l" src="../assets/card/card_list.png" alt="My shopping list in the SmartLists style" width="460" height="720" loading="lazy"><img class="sd-d" src="../assets/card/card_list_dark.png" alt="My shopping list in the SmartLists style" width="460" height="720" loading="lazy">
       <figcaption>Picture – with SmartLists the tab shows the list in the SmartLists card (<code>shop_view: smartlists</code>).</figcaption>
     </figure>
 
