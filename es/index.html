@@ -549,7 +549,7 @@
     </div>
 
     <h2 class="section-title">Novedades de la 4.0</h2>
-    <p class="lead">La mayor renovación hasta ahora – primero como beta: activa «Mostrar versiones beta» en HACS.</p>
+    <p class="lead">La mayor renovación hasta ahora: nuevo diseño de listas, ofertas, lista de seguimiento y ajustes reorganizados.</p>
     <div class="grid">
       <div class="feature">
         <div class="icon">✨</div>
@@ -559,7 +559,7 @@
       <div class="feature">
         <div class="icon">🏷️</div>
         <h3>Tarjeta de ofertas</h3>
-        <p>Ofertas del supermercado comparadas con tu lista. La oferta elegida aparece como insignia en el artículo; las caducadas se quitan con un toque.</p>
+        <p>Ofertas de supermercado cruzadas con tu lista, en la tarjeta aparte SmartDiscounts. La oferta elegida aparece como insignia en el artículo; cuando caduca, la quitas allí con un toque.</p>
       </div>
       <div class="feature">
         <div class="icon">✏️</div>
@@ -580,6 +580,16 @@
         <div class="icon">⚙️</div>
         <h3>Ajustes más ordenados</h3>
         <p>Bien estructurados, con tu propio orden de insignias y mejor vista en el smartphone.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">📊</div>
+        <h3>Sensores para automatizaciones</h3>
+        <p>Por lista: artículos pendientes, próximo vencimiento, ofertas y total estimado. Para el hogar: gastos del mes, vencimientos y última copia de seguridad.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">↩️</div>
+        <h3>Sin ataduras</h3>
+        <p>Copia de seguridad manual y al desinstalar, restauración al volver a configurar, y cada lista se puede copiar como lista de tareas normal de Home Assistant.</p>
       </div>
     </div>
 
@@ -692,12 +702,12 @@
     <h2 class="section-title">Así se ve</h2>
     <p class="lead">Imágenes reales de la tarjeta con datos de ejemplo (en alemán). Arrastra el control: claro a la izquierda, oscuro a la derecha.</p>
     <div class="gal">
-      <figure class="gal-main"><div class="shot ba" style="--p:50%"><img src="../assets/card/card_list_dark.png?v=2" alt="SmartLists" width="460" height="720"><img class="top" src="../assets/card/card_list.png?v=2" alt="" width="460" height="720"><span class="bar"></span><input type="range" min="0" max="100" value="50" aria-label="Claro / oscuro"></div><figcaption>Lista con categorías y vencimientos</figcaption></figure>
+      <figure class="gal-main"><div class="shot ba" style="--p:50%"><img src="../assets/card/card_list_dark.png?v=9d20df6e" alt="SmartLists" width="460" height="720"><img class="top" src="../assets/card/card_list.png?v=738f43eb" alt="" width="460" height="720"><span class="bar"></span><input type="range" min="0" max="100" value="50" aria-label="Claro / oscuro"></div><figcaption>Lista con categorías y vencimientos</figcaption></figure>
       <div class="gal-thumbs" role="tablist">
-        <button type="button" role="tab" aria-selected="true" class="on" data-img="card_list"><img class="tl" src="../assets/card/card_list.png?v=2" alt="" width="460" height="720" loading="lazy"><img class="td" src="../assets/card/card_list_dark.png?v=2" alt="" width="460" height="720" loading="lazy"><span>Lista con categorías y vencimientos</span></button>
-        <button type="button" role="tab" aria-selected="false" data-img="card_shop"><img class="tl" src="../assets/card/card_shop.png?v=2" alt="" width="460" height="720" loading="lazy"><img class="td" src="../assets/card/card_shop_dark.png?v=2" alt="" width="460" height="720" loading="lazy"><span>Modo compra</span></button>
-        <button type="button" role="tab" aria-selected="false" data-img="card_due"><img class="tl" src="../assets/card/card_due.png?v=2" alt="" width="460" height="720" loading="lazy"><img class="td" src="../assets/card/card_due_dark.png?v=2" alt="" width="460" height="720" loading="lazy"><span>Vence el, repetir, calendario</span></button>
-        <button type="button" role="tab" aria-selected="false" data-img="card_share"><img class="tl" src="../assets/card/card_share.png?v=2" alt="" width="460" height="720" loading="lazy"><img class="td" src="../assets/card/card_share_dark.png?v=2" alt="" width="460" height="720" loading="lazy"><span>Enlace compartido en el navegador</span></button>
+        <button type="button" role="tab" aria-selected="true" class="on" data-img="card_list"><img class="tl" src="../assets/card/card_list.png?v=738f43eb" alt="" width="460" height="720" loading="lazy"><img class="td" src="../assets/card/card_list_dark.png?v=9d20df6e" alt="" width="460" height="720" loading="lazy"><span>Lista con categorías y vencimientos</span></button>
+        <button type="button" role="tab" aria-selected="false" data-img="card_shop"><img class="tl" src="../assets/card/card_shop.png?v=d22f6d37" alt="" width="460" height="720" loading="lazy"><img class="td" src="../assets/card/card_shop_dark.png?v=149beca7" alt="" width="460" height="720" loading="lazy"><span>Modo compra</span></button>
+        <button type="button" role="tab" aria-selected="false" data-img="card_due"><img class="tl" src="../assets/card/card_due.png?v=a08640fa" alt="" width="460" height="720" loading="lazy"><img class="td" src="../assets/card/card_due_dark.png?v=172a1181" alt="" width="460" height="720" loading="lazy"><span>Vence el, repetir, calendario</span></button>
+        <button type="button" role="tab" aria-selected="false" data-img="card_share"><img class="tl" src="../assets/card/card_share.png?v=da8f5157" alt="" width="460" height="720" loading="lazy"><img class="td" src="../assets/card/card_share_dark.png?v=543465f8" alt="" width="460" height="720" loading="lazy"><span>Enlace compartido en el navegador</span></button>
       </div>
     </div>
 
@@ -705,7 +715,7 @@
       <div class="icon-big">🏷️</div>
       <div>
         <h3>Junto con la tarjeta de ofertas</h3>
-        <p>La SmartDiscounts es un proyecto propio y se instala aparte desde HACS. Muestra qué artículos de tu lista están en oferta ahora mismo y dónde salen más baratos.</p>
+        <p>SmartDiscounts es un proyecto propio y se instala por separado desde HACS. Muestra qué artículos de tu lista están de oferta ahora mismo y qué llega la próxima semana.</p>
         <p class="cross" style="text-align:left;margin-top:8px"><a data-goto="card">A la tarjeta de ofertas →</a></p>
       </div>
     </div>
@@ -769,7 +779,7 @@
     <div class="logo">🏷️</div>
     <div class="kicker">Tarjeta de panel · también funciona sin SmartLists</div>
     <h1>SmartDiscounts</h1>
-    <p class="tagline">Las ofertas de tus supermercados comparadas con tu lista de la compra: para cada artículo ves dónde está en oferta – y dónde es más barato.</p>
+    <p class="tagline">Las ofertas de tus supermercados, cruzadas con tu lista de la compra: ves qué está de oferta ahora, qué está ya en tu lista y qué llega la próxima semana.</p>
     <div class="btn-row">
       <a class="download-btn" href="https://my.home-assistant.io/redirect/hacs_repository/?owner=m3m0rex&amp;repository=ha_smartdiscounts-card&amp;category=plugin">⬇️ Abrir en HACS</a>
       <a class="download-btn ghost" href="https://github.com/m3m0rex/ha_smartdiscounts-card">GitHub y documentación</a>
@@ -803,22 +813,22 @@
       <div class="feature">
         <div class="icon">⭐</div>
         <h3>Seguimiento</h3>
-        <p>Lo que solo compras en oferta: la tarjeta muestra dónde está barato ahora y te avisa si quieres. Con SmartLists cada uno tiene sus propias listas, guardadas en Home Assistant.</p>
+        <p>Lo que solo compras de oferta: la tarjeta muestra dónde está barato ahora y te avisa si quieres. Cada usuario tiene sus propias listas de seguimiento, guardadas en Home Assistant; con SmartLists, Home Assistant avisa de nuevas ofertas aunque no haya ningún panel abierto.</p>
       </div>
       <div class="feature">
         <div class="icon">🎁</div>
         <h3>Ofertas de bonificación e historial de precios</h3>
-        <p>Las promociones de bonificación como REWE Bonus se marcan «solo con la app de bonificación» y pueden compararse con la bonificación descontada. ▲ y ▼ muestran si un producto era antes más barato o más caro.</p>
+        <p>Las ofertas con bonus como REWE Bonus llevan su propia etiqueta («🎁 0,20 € de bonus»); si quieres, el bonus se descuenta del precio. ▲ y ▼ indican si un producto era antes más barato o más caro.</p>
       </div>
       <div class="feature">
-        <div class="icon">✅</div>
-        <h3>Pasar a la lista</h3>
-        <p>Anota tienda, precio y validez en la entrada: como insignia con SmartLists, si no como línea legible en la descripción.</p>
+        <div class="icon">📅</div>
+        <h3>Ofertas de la próxima semana</h3>
+        <p>Si un sensor ofrece el avance, cambias entre «Ahora» y «desde el …». Lo que añades de ahí aparece en la lista con «válido desde el …», y un aviso indica si algo será más barato por litro o kilo la próxima semana.</p>
       </div>
       <div class="feature">
-        <div class="icon">⏳</div>
-        <h3>Ofertas caducadas</h3>
-        <p>Cuando una oferta aplicada ha terminado, la tarjeta lo avisa – quitarla o recordarlo más tarde.</p>
+        <div class="icon">📌</div>
+        <h3>En tu lista</h3>
+        <p>Lo que ya está en la lista aparece arriba del todo en «Todas las ofertas», con su total. ＋ y − cuentan al instante; al llegar a cero, el artículo se quita.</p>
       </div>
       <div class="feature">
         <div class="icon">🔌</div>
@@ -838,7 +848,7 @@
       <div class="sd-slot" data-cfg='{"default_tab":"shop"}'></div>
     </div>
     <figure class="sd-shot" id="sd-shot" hidden>
-      <img class="sd-l" src="../assets/card/card_list.png?v=2" alt="Mi lista de la compra al estilo de SmartLists" width="460" height="720" loading="lazy"><img class="sd-d" src="../assets/card/card_list_dark.png?v=2" alt="Mi lista de la compra al estilo de SmartLists" width="460" height="720" loading="lazy">
+      <img class="sd-l" src="../assets/card/card_list.png?v=738f43eb" alt="Mi lista de la compra al estilo de SmartLists" width="460" height="720" loading="lazy"><img class="sd-d" src="../assets/card/card_list_dark.png?v=9d20df6e" alt="Mi lista de la compra al estilo de SmartLists" width="460" height="720" loading="lazy">
       <figcaption>Imagen: con SmartLists la pestaña muestra la lista en la tarjeta de SmartLists (<code>shop_view: smartlists</code>).</figcaption>
     </figure>
 
@@ -856,8 +866,10 @@ sources:
       old_price: prices.regular
       image: images.0.url
       until: validity.to
-match: word
-list_view: rows
+add_to: todo.angebote
+preview_entities:
+  - sensor.mein_markt_preview
+shop_view: smartlists
 all_view: list</pre>
 
     <div class="callout">
@@ -942,7 +954,7 @@ all_view: list</pre>
         <div class="download-sub">Gratis · sin publicidad · más adelante en Google Play y como APK desde esta página</div>
         <div class="ver" data-app-ver hidden><a data-os="android" hidden>Android <b></b> <span data-state="soon">· aún no publicada</span></a> <a data-os="ios" hidden>iPhone <b></b> <span data-state="soon">· aún no publicada</span></a></div>
       </div>
-      <div class="shot ba" style="--p:50%"><img src="../assets/app/ha_start_dark.png" alt="SmartLists Go" width="412" height="892"><img class="top" src="../assets/app/ha_start.png" alt="" width="412" height="892"><span class="bar"></span><input type="range" min="0" max="100" value="50" aria-label="Claro / oscuro"></div>
+      <div class="shot ba" style="--p:50%"><img src="../assets/app/ha_start_dark.png?v=8b923dbb" alt="SmartLists Go" width="412" height="892"><img class="top" src="../assets/app/ha_start.png?v=3647167c" alt="" width="412" height="892"><span class="bar"></span><input type="range" min="0" max="100" value="50" aria-label="Claro / oscuro"></div>
     </div>
   </header>
 
@@ -959,9 +971,9 @@ all_view: list</pre>
     <h2 class="section-title">Así es la app</h2>
     <p class="lead">Arrastra el control a izquierda o derecha: claro a la izquierda, oscuro a la derecha. Las imágenes muestran la versión inglesa con datos de ejemplo.</p>
     <div class="shots">
-      <figure><div class="shot ba" style="--p:50%"><img src="../assets/app/ha_offers_dark.png" alt="SmartLists Go" width="412" height="892"><img class="top" src="../assets/app/ha_offers.png" alt="" width="412" height="892"><span class="bar"></span><input type="range" min="0" max="100" value="50" aria-label="Claro / oscuro"></div><figcaption>Ofertas</figcaption></figure>
-      <figure><div class="shot ba" style="--p:50%"><img src="../assets/app/ha_lists_dark.png" alt="SmartLists Go" width="412" height="892"><img class="top" src="../assets/app/ha_lists.png" alt="" width="412" height="892"><span class="bar"></span><input type="range" min="0" max="100" value="50" aria-label="Claro / oscuro"></div><figcaption>Listas</figcaption></figure>
-      <figure><div class="shot ba" style="--p:50%"><img src="../assets/app/ha_notes_dark.png" alt="SmartLists Go" width="412" height="892"><img class="top" src="../assets/app/ha_notes.png" alt="" width="412" height="892"><span class="bar"></span><input type="range" min="0" max="100" value="50" aria-label="Claro / oscuro"></div><figcaption>Notas</figcaption></figure>
+      <figure><div class="shot ba" style="--p:50%"><img src="../assets/app/ha_offers_dark.png?v=e5e9c06b" alt="SmartLists Go" width="412" height="892"><img class="top" src="../assets/app/ha_offers.png?v=f95f1ade" alt="" width="412" height="892"><span class="bar"></span><input type="range" min="0" max="100" value="50" aria-label="Claro / oscuro"></div><figcaption>Ofertas</figcaption></figure>
+      <figure><div class="shot ba" style="--p:50%"><img src="../assets/app/ha_lists_dark.png?v=ca5f2c83" alt="SmartLists Go" width="412" height="892"><img class="top" src="../assets/app/ha_lists.png?v=1b783f0b" alt="" width="412" height="892"><span class="bar"></span><input type="range" min="0" max="100" value="50" aria-label="Claro / oscuro"></div><figcaption>Listas</figcaption></figure>
+      <figure><div class="shot ba" style="--p:50%"><img src="../assets/app/ha_notes_dark.png?v=dd788ca8" alt="SmartLists Go" width="412" height="892"><img class="top" src="../assets/app/ha_notes.png?v=d5171f8f" alt="" width="412" height="892"><span class="bar"></span><input type="range" min="0" max="100" value="50" aria-label="Claro / oscuro"></div><figcaption>Notas</figcaption></figure>
     </div>
     <h2 class="section-title">Tres niveles</h2>
     <p class="lead">Empieza donde quieras y sube de nivel cuando quieras.</p>
@@ -1013,7 +1025,7 @@ all_view: list</pre>
       <div class="feature">
         <div class="icon">🏷️</div>
         <h3>Ofertas para tu lista</h3>
-        <p>Qué hay en oferta de tu lista ahora mismo y dónde sale más barato. Con Home Assistant.</p>
+        <p>Las ofertas de tus tiendas y tu lista de seguimiento: añádelas directamente a la lista. Con Home Assistant.</p>
       </div>
       <div class="feature">
         <div class="icon">🗒️</div>
@@ -1077,7 +1089,6 @@ all_view: list</pre>
     <div class="final-cta">
       <h2>Un poco de paciencia</h2>
       <p>La app se está reconstruyendo ahora mismo. Gratis, sin inicio de sesión, sin nube obligatoria.</p>
-      <div class="soon">🚧 En desarrollo: primero Android, iPhone previsto</div>
     </div>
     <p class="cross">¿Todo directamente en Home Assistant, sin app? <a data-goto="hacs">A la integración HACS →</a></p>
   </main>
@@ -1406,7 +1417,9 @@ all_view: list</pre>
     var range = gal.querySelector(".gal-main input"), box = range.parentNode, down = null;
     tabs.forEach(function (b) {
       b.addEventListener("click", function () {
-        imgs.forEach(function (img) { img.src = img.getAttribute("src").replace(/card_[a-z]+(_dark)?\.png/, b.dataset.img + "$1.png"); });
+        // die Adressen (samt Versions-Kürzel) stehen an den Vorschaubildern des Knopfs: dunkel und hell
+        var tl = b.querySelector("img.tl"), td = b.querySelector("img.td");
+        imgs.forEach(function (img) { var dark = /_dark\.png/.test(img.getAttribute("src")); img.src = (dark ? td : tl).getAttribute("src"); });
         cap.textContent = b.querySelector("span").textContent;
         tabs.forEach(function (x) { x.classList.toggle("on", x === b); x.setAttribute("aria-selected", String(x === b)); });
       });
