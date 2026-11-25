@@ -1,4 +1,5 @@
-# Keeps downloads/versions.json up to date: the latest stable release of SmartLists and SmartDiscounts,
+# Keeps downloads/versions.json up to date: the latest stable release of SmartLists and SmartDiscounts, the version
+# of the app SmartLists Go,
 # and the newest beta when it is newer than the stable one.
 # Runs every hour and on demand (Actions → "Update version numbers" → Run workflow).
 name: Update version numbers
@@ -6,6 +7,10 @@ name: Update version numbers
 on:
   schedule:
     - cron: "17 * * * *"
+  # the app repository reports a new version of SmartLists Go in downloads/app.json; a released APK is in version.json
+  push:
+    branches: [main]
+    paths: ["downloads/app.json", "downloads/version.json"]
   workflow_dispatch:
 
 permissions:

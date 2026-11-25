@@ -1,4 +1,5 @@
-"""Writes downloads/versions.json with the latest stable release of each project.
+"""Writes downloads/versions.json with the latest stable release of each project – SmartLists, SmartDiscounts and
+the app SmartLists Go ("smartlists_go", taken from downloads/version.json or downloads/app.json).
 
 "Latest" is what GitHub marks as the latest release: drafts and pre-releases (betas) do not count.
 A beta is listed next to it ("beta") while it is newer than the stable release.
@@ -67,5 +68,27 @@ for key, repo in REPOS.items():
         entry["beta"] = beta
     if entry:
         new[key] = entry
+
+
+def app() -> dict | None:
+    """SmartLists Go: the released APK (downloads/version.json) or, before the first release, the version the app
+    repository reports (downloads/app.json, android)."""
+    def read(name: str) -> dict:
+        path = pathlib.Path("downloads") / name
+        try:
+            return json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+        except ValueError:
+            return {}
+
+    rel, dev = read("version.json"), (read("app.json").get("android") or {})
+    if rel.get("version") and str(rel.get("apk", "")).startswith("https://"):
+        return {"version": str(rel["version"]), "url": rel["apk"], "published": str(rel.get("released", "")), "released": True}
+    if dev.get("version"):
+        return {"version": str(dev["version"]), "url": str(dev.get("url") or ""), "published": "", "released": bool(dev.get("published"))}
+    return None
+
+
+if (go := app()) is not None:
+    new["smartlists_go"] = go
 OUT.write_text(json.dumps(new, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 print(json.dumps(new, indent=2))
