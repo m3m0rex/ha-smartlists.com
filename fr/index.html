@@ -1305,7 +1305,7 @@ all_view: list</pre>
     function start() {
       if (started) return; started = true;
       if (!customElements.get("ha-card")) customElements.define("ha-card", class extends HTMLElement {});
-      var sc = document.createElement("script"); sc.src = base + "smartdiscounts-card.js?v=1.3.28";  // Version mitgeben, sonst zeigt der Browser eine alte Datei
+      var sc = document.createElement("script"); sc.src = base + "smartdiscounts-card.js?v=1.3.30";  // Version mitgeben, sonst zeigt der Browser eine alte Datei
       sc.onload = function () {
         box.querySelectorAll(".sd-slot").forEach(function (slot) {
           var c = document.createElement("smartdiscounts-card");
